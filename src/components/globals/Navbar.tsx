@@ -1,11 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Search, ShoppingCart, User } from "lucide-react";
+import { Menu, X, Search, ShoppingCart, User, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
+import SearchModal from "./SearchModal";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -40,9 +49,26 @@ export default function Navbar() {
 
           {/* Icons & Actions */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="p-2 text-foreground hover:text-primary transition-colors">
+            
+            {/* Search Button */}
+            <button 
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2 text-foreground hover:text-primary transition-colors"
+            >
               <Search className="w-5 h-5" />
             </button>
+            
+            {/* Theme Toggle */}
+            {mounted && (
+              <button 
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="p-2 text-foreground hover:text-primary transition-colors"
+              >
+                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            )}
+
+            {/* Cart Icon */}
             <Link href="/cart" className="p-2 text-foreground hover:text-primary transition-colors relative">
               <ShoppingCart className="w-5 h-5" />
               {/* Dummy badge for UI effect */}
@@ -96,6 +122,8 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      {/* Search Modal */}
+      <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </nav>
   );
 }

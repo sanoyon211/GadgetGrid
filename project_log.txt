@@ -116,3 +116,12 @@ Step 14: Navigation Fixes & Final Polishing
 - How it was done:
   * `src/components/globals/Navbar.tsx` এর লিংকগুলো আপডেট করে আসল পেজগুলোতে (Home, Shop, About, Contact) পয়েন্ট করা হয়েছে এবং Cart আইকনে লিংক এড করা হয়েছে।
   * `src/components/globals/Footer.tsx` এর কুইক লিংকগুলো আপডেট করা হয়েছে যেন ওয়েবসাইটের কোনো ব্রোকেন লিংক বা ডেড লিংক না থাকে।
+
+Step 15: Interactive Navbar Features (Theme Toggle & Search Modal)
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS, next-themes.
+- How it was done:
+  * `next-themes` লাইব্রেরি ইনস্টল করে `src/components/globals/ThemeProvider.tsx` তৈরি করা হয়েছে।
+  * `src/app/layout.tsx` এ ThemeProvider র‍্যাপ (wrap) করা হয়েছে যেন ম্যানুয়াল ডার্ক মোড সাপোর্ট করে।
+  * `src/components/globals/SearchModal.tsx` তৈরি করা হয়েছে যা একটি সুন্দর সার্চ পপআপ দেখায়।
+  * `Navbar.tsx` এ Sun/Moon আইকন দিয়ে ডার্ক মোড টগল এবং Search আইকনে ক্লিক করলে সার্চ মডাল ওপেন হওয়ার ফিচার যুক্ত করা হয়েছে।
