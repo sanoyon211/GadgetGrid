@@ -5,22 +5,38 @@ import { useState } from "react";
 import { Mail, Lock, LogIn } from "lucide-react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        toast.error("Invalid email or password");
+      } else {
+        toast.success("Successfully logged in!");
+        router.push("/dashboard");
+        router.refresh();
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
       setIsLoading(false);
-      toast.success("Successfully logged in!");
-      // Here you would typically redirect the user to the dashboard
-    }, 1500);
+    }
   };
 
   return (

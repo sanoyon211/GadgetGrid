@@ -5,25 +5,43 @@ import { useState } from "react";
 import { Mail, Lock, User, UserPlus } from "lucide-react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      toast.success("Account created successfully!", {
-        description: "Welcome to GadgetGrid. You can now sign in."
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
       });
-      // Redirect logic to login or dashboard would go here
-    }, 1500);
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "Registration failed");
+      } else {
+        toast.success("Account created successfully!", {
+          description: "Welcome to GadgetGrid. You can now sign in."
+        });
+        router.push("/login");
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
