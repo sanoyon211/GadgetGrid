@@ -18,3 +18,13 @@ Step 2: Configure Tailwind CSS, custom fonts (Outfit & Inter), and base CSS
   * `src/app/layout.tsx` ফাইলটি মডিফাই করে `Outfit` (হেডিংয়ের জন্য) এবং `Inter` (সাধারণ লেখার জন্য) ফন্ট ইমপোর্ট করে যুক্ত করা হয়েছে।
   * `src/app/globals.css` ফাইলে Tailwind v4 এর `@theme` রুল ব্যবহার করে "Sunset Minimalist" থিমের কালার কোডগুলো গ্লোবাল ভ্যারিয়েবল হিসেবে অ্যাড করা হয়েছে (যাতে পুরো প্রজেক্টে সহজেই ব্যবহার করা যায়)।
   * কোডগুলো গিটহাবে পুশ করা হয়েছে।
+
+Step 3 & 4: Setup UI dependencies & Design System
+-----------------------------------------------------------------------------
+- Technologies Used: npm, lucide-react, sonner, recharts.
+- How it was done:
+  * আইকন দেখানোর জন্য `lucide-react` ইনস্টল করা হয়েছে।
+  * সুন্দর টোস্ট মেসেজের জন্য `sonner` ইনস্টল করা হয়েছে।
+  * ড্যাশবোর্ডে চার্ট/গ্রাফ দেখানোর জন্য `recharts` ইনস্টল করা হয়েছে।
+  * (নোট: Step 4 এর ডিজাইন সিস্টেম কনফিগারেশনের কাজ আমরা আগেই Step 2-এ Tailwind v4 এর মাধ্যমে `globals.css`-এ কমপ্লিট করে ফেলেছি)।
+  * গিটহাবে পুশ করা হয়েছে।
