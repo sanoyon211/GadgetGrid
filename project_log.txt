@@ -101,3 +101,11 @@ Step 12: Build Information Pages (About Us & Contact Us)
   * `src/app/about/page.tsx` তৈরি করে ওয়েবসাইটের একটি সুন্দর About Us পেজ বানানো হয়েছে, যেখানে হিরো ব্যানার, Our Story, Core Values এবং Team মেম্বারদের সেকশন রয়েছে।
   * `src/app/contact/page.tsx` তৈরি করে কন্টাক্ট পেজ বানানো হয়েছে, যেখানে অফিসের ঠিকানা, ইমেইল, ফোন নম্বরের ইনফো কার্ড এবং একটি সুন্দর কন্টাক্ট ফর্ম যুক্ত করা হয়েছে।
 
+Step 13: Build Checkout Flow (Shipping & Payment)
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS, React State, lucide-react.
+- How it was done:
+  * `src/components/checkout/CheckoutForm.tsx` তৈরি করে ইউজারের শিপিং অ্যাড্রেস (Name, Email, Address, ZIP, Phone) নেওয়ার জন্য ফর্ম ডিজাইন করা হয়েছে।
+  * `src/components/checkout/PaymentMethods.tsx` তৈরি করে পেমেন্ট মেথড (Credit Card & Cash on Delivery) সিলেক্ট করার অপশন এবং ডামি কার্ড ডিটেইলস ফর্ম যুক্ত করা হয়েছে।
+  * `src/components/checkout/OrderSummarySide.tsx` তৈরি করে চেকআউট পেজের ডানপাশে কার্ট আইটেম ও প্রাইস ক্যালকুলেশন দেখানো হয়েছে।
+  * `src/app/checkout/page.tsx` রাউট তৈরি করে এই সবগুলো কম্পোনেন্ট দিয়ে একটি পূর্ণাঙ্গ চেকআউট পেজ লেআউট কমপ্লিট করা হয়েছে।
