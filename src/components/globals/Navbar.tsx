@@ -9,9 +9,9 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Explore", href: "/explore" },
-    { name: "Categories", href: "/categories" },
+    { name: "Shop", href: "/products" },
     { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -43,9 +43,11 @@ export default function Navbar() {
             <button className="p-2 text-foreground hover:text-primary transition-colors">
               <Search className="w-5 h-5" />
             </button>
-            <button className="p-2 text-foreground hover:text-primary transition-colors">
+            <Link href="/cart" className="p-2 text-foreground hover:text-primary transition-colors relative">
               <ShoppingCart className="w-5 h-5" />
-            </button>
+              {/* Dummy badge for UI effect */}
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-primary rounded-full">3</span>
+            </Link>
             <Link
               href="/login"
               className="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"

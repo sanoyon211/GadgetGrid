@@ -109,3 +109,10 @@ Step 13: Build Checkout Flow (Shipping & Payment)
   * `src/components/checkout/PaymentMethods.tsx` তৈরি করে পেমেন্ট মেথড (Credit Card & Cash on Delivery) সিলেক্ট করার অপশন এবং ডামি কার্ড ডিটেইলস ফর্ম যুক্ত করা হয়েছে।
   * `src/components/checkout/OrderSummarySide.tsx` তৈরি করে চেকআউট পেজের ডানপাশে কার্ট আইটেম ও প্রাইস ক্যালকুলেশন দেখানো হয়েছে।
   * `src/app/checkout/page.tsx` রাউট তৈরি করে এই সবগুলো কম্পোনেন্ট দিয়ে একটি পূর্ণাঙ্গ চেকআউট পেজ লেআউট কমপ্লিট করা হয়েছে।
+
+Step 14: Navigation Fixes & Final Polishing
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS.
+- How it was done:
+  * `src/components/globals/Navbar.tsx` এর লিংকগুলো আপডেট করে আসল পেজগুলোতে (Home, Shop, About, Contact) পয়েন্ট করা হয়েছে এবং Cart আইকনে লিংক এড করা হয়েছে।
+  * `src/components/globals/Footer.tsx` এর কুইক লিংকগুলো আপডেট করা হয়েছে যেন ওয়েবসাইটের কোনো ব্রোকেন লিংক বা ডেড লিংক না থাকে।
