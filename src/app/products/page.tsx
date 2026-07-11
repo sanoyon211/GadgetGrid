@@ -1,18 +1,60 @@
 import ProductFilters from "@/components/shop/ProductFilters";
 import SearchAndSort from "@/components/shop/SearchAndSort";
 import ProductGrid from "@/components/shop/ProductGrid";
+import connectToDatabase from "@/lib/mongoose";
+import Gadget from "@/models/Gadget";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Explore Gadgets | GadgetGrid",
   description: "Browse our premium collection of smartphones, laptops, audio, and wearables.",
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+  await connectToDatabase();
+  
+  const params = await searchParams;
+  const search = typeof params.search === 'string' ? params.search : '';
+  const category = typeof params.category === 'string' ? params.category : '';
+  const minPrice = typeof params.minPrice === 'string' ? Number(params.minPrice) : 0;
+  const maxPrice = typeof params.maxPrice === 'string' ? Number(params.maxPrice) : 100000;
+  const sort = typeof params.sort === 'string' ? params.sort : 'newest';
+  const page = typeof params.page === 'string' ? Number(params.page) : 1;
+  const limit = 9;
+
+  const query: any = {
+    price: { $gte: minPrice, $lte: maxPrice }
+  };
+  if (search) query.name = { $regex: search, $options: "i" };
+  if (category && category !== "All Products") query.category = category;
+
+  let sortOption: any = { createdAt: -1 };
+  if (sort === "price-asc") sortOption = { price: 1 };
+  if (sort === "price-desc") sortOption = { price: -1 };
+  if (sort === "rating") sortOption = { rating: -1 };
+
+  const skip = (page - 1) * limit;
+
+  const rawGadgets = await Gadget.find(query).sort(sortOption).skip(skip).limit(limit).lean();
+  const total = await Gadget.countDocuments(query);
+  const totalPages = Math.ceil(total / limit) || 1;
+
+  const gadgets = rawGadgets.map((g: any) => ({
+    id: g._id.toString(),
+    name: g.name,
+    price: g.price,
+    originalPrice: g.originalPrice,
+    rating: g.rating,
+    reviews: g.reviewsCount,
+    image: g.images[0],
+    category: g.category,
+    badge: g.isTrending ? "Trending" : g.isFeatured ? "Featured" : null,
+  }));
+
   return (
     <div className="bg-gray-50 dark:bg-black min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Page Header */}
         <div className="mb-10">
           <h1 className="text-4xl font-heading font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
             Explore Gadgets
@@ -23,17 +65,19 @@ export default function ProductsPage() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Left Sidebar - Filters (Desktop) */}
           <aside className="hidden lg:block w-72 shrink-0">
             <div className="sticky top-24">
-              <ProductFilters />
+              <Suspense fallback={<div>Loading filters...</div>}>
+                <ProductFilters />
+              </Suspense>
             </div>
           </aside>
 
-          {/* Main Content Area */}
           <main className="flex-1">
-            <SearchAndSort />
-            <ProductGrid />
+            <Suspense fallback={<div>Loading search...</div>}>
+              <SearchAndSort />
+            </Suspense>
+            <ProductGrid initialGadgets={gadgets} totalPages={totalPages} currentPage={page} />
           </main>
         </div>
         
