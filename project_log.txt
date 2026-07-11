@@ -67,3 +67,11 @@ Step 8: Build Product Details Page (Dynamic Route)
   * `src/components/product/ProductTabs.tsx` তৈরি করে Description, Specifications, এবং Reviews দেখার জন্য একটি ডাইনামিক ট্যাব সিস্টেম বানানো হয়েছে।
   * `src/app/product/[id]/page.tsx` ডাইনামিক রাউট তৈরি করে সব কম্পোনেন্ট একসাথে যুক্ত করে প্রোডাক্ট ডিটেইলস পেজটি কমপ্লিট করা হয়েছে এবং নিচে Related Products হিসেবে TrendingGadgets অ্যাড করা হয়েছে।
 
+Step 9: Build Cart & Checkout Page
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS, React State, lucide-react.
+- How it was done:
+  * `src/components/cart/CartItemsList.tsx` তৈরি করে কার্টে থাকা প্রোডাক্টগুলোর লিস্ট দেখানো হয়েছে। এখানে প্রোডাক্টের কোয়ান্টিটি বাড়ানো-কমানো বা ডিলিট করার ফাংশনালিটি (React State দিয়ে) যুক্ত করা হয়েছে। কার্ট খালি থাকলে একটি সুন্দর Empty State ও দেখাবে।
+  * `src/components/cart/CartSummary.tsx` তৈরি করে সাব-টোটাল, ট্যাক্স এবং টোটাল প্রাইস হিসাব করার সামারি বক্স বানানো হয়েছে, সাথে প্রোমো কোড অ্যাপ্লাই করার ফিল্ডও আছে।
+  * `src/app/cart/page.tsx` এ একটি নতুন রাউট তৈরি করে লেফট সাইডে Cart Items এবং রাইট সাইডে Cart Summary দিয়ে একটি রেস্পন্সিভ লেআউট তৈরি করা হয়েছে।
+
