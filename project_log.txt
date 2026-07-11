@@ -94,3 +94,10 @@ Step 11: Build User Dashboard
   * `src/app/dashboard/layout.tsx` তৈরি করে ড্যাশবোর্ডের জন্য একটি নেস্টেড লেআউট বানানো হয়েছে যেন সাইডবারটি সব পেজে থাকে।
   * `src/app/dashboard/page.tsx` এবং `src/app/dashboard/orders/page.tsx` রাউটগুলো তৈরি করা হয়েছে।
 
+Step 12: Build Information Pages (About Us & Contact Us)
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS, lucide-react.
+- How it was done:
+  * `src/app/about/page.tsx` তৈরি করে ওয়েবসাইটের একটি সুন্দর About Us পেজ বানানো হয়েছে, যেখানে হিরো ব্যানার, Our Story, Core Values এবং Team মেম্বারদের সেকশন রয়েছে।
+  * `src/app/contact/page.tsx` তৈরি করে কন্টাক্ট পেজ বানানো হয়েছে, যেখানে অফিসের ঠিকানা, ইমেইল, ফোন নম্বরের ইনফো কার্ড এবং একটি সুন্দর কন্টাক্ট ফর্ম যুক্ত করা হয়েছে।
+
