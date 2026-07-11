@@ -26,8 +26,8 @@ This is our strict roadmap. After each step, the code will be committed and push
 - [x] **Step 2:** Configure Tailwind CSS, custom fonts (Outfit & Inter), and base CSS. *(Push 2)*
 - [x] **Step 3:** Setup UI dependencies (Lucide Icons, Sonner for Toast, Recharts). *(Push 3)*
 - [x] **Step 4:** Implement Design System (Configure Tailwind config with the chosen unique colors). *(Push 4)*
-- [/] **Step 5:** Build Global Components: Navbar (Sticky, responsive) & Footer. *(Push 5)*
-- [ ] **Step 6:** Home Page: Build Hero Section with animations. *(Push 6)*
+- [x] **Step 5:** Build Global Components: Navbar (Sticky, responsive) & Footer. *(Push 5)*
+- [/] **Step 6:** Home Page: Build Hero Section with animations. *(Push 6)*
 - [ ] **Step 7:** Home Page: Build Categories and Featured Gadgets sections. *(Push 7)*
 - [ ] **Step 8:** Home Page: Build Statistics (Recharts) & Testimonials sections. *(Push 8)*
 - [ ] **Step 9:** Home Page: Build Newsletter and FAQ sections. *(Push 9)*

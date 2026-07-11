@@ -28,3 +28,22 @@ Step 3 & 4: Setup UI dependencies & Design System
   * ড্যাশবোর্ডে চার্ট/গ্রাফ দেখানোর জন্য `recharts` ইনস্টল করা হয়েছে।
   * (নোট: Step 4 এর ডিজাইন সিস্টেম কনফিগারেশনের কাজ আমরা আগেই Step 2-এ Tailwind v4 এর মাধ্যমে `globals.css`-এ কমপ্লিট করে ফেলেছি)।
   * গিটহাবে পুশ করা হয়েছে।
+
+Step 5: Build Global Components (Navbar & Footer)
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS, lucide-react.
+- How it was done:
+  * `src/components/globals/Navbar.tsx` তৈরি করে রেসপন্সিভ (মোবাইল হ্যামবার্গার মেনু) এবং স্টিকি নেভিগেশন বার ডিজাইন করা হয়েছে।
+  * `src/components/globals/Footer.tsx` তৈরি করে ৪-কলাম বিশিষ্ট একটি সুন্দর ফুটার ডিজাইন করা হয়েছে।
+  * `src/app/layout.tsx` ফাইলে Navbar এবং Footer ইমপোর্ট করে যুক্ত করা হয়েছে, যাতে এগুলো ওয়েবসাইটের প্রতিটি পেজে দেখায়।
+  * গিটহাবে পুশ করা হয়েছে।
+
+Step 6: Build Homepage Sections with Separate Components
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js, Tailwind CSS, lucide-react.
+- How it was done:
+  * `src/components/home/HeroSection.tsx` তৈরি করে একটি আকর্ষণীয় হিরো ব্যানার ডিজাইন করা হয়েছে।
+  * `src/components/home/FeaturedCategories.tsx` তৈরি করে বিভিন্ন গ্যাজেট ক্যাটাগরির গ্রিড তৈরি করা হয়েছে।
+  * `src/components/home/TrendingGadgets.tsx` তৈরি করে ট্রেন্ডিং প্রোডাক্টের লিস্ট ডিজাইন করা হয়েছে।
+  * `src/components/home/NewsletterSection.tsx` তৈরি করে ইমেইল সাবস্ক্রিপশনের অংশ তৈরি করা হয়েছে।
+  * `src/app/page.tsx` থেকে ডিফল্ট Next.js কোড সরিয়ে এই সবগুলো কম্পোনেন্ট একসাথে যুক্ত করা হয়েছে।

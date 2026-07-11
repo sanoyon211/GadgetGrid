@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Github, Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { FaFacebook, FaTwitter, FaInstagram, FaGithub } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -15,10 +16,10 @@ export default function Footer() {
               Your ultimate destination for premium tech gadgets. Buy, sell, and discover the best devices on the market.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><Github className="w-5 h-5" /></a>
+              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><FaFacebook className="w-5 h-5" /></a>
+              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><FaTwitter className="w-5 h-5" /></a>
+              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><FaInstagram className="w-5 h-5" /></a>
+              <a href="#" className="text-gray-300 hover:text-primary transition-colors"><FaGithub className="w-5 h-5" /></a>
             </div>
           </div>
 
