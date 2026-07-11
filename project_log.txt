@@ -47,3 +47,13 @@ Step 6: Build Homepage Sections with Separate Components
   * `src/components/home/TrendingGadgets.tsx` তৈরি করে ট্রেন্ডিং প্রোডাক্টের লিস্ট ডিজাইন করা হয়েছে।
   * `src/components/home/NewsletterSection.tsx` তৈরি করে ইমেইল সাবস্ক্রিপশনের অংশ তৈরি করা হয়েছে।
   * `src/app/page.tsx` থেকে ডিফল্ট Next.js কোড সরিয়ে এই সবগুলো কম্পোনেন্ট একসাথে যুক্ত করা হয়েছে।
+
+Step 7: Build Explore/Shop Page
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS, React State.
+- How it was done:
+  * `src/components/shop/ProductFilters.tsx` তৈরি করে ক্যাটাগরি, দাম এবং রেটিং ফিল্টার করার জন্য একটি সাইডবার ফিল্টার মেনু ডিজাইন করা হয়েছে।
+  * `src/components/shop/SearchAndSort.tsx` তৈরি করে একটি সার্চবার এবং প্রোডাক্ট সর্ট (Sort) করার ড্রপডাউন মেনু যুক্ত করা হয়েছে।
+  * `src/components/shop/ProductGrid.tsx` তৈরি করে ডামি প্রোডাক্ট দিয়ে একটি সুন্দর ও রেস্পন্সিভ প্রোডাক্ট গ্রিড বানানো হয়েছে।
+  * `src/app/products/page.tsx` এ একটি নতুন রাউট তৈরি করে উপরের সবগুলো কম্পোনেন্ট লেফট সাইডবার লেআউটে সাজানো হয়েছে।
+
