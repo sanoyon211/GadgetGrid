@@ -27,10 +27,10 @@ This is our strict roadmap. After each step, the code will be committed and push
 - [x] **Step 3:** Setup UI dependencies (Lucide Icons, Sonner for Toast, Recharts). *(Push 3)*
 - [x] **Step 4:** Implement Design System (Configure Tailwind config with the chosen unique colors). *(Push 4)*
 - [x] **Step 5:** Build Global Components: Navbar (Sticky, responsive) & Footer. *(Push 5)*
-- [/] **Step 6:** Home Page: Build Hero Section with animations. *(Push 6)*
-- [ ] **Step 7:** Home Page: Build Categories and Featured Gadgets sections. *(Push 7)*
-- [ ] **Step 8:** Home Page: Build Statistics (Recharts) & Testimonials sections. *(Push 8)*
-- [ ] **Step 9:** Home Page: Build Newsletter and FAQ sections. *(Push 9)*
+- [x] **Step 6:** Home Page: Build Hero Section with animations. *(Push 6)*
+- [x] **Step 7:** Home Page: Build Categories and Featured Gadgets sections. *(Push 7)*
+- [x] **Step 8:** Home Page: Build Statistics (Recharts) & Testimonials sections. *(Push 8)*
+- [x] **Step 9:** Home Page: Build Newsletter and FAQ sections. *(Push 9)*
 - [ ] **Step 10:** Database Setup: Connect MongoDB with Mongoose and define schemas (User, Gadget). *(Push 10)*
 - [ ] **Step 11:** Auth Backend: Implement NextAuth.js or custom JWT for authentication. *(Push 11)*
 - [ ] **Step 12:** Auth Frontend: Build Login and Registration pages with form validation. *(Push 12)*
