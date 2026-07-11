@@ -84,3 +84,13 @@ Step 10: Build Authentication Pages (Login & Register)
   * `src/components/auth/RegisterForm.tsx` তৈরি করে নতুন ইউজারদের জন্য সাইন-আপ ফর্ম বানানো হয়েছে।
   * `src/app/login/page.tsx` এবং `src/app/register/page.tsx` রাউট তৈরি করে এই কম্পোনেন্টগুলো বসানো হয়েছে।
 
+Step 11: Build User Dashboard
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (Nested Layouts), Tailwind CSS, lucide-react.
+- How it was done:
+  * `src/components/dashboard/DashboardSidebar.tsx` তৈরি করে ড্যাশবোর্ডের মেনু (Overview, Orders, Wishlist, Settings) সহ লেফট সাইডবার বানানো হয়েছে।
+  * `src/components/dashboard/DashboardOverview.tsx` তৈরি করে ইউজারের অ্যাকাউন্ট সামারি এবং রিসেন্ট অর্ডার স্ট্যাটাস দেখানোর মেইন স্ক্রিন বানানো হয়েছে।
+  * `src/components/dashboard/OrderHistory.tsx` তৈরি করে একটি সুন্দর টেবিল দিয়ে ইউজারের পূর্বের অর্ডারগুলো (Dummy Data) প্রদর্শন করা হয়েছে।
+  * `src/app/dashboard/layout.tsx` তৈরি করে ড্যাশবোর্ডের জন্য একটি নেস্টেড লেআউট বানানো হয়েছে যেন সাইডবারটি সব পেজে থাকে।
+  * `src/app/dashboard/page.tsx` এবং `src/app/dashboard/orders/page.tsx` রাউটগুলো তৈরি করা হয়েছে।
+
