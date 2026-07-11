@@ -57,3 +57,13 @@ Step 7: Build Explore/Shop Page
   * `src/components/shop/ProductGrid.tsx` তৈরি করে ডামি প্রোডাক্ট দিয়ে একটি সুন্দর ও রেস্পন্সিভ প্রোডাক্ট গ্রিড বানানো হয়েছে।
   * `src/app/products/page.tsx` এ একটি নতুন রাউট তৈরি করে উপরের সবগুলো কম্পোনেন্ট লেফট সাইডবার লেআউটে সাজানো হয়েছে।
 
+Step 8: Build Product Details Page (Dynamic Route)
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js Dynamic Routes (`[id]`), Tailwind CSS, lucide-react.
+- How it was done:
+  * `src/components/product/ProductGallery.tsx` তৈরি করে প্রোডাক্টের ছবি ও থাম্বনেইল গ্যালারি বানানো হয়েছে।
+  * `src/components/product/ProductInfo.tsx` তৈরি করে প্রোডাক্টের নাম, দাম, রেটিং, ডেসক্রিপশন এবং কালার/স্টোরেজ সিলেক্ট করার অপশন যুক্ত করা হয়েছে।
+  * `src/components/product/ProductActions.tsx` তৈরি করে Add to Cart, Buy Now, এবং Wishlist বাটনগুলো তৈরি করা হয়েছে।
+  * `src/components/product/ProductTabs.tsx` তৈরি করে Description, Specifications, এবং Reviews দেখার জন্য একটি ডাইনামিক ট্যাব সিস্টেম বানানো হয়েছে।
+  * `src/app/product/[id]/page.tsx` ডাইনামিক রাউট তৈরি করে সব কম্পোনেন্ট একসাথে যুক্ত করে প্রোডাক্ট ডিটেইলস পেজটি কমপ্লিট করা হয়েছে এবং নিচে Related Products হিসেবে TrendingGadgets অ্যাড করা হয়েছে।
+
