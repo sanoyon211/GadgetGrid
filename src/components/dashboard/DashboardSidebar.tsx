@@ -12,6 +12,7 @@ export default function DashboardSidebar() {
     { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
     { name: "My Orders", icon: ShoppingBag, href: "/dashboard/orders" },
     { name: "Wishlist", icon: Heart, href: "/dashboard/wishlist" },
+    { name: "Manage Products", icon: LayoutDashboard, href: "/dashboard/products" },
     { name: "Settings", icon: Settings, href: "/dashboard/settings" },
   ];
 

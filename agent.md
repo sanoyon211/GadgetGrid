@@ -37,8 +37,8 @@ This is our strict roadmap. After each step, the code will be committed and push
 - [x] **Step 13:** Explore Page UI: Build Search bar, Filter sidebar, and Gadget Card skeletons. *(Push 13)*
 - [x] **Step 14:** Explore Page API: Create API routes for fetching, filtering, and sorting gadgets. *(Push 14)*
 - [x] **Step 15:** Explore Page Integration: Connect frontend filters to backend API + Pagination. *(Push 15)*
-- [ ] **Step 16:** Details Page: Dynamic routing (`/gadgets/[id]`), Image Gallery, and Specs UI. *(Push 16)*
-- [ ] **Step 17:** Details Page API: Fetch single gadget data, handle related items. *(Push 17)*
-- [ ] **Step 18:** Protected Routes: Add middleware to protect dashboard routes. Build Add Item Form. *(Push 18)*
-- [ ] **Step 19:** Dashboard UI: Manage Items table, integrating Recharts for user stats. *(Push 19)*
-- [ ] **Step 20:** Final Polish: Build Additional pages (About, Contact), ensure mobile responsiveness, SEO tags. *(Push 20)*
+- [x] **Step 16:** Details Page: Dynamic routing (`/gadgets/[id]`), Image Gallery, and Specs UI. *(Push 16)*
+- [x] **Step 17:** Details Page API: Fetch single gadget data, handle related items. *(Push 17)*
+- [x] **Step 18:** Protected Routes: Add middleware to protect dashboard routes. Build Add Item Form. *(Push 18)*
+- [x] **Step 19:** Dashboard UI: Manage Items table, integrating Recharts for user stats. *(Push 19)*
+- [x] **Step 20:** Final Polish: Build Additional pages (About, Contact), ensure mobile responsiveness, SEO tags. *(Push 20)*

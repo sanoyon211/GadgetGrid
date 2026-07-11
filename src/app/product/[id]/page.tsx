@@ -5,26 +5,39 @@ import ProductInfo from "@/components/product/ProductInfo";
 import ProductActions from "@/components/product/ProductActions";
 import ProductTabs from "@/components/product/ProductTabs";
 import TrendingGadgets from "@/components/home/TrendingGadgets"; // Using this as Related Products
+import connectToDatabase from "@/lib/mongoose";
+import Gadget from "@/models/Gadget";
+import { notFound } from "next/navigation";
 
-// Dummy data fetching function based on ID
-function getProductById(id: string) {
-  return {
-    id,
-    name: "MacBook Pro 16\" (M3 Max)",
-    price: 3499,
-    originalPrice: 3699,
-    rating: 4.9,
-    reviews: 128,
-    category: "Laptops & MacBooks",
-    badge: "Sale",
-    colors: ["silver", "space-gray"],
-    storage: ["1TB SSD", "2TB SSD", "4TB SSD"],
-    description: "Experience the ultimate blend of design and functionality with the new MacBook Pro. Engineered for those who demand the best in technology, featuring the M3 Max chip for unparalleled performance."
+export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
+  await connectToDatabase();
+
+  let productRaw;
+  try {
+    productRaw = await Gadget.findById(resolvedParams.id).lean();
+  } catch (error) {
+    productRaw = null;
+  }
+
+  if (!productRaw) {
+    notFound();
+  }
+
+  const product = {
+    id: productRaw._id.toString(),
+    name: productRaw.name,
+    price: productRaw.price,
+    originalPrice: productRaw.originalPrice,
+    rating: productRaw.rating,
+    reviews: productRaw.reviewsCount,
+    category: productRaw.category,
+    badge: productRaw.isTrending ? "Trending" : productRaw.isFeatured ? "Featured" : null,
+    colors: ["silver", "space-gray"], // Defaulting since we don't have this in schema yet
+    storage: ["1TB SSD", "2TB SSD", "4TB SSD"], // Defaulting
+    description: productRaw.description,
+    image: productRaw.images[0] || "📦"
   };
-}
-
-export default function ProductDetailsPage({ params }: { params: { id: string } }) {
-  const product = getProductById(params.id);
 
   return (
     <div className="bg-white dark:bg-black min-h-screen">
@@ -52,7 +65,7 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
           {/* Left Column: Gallery */}
           <div className="mb-10 lg:mb-0">
             <div className="sticky top-24">
-              <ProductGallery mainImage="💻" />
+              <ProductGallery mainImage={product.image} />
             </div>
           </div>
 

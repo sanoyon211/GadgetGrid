@@ -149,3 +149,21 @@ Step 18: Build Explore Page API & Integrate Filters
   * `src/app/api/seed/route.ts` তৈরি করা হয়েছে ডামি ডেটা দিয়ে ডেটাবেস পপুলেট করার জন্য।
   * `src/app/products/page.tsx` কে সার্ভার কম্পোনেন্ট বানিয়ে URL Search Params অনুযায়ী ডেটাবেস থেকে ডেটা এনে `ProductGrid`-এ পাস করা হয়েছে।
   * `ProductFilters.tsx` এবং `SearchAndSort.tsx` এ `useRouter` ব্যবহার করে ফিল্টারগুলো URL এ পুশ করার ব্যবস্থা করা হয়েছে।
+
+Step 19: Dashboard Product Management & Protected Routes
+-----------------------------------------------------------------------------
+- Technologies Used: NextAuth Middleware, React State, Next.js API Routes.
+- How it was done:
+  * `src/middleware.ts` তৈরি করে `/dashboard` রাউটগুলোকে প্রটেক্ট করা হয়েছে (লগিন ছাড়া এক্সেস করা যাবে না)।
+  * `src/app/dashboard/add-product/page.tsx` তৈরি করে নতুন প্রোডাক্ট অ্যাড করার ফর্ম বানানো হয়েছে।
+  * `src/app/dashboard/products/page.tsx` তৈরি করে প্রোডাক্ট ম্যানেজ (ডিলিট) করার টেবিল বানানো হয়েছে।
+  * `src/app/api/gadgets/add/route.ts` এবং `src/app/api/gadgets/[id]/route.ts` তৈরি করে Create এবং Delete এপিআই যুক্ত করা হয়েছে।
+  * `DashboardSidebar.tsx` এ নতুন পেজগুলোর লিংক যুক্ত করা হয়েছে।
+
+Step 20: Details Page API Integration & Final Polish
+-----------------------------------------------------------------------------
+- Technologies Used: Mongoose, Next.js Server Components.
+- How it was done:
+  * `src/app/product/[id]/page.tsx` এ Mongoose ব্যবহার করে ডেটাবেস থেকে ডাইনামিক ডেটা ফেচ করা হয়েছে।
+  * `ProductGallery.tsx` এবং `ProductInfo.tsx` কে ডাইনামিক ডেটা সাপোর্ট করার জন্য আপডেট করা হয়েছে।
+  * পুরো প্রজেক্টটি রিভিউ করে ফাইনাল স্টেপগুলো কমপ্লিট মার্ক করা হয়েছে।
