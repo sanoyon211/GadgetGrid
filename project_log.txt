@@ -75,3 +75,12 @@ Step 9: Build Cart & Checkout Page
   * `src/components/cart/CartSummary.tsx` তৈরি করে সাব-টোটাল, ট্যাক্স এবং টোটাল প্রাইস হিসাব করার সামারি বক্স বানানো হয়েছে, সাথে প্রোমো কোড অ্যাপ্লাই করার ফিল্ডও আছে।
   * `src/app/cart/page.tsx` এ একটি নতুন রাউট তৈরি করে লেফট সাইডে Cart Items এবং রাইট সাইডে Cart Summary দিয়ে একটি রেস্পন্সিভ লেআউট তৈরি করা হয়েছে।
 
+Step 10: Build Authentication Pages (Login & Register)
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js (App Router), Tailwind CSS, React State, react-icons/fa.
+- How it was done:
+  * `src/components/auth/AuthLayout.tsx` তৈরি করে লগিন ও রেজিস্ট্রেশনের জন্য স্প্লিট-স্ক্রিন লেআউট তৈরি করা হয়েছে (একপাশে ফর্ম, অন্যপাশে সুন্দর ব্যানার ডিজাইন)।
+  * `src/components/auth/LoginForm.tsx` তৈরি করে ইমেইল, পাসওয়ার্ড এবং সোশ্যাল লগিন (Google/GitHub) বাটনসহ একটি সুন্দর লগিন ফর্ম ডিজাইন করা হয়েছে।
+  * `src/components/auth/RegisterForm.tsx` তৈরি করে নতুন ইউজারদের জন্য সাইন-আপ ফর্ম বানানো হয়েছে।
+  * `src/app/login/page.tsx` এবং `src/app/register/page.tsx` রাউট তৈরি করে এই কম্পোনেন্টগুলো বসানো হয়েছে।
+
