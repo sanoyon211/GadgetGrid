@@ -125,3 +125,27 @@ Step 15: Interactive Navbar Features (Theme Toggle & Search Modal)
   * `src/app/layout.tsx` এ ThemeProvider র‍্যাপ (wrap) করা হয়েছে যেন ম্যানুয়াল ডার্ক মোড সাপোর্ট করে।
   * `src/components/globals/SearchModal.tsx` তৈরি করা হয়েছে যা একটি সুন্দর সার্চ পপআপ দেখায়।
   * `Navbar.tsx` এ Sun/Moon আইকন দিয়ে ডার্ক মোড টগল এবং Search আইকনে ক্লিক করলে সার্চ মডাল ওপেন হওয়ার ফিচার যুক্ত করা হয়েছে।
+
+Step 16: Setup MongoDB & Mongoose Database
+-----------------------------------------------------------------------------
+- Technologies Used: MongoDB, Mongoose, Node.js.
+- How it was done:
+  * `mongoose` প্যাকেজটি ইন্সটল করে `src/lib/mongoose.ts` এ ডেটাবেস কানেকশন তৈরি করা হয়েছে।
+  * `src/models/User.ts` এবং `src/models/Gadget.ts` তৈরি করে ইউজার এবং প্রোডাক্টের স্কিমা (Schema) ডিফাইন করা হয়েছে।
+
+Step 17: Configure NextAuth for Authentication
+-----------------------------------------------------------------------------
+- Technologies Used: NextAuth.js (v4), bcryptjs.
+- How it was done:
+  * `next-auth` এবং `bcryptjs` ইন্সটল করে `src/lib/auth.ts` এবং `src/app/api/auth/[...nextauth]/route.ts` তৈরি করা হয়েছে।
+  * `src/components/globals/AuthProvider.tsx` তৈরি করে `layout.tsx` এ র‍্যাপ করা হয়েছে।
+  * `src/app/api/auth/register/route.ts` এ কাস্টম রেজিস্ট্রেশন এপিআই তৈরি করে `LoginForm` এবং `RegisterForm` এর সাথে ব্যাকএন্ড কানেক্ট করা হয়েছে।
+
+Step 18: Build Explore Page API & Integrate Filters
+-----------------------------------------------------------------------------
+- Technologies Used: Next.js API Routes, Server Components, URLSearchParams.
+- How it was done:
+  * `src/app/api/gadgets/route.ts` তৈরি করে ডেটাবেস থেকে প্রোডাক্ট ফেচ, ফিল্টার এবং সর্ট করার এপিআই তৈরি করা হয়েছে।
+  * `src/app/api/seed/route.ts` তৈরি করা হয়েছে ডামি ডেটা দিয়ে ডেটাবেস পপুলেট করার জন্য।
+  * `src/app/products/page.tsx` কে সার্ভার কম্পোনেন্ট বানিয়ে URL Search Params অনুযায়ী ডেটাবেস থেকে ডেটা এনে `ProductGrid`-এ পাস করা হয়েছে।
+  * `ProductFilters.tsx` এবং `SearchAndSort.tsx` এ `useRouter` ব্যবহার করে ফিল্টারগুলো URL এ পুশ করার ব্যবস্থা করা হয়েছে।
