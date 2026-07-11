@@ -32,7 +32,7 @@ This is our strict roadmap. After each step, the code will be committed and push
 - [x] **Step 8:** Home Page: Build Statistics (Recharts) & Testimonials sections. *(Push 8)*
 - [x] **Step 9:** Home Page: Build Newsletter and FAQ sections. *(Push 9)*
 - [x] **Step 10:** Database Setup: Connect MongoDB with Mongoose and define schemas (User, Gadget). *(Push 10)*
-- [ ] **Step 11:** Auth Backend: Implement NextAuth.js or custom JWT for authentication. *(Push 11)*
+- [x] **Step 11:** Auth Backend: Implement NextAuth.js or custom JWT for authentication. *(Push 11)*
 - [ ] **Step 12:** Auth Frontend: Build Login and Registration pages with form validation. *(Push 12)*
 - [ ] **Step 13:** Explore Page UI: Build Search bar, Filter sidebar, and Gadget Card skeletons. *(Push 13)*
 - [ ] **Step 14:** Explore Page API: Create API routes for fetching, filtering, and sorting gadgets. *(Push 14)*
