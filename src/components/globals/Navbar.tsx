@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Search, ShoppingCart, User, Sun, Moon } from "lucide-react";
+import { Menu, X, Search, ShoppingCart, User, Sun, Moon, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useSession, signOut } from "next-auth/react";
 import SearchModal from "./SearchModal";
 
 export default function Navbar() {
@@ -11,6 +12,7 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     setMounted(true);
@@ -22,6 +24,14 @@ export default function Navbar() {
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
+
+  if (session) {
+    navLinks.push(
+      { name: "Dashboard", href: "/dashboard" },
+      { name: "Add Item", href: "/dashboard/add-product" },
+      { name: "Manage Items", href: "/dashboard/products" }
+    );
+  }
 
   return (
     <nav className="sticky top-0 z-50 w-full backdrop-blur-lg bg-background/80 border-b border-gray-200/50 shadow-sm transition-all">
@@ -74,13 +84,31 @@ export default function Navbar() {
               {/* Dummy badge for UI effect */}
               <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-primary rounded-full">3</span>
             </Link>
-            <Link
-              href="/login"
-              className="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"
-            >
-              <User className="w-4 h-4" />
-              <span>Login</span>
-            </Link>
+
+            {status === "loading" ? (
+              <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse"></div>
+            ) : session ? (
+              <div className="flex items-center space-x-3">
+                <Link href="/dashboard" className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                  {session.user?.name?.charAt(0) || "U"}
+                </Link>
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="p-2 text-foreground hover:text-red-500 transition-colors"
+                  title="Logout"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"
+              >
+                <User className="w-4 h-4" />
+                <span>Login</span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -110,14 +138,24 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="border-t border-gray-100 mt-4 pt-4 px-3 flex flex-col space-y-3">
-              <Link
-                href="/login"
-                className="flex items-center justify-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"
-                onClick={() => setIsOpen(false)}
-              >
-                <User className="w-4 h-4" />
-                <span>Login / Register</span>
-              </Link>
+              {session ? (
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="flex items-center justify-center space-x-2 bg-red-50 text-red-500 px-4 py-2 rounded-lg font-medium hover:bg-red-100 transition-all shadow-sm"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Logout</span>
+                </button>
+              ) : (
+                <Link
+                  href="/login"
+                  className="flex items-center justify-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <User className="w-4 h-4" />
+                  <span>Login / Register</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>
