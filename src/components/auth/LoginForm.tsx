@@ -39,6 +39,12 @@ export default function LoginForm() {
     }
   };
 
+  const handleDemoLogin = () => {
+    setEmail("admin@gadgetgrid.com");
+    setPassword("admin123");
+    toast("Credentials auto-filled. Please click Sign in.");
+  };
+
   return (
     <div className="w-full">
       <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-2">
@@ -67,6 +73,15 @@ export default function LoginForm() {
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">GitHub</span>
         </button>
       </div>
+
+      <button 
+        type="button"
+        onClick={handleDemoLogin}
+        className="w-full flex items-center justify-center gap-2 py-3 border-2 border-primary/20 bg-primary/5 text-primary rounded-xl font-bold hover:bg-primary/10 transition-colors mb-6"
+      >
+        <User className="w-5 h-5" />
+        Use Demo Admin Account
+      </button>
 
       <div className="relative mb-6">
         <div className="absolute inset-0 flex items-center">

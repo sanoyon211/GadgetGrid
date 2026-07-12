@@ -179,3 +179,11 @@ Step 22: Update Navbar for Authenticated Users
 - How it was done:
   * `Navbar.tsx`-এ `useSession` ব্যবহার করে লগিন করা ইউজারদের জন্য 'Dashboard', 'Add Item', 'Manage Items' লিংকগুলো ডায়নামিক ভাবে অ্যাড করা হয়েছে।
   * লগিন করা থাকলে ইউজারের নামের প্রথম অক্ষর দিয়ে একটি অ্যাভাটার এবং একটি Logout বাটন যুক্ত করা হয়েছে।
+
+Step 23: Card Grid Layout & Skeletons
+-----------------------------------------------------------------------------
+- Technologies Used: Tailwind CSS, Next.js Loading UI.
+- How it was done:
+  * `ProductGrid.tsx` এর লেআউটটি `lg:grid-cols-3` থেকে পরিবর্তন করে রিকোয়ারমেন্ট অনুযায়ী `lg:grid-cols-4` করা হয়েছে।
+  * `ProductSkeleton.tsx` নামে একটি নতুন গ্লোবাল অ্যানিমেটেড স্কেলিটন কম্পোনেন্ট তৈরি করা হয়েছে।
+  * `src/app/products/loading.tsx` ফাইল তৈরি করে প্রোডাক্ট ফেচ হওয়ার সময় "Loading..." লেখার বদলে সুন্দর স্কেলিটন রেন্ডার করার ব্যবস্থা করা হয়েছে।
