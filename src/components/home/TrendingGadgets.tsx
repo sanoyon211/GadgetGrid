@@ -31,14 +31,14 @@ export default async function TrendingGadgets() {
           {products.map((product) => (
           <div key={product.id} className="group relative flex flex-col items-center">
             <Link href={`/product/${product.id}`} className="w-full">
-              <div className="relative w-full aspect-square bg-[var(--accent)] flex items-center justify-center p-6 mb-4 transition-colors duration-300 group-hover:bg-gray-200/50 dark:group-hover:bg-zinc-800">
+              <div className="relative w-full aspect-square bg-[var(--accent)] flex items-center justify-center mb-4 transition-colors duration-300 overflow-hidden">
                 {product.badge && (
                   <div className="absolute top-4 right-4 z-10 px-2 py-1 text-[10px] font-bold bg-foreground text-background tracking-wider">
                     {product.badge}
                   </div>
                 )}
                 {product.image ? (
-                  <img src={product.image} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-md" />
+                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 ) : (
                   <div className="text-6xl">📦</div>
                 )}

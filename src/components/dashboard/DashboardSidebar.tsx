@@ -2,17 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ShoppingBag, Heart, Settings, LogOut, UserCircle } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Heart, Settings, LogOut, UserCircle, Home } from "lucide-react";
 import { toast } from "sonner";
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
-
   const menuItems = [
     { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
     { name: "My Orders", icon: ShoppingBag, href: "/dashboard/orders" },
     { name: "Wishlist", icon: Heart, href: "/dashboard/wishlist" },
-    { name: "Manage Products", icon: LayoutDashboard, href: "/dashboard/products" },
+    { name: "Manage Products", icon: LayoutDashboard, href: "/items/manage" },
     { name: "Settings", icon: Settings, href: "/dashboard/settings" },
   ];
 
@@ -21,11 +20,11 @@ export default function DashboardSidebar() {
   };
 
   return (
-    <div className="w-full lg:w-64 shrink-0 bg-white dark:bg-zinc-950 border-r border-gray-200 dark:border-zinc-800 lg:min-h-[calc(100vh-80px)] p-6">
+    <div className="w-full lg:w-64 shrink-0 bg-white dark:bg-zinc-950 border-r border-gray-200 dark:border-zinc-800 lg:h-screen lg:sticky lg:top-0 overflow-y-auto p-6 flex flex-col">
       
       {/* User Profile Summary */}
       <div className="flex items-center gap-4 mb-8 pb-8 border-b border-gray-100 dark:border-zinc-900">
-        <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 rounded-none bg-gray-100 dark:bg-zinc-900 text-foreground flex items-center justify-center shrink-0">
           <UserCircle className="w-7 h-7" />
         </div>
         <div>
@@ -42,26 +41,35 @@ export default function DashboardSidebar() {
             <Link
               key={item.name}
               href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm ${
+              className={`flex items-center gap-4 px-4 py-3 transition-all font-medium text-sm border-l-2 ${
                 isActive
-                  ? "bg-primary text-white shadow-md shadow-primary/20"
-                  : "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-900 hover:text-gray-900 dark:hover:text-white"
+                  ? "border-foreground text-foreground bg-gray-50 dark:bg-zinc-900/50"
+                  : "border-transparent text-gray-500 hover:text-foreground hover:bg-gray-50 dark:hover:bg-zinc-900/50"
               }`}
             >
-              <item.icon className={`w-5 h-5 ${isActive ? "text-white" : "text-gray-400"}`} />
+              <item.icon className={`w-4 h-4 ${isActive ? "text-foreground" : "text-gray-400"}`} />
               {item.name}
             </Link>
           );
         })}
       </nav>
 
-      {/* Logout */}
-      <div className="mt-8 pt-8 border-t border-gray-100 dark:border-zinc-900">
+      <div className="flex-1"></div>
+
+      {/* Back to Home & Logout */}
+      <div className="mt-8 pt-8 border-t border-gray-100 dark:border-zinc-900 space-y-2">
+        <Link
+          href="/"
+          className="w-full flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-foreground hover:bg-gray-50 dark:hover:bg-zinc-900/50 transition-colors font-medium text-sm border-l-2 border-transparent"
+        >
+          <Home className="w-4 h-4" />
+          Back to Home
+        </Link>
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 dark:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors font-medium text-sm"
+          className="w-full flex items-center gap-4 px-4 py-3 text-gray-500 hover:text-foreground hover:bg-gray-50 dark:hover:bg-zinc-900/50 transition-colors font-medium text-sm border-l-2 border-transparent"
         >
-          <LogOut className="w-5 h-5" />
+          <LogOut className="w-4 h-4" />
           Logout
         </button>
       </div>

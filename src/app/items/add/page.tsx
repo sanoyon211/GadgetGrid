@@ -52,34 +52,34 @@ export default function AddProductPage() {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-gray-100 dark:border-zinc-900 shadow-sm">
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Add New Product</h2>
+    <div className="bg-transparent p-6">
+      <h2 className="text-2xl font-heading font-bold text-foreground mb-8 pb-4 border-b border-gray-200 dark:border-zinc-800">Add New Product</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Product Name</label>
-            <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full px-4 py-2 border border-gray-200 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" />
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Product Name</label>
+            <input required type="text" name="name" value={formData.name} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
-            <textarea required rows={4} name="description" value={formData.description} onChange={handleChange} className="w-full px-4 py-2 border border-gray-200 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white"></textarea>
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Description</label>
+            <textarea required rows={4} name="description" value={formData.description} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors"></textarea>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Price ($)</label>
-            <input required type="number" name="price" value={formData.price} onChange={handleChange} className="w-full px-4 py-2 border border-gray-200 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" />
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Price ($)</label>
+            <input required type="number" name="price" value={formData.price} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Original Price ($)</label>
-            <input type="number" name="originalPrice" value={formData.originalPrice} onChange={handleChange} className="w-full px-4 py-2 border border-gray-200 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" />
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Original Price ($)</label>
+            <input type="number" name="originalPrice" value={formData.originalPrice} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
-            <select name="category" value={formData.category} onChange={handleChange} className="w-full px-4 py-2 border border-gray-200 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white">
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Category</label>
+            <select name="category" value={formData.category} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors">
               <option value="Smartphones">Smartphones</option>
               <option value="Laptops & MacBooks">Laptops & MacBooks</option>
               <option value="Audio & Headphones">Audio & Headphones</option>
@@ -90,17 +90,17 @@ export default function AddProductPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stock</label>
-            <input required type="number" name="stock" value={formData.stock} onChange={handleChange} className="w-full px-4 py-2 border border-gray-200 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" />
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Stock</label>
+            <input required type="number" name="stock" value={formData.stock} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Emoji / Image Placeholder</label>
-            <input required type="text" name="image" value={formData.image} onChange={handleChange} className="w-full px-4 py-2 border border-gray-200 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-900 dark:text-white" />
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Emoji / Image URL</label>
+            <input required type="text" name="image" value={formData.image} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
           </div>
         </div>
 
-        <button disabled={isLoading} type="submit" className="flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors disabled:opacity-50">
+        <button disabled={isLoading} type="submit" className="flex items-center gap-2 px-8 py-3 bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors disabled:opacity-50 mt-8">
           <Save className="w-4 h-4" />
           {isLoading ? "Saving..." : "Save Product"}
         </button>

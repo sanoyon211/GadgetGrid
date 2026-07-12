@@ -27,6 +27,20 @@ export default function Navbar() {
 
   if (session) {
     navLinks.push(
+      { name: "Add Item", href: "/items/add" },
+      { name: "Manage Items", href: "/items/manage" }
+    );
+  }
+
+  const mobileNavLinks = [
+    { name: "Home", href: "/" },
+    { name: "Shop", href: "/products" },
+    { name: "About", href: "/about" },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  if (session) {
+    mobileNavLinks.push(
       { name: "Dashboard", href: "/dashboard" },
       { name: "Add Item", href: "/items/add" },
       { name: "Manage Items", href: "/items/manage" }
@@ -56,7 +70,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex flex-1 justify-center space-x-10 items-center">
+          <div className="hidden lg:flex flex-1 justify-center space-x-6 xl:space-x-10 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -69,7 +83,7 @@ export default function Navbar() {
           </div>
 
           {/* Icons & Actions */}
-          <div className="hidden md:flex items-center justify-end w-1/4 space-x-4">
+          <div className="hidden lg:flex items-center justify-end w-1/4 space-x-4">
             
             {/* Search Button */}
             <button 
@@ -122,7 +136,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden items-center">
+          <div className="flex lg:hidden items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-md text-foreground hover:text-primary hover:bg-gray-100/50 transition-colors"
@@ -135,9 +149,9 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-background border-t border-gray-100 absolute w-full left-0 shadow-lg">
+        <div className="lg:hidden bg-background border-t border-gray-100 absolute w-full left-0 shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map((link) => (
+            {mobileNavLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}

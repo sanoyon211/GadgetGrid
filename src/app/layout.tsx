@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import Navbar from "@/components/globals/Navbar";
-import Footer from "@/components/globals/Footer";
+import LayoutWrapper from "@/components/globals/LayoutWrapper";
 import { ThemeProvider } from "@/components/globals/ThemeProvider";
 import AuthProvider from "@/components/globals/AuthProvider";
 import "./globals.css";
@@ -40,11 +39,9 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
-            <main className="flex-grow">
+            <LayoutWrapper>
               {children}
-            </main>
-            <Footer />
+            </LayoutWrapper>
           </ThemeProvider>
         </AuthProvider>
       </body>

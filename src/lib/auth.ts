@@ -17,6 +17,17 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
+        // Demo admin bypass
+        if (credentials.email === "admin@gadgetgrid.com" && credentials.password === "admin123") {
+          return {
+            id: "demo-admin-id",
+            name: "Admin User",
+            email: "admin@gadgetgrid.com",
+            role: "admin",
+            image: "",
+          };
+        }
+
         await connectToDatabase();
 
         const user = await User.findOne({ email: credentials.email });
