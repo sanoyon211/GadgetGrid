@@ -53,7 +53,7 @@ export default function ProductInfo({ product }: { product: any }) {
 
       {/* Description */}
       <p className="text-gray-600 dark:text-gray-300 text-base mb-8 leading-relaxed">
-        {product.description || "Experience next-level performance and stunning design with this premium gadget. Engineered for those who demand the best in technology."}
+        {product.shortDescription || product.description || "Experience next-level performance and stunning design with this premium gadget. Engineered for those who demand the best in technology."}
       </p>
 
       <hr className="border-gray-200 dark:border-zinc-800 mb-8" />

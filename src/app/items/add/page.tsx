@@ -10,6 +10,7 @@ export default function AddProductPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    shortDescription: "",
     description: "",
     price: "",
     originalPrice: "",
@@ -63,7 +64,12 @@ export default function AddProductPage() {
           </div>
 
           <div className="sm:col-span-2">
-            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Description</label>
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Short Description</label>
+            <textarea required rows={2} name="shortDescription" value={formData.shortDescription} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors"></textarea>
+          </div>
+
+          <div className="sm:col-span-2">
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Full Description</label>
             <textarea required rows={4} name="description" value={formData.description} onChange={handleChange} className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors"></textarea>
           </div>
 

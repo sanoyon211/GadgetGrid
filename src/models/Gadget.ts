@@ -2,6 +2,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface IGadget extends Document {
   name: string;
+  shortDescription: string;
   description: string;
   price: number;
   originalPrice?: number;
@@ -23,6 +24,10 @@ const GadgetSchema: Schema = new Schema(
       type: String,
       required: [true, 'Please provide a product name'],
       trim: true,
+    },
+    shortDescription: {
+      type: String,
+      required: [true, 'Please provide a short description'],
     },
     description: {
       type: String,

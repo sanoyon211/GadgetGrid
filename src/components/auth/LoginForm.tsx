@@ -39,10 +39,16 @@ export default function LoginForm() {
     }
   };
 
-  const handleDemoLogin = () => {
+  const handleDemoAdminLogin = () => {
     setEmail("admin@gadgetgrid.com");
     setPassword("admin123");
-    toast("Credentials auto-filled. Please click Sign in.");
+    toast("Admin credentials auto-filled. Please click Sign in.");
+  };
+
+  const handleDemoUserLogin = () => {
+    setEmail("user@gadgetgrid.com");
+    setPassword("user123");
+    toast("User credentials auto-filled. Please click Sign in.");
   };
 
   return (
@@ -74,14 +80,25 @@ export default function LoginForm() {
         </button>
       </div>
 
-      <button 
-        type="button"
-        onClick={handleDemoLogin}
-        className="w-full flex items-center justify-center gap-2 py-3 border-2 border-primary/20 bg-primary/5 text-primary rounded-xl font-bold hover:bg-primary/10 transition-colors mb-6"
-      >
-        <User className="w-5 h-5" />
-        Use Demo Admin Account
-      </button>
+      <div className="flex gap-4 mb-6">
+        <button 
+          type="button"
+          onClick={handleDemoAdminLogin}
+          className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-primary/20 bg-primary/5 text-primary rounded-xl font-bold hover:bg-primary/10 transition-colors"
+        >
+          <User className="w-5 h-5" />
+          Demo Admin
+        </button>
+
+        <button 
+          type="button"
+          onClick={handleDemoUserLogin}
+          className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+        >
+          <User className="w-5 h-5" />
+          Demo User
+        </button>
+      </div>
 
       <div className="relative mb-6">
         <div className="absolute inset-0 flex items-center">

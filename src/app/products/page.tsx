@@ -46,6 +46,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     originalPrice: g.originalPrice,
     rating: g.rating,
     reviews: g.reviewsCount,
+    description: g.shortDescription || g.description,
     image: g.images[0],
     category: g.category,
     badge: g.isTrending ? "Trending" : g.isFeatured ? "Featured" : null,

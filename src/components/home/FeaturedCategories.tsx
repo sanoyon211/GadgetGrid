@@ -2,12 +2,12 @@ import Link from "next/link";
 import { Smartphone, Laptop, Headphones, Watch, Camera, Gamepad2 } from "lucide-react";
 
 const categories = [
-  { name: "Smartphones", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=300&q=80", href: "/category/smartphones" },
-  { name: "Laptops", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=300&q=80", href: "/category/laptops" },
-  { name: "Audio", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80", href: "/category/audio" },
-  { name: "Wearables", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80", href: "/category/wearables" },
-  { name: "Cameras", image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=300&q=80", href: "/category/cameras" },
-  { name: "Gaming", image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=300&q=80", href: "/category/gaming" },
+  { name: "Smartphones", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=300&q=80", href: "/products?category=Smartphones" },
+  { name: "Laptops", image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=300&q=80", href: "/products?category=Laptops%20%26%20MacBooks" },
+  { name: "Audio", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80", href: "/products?category=Audio%20%26%20Headphones" },
+  { name: "Wearables", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80", href: "/products?category=Wearables" },
+  { name: "Cameras", image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=300&q=80", href: "/products?category=Cameras" },
+  { name: "Gaming", image: "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?auto=format&fit=crop&w=300&q=80", href: "/products?category=Gaming" },
 ];
 
 export default function FeaturedCategories() {

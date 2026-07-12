@@ -36,6 +36,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     colors: ["silver", "space-gray"], // Defaulting since we don't have this in schema yet
     storage: ["1TB SSD", "2TB SSD", "4TB SSD"], // Defaulting
     description: productRaw.description,
+    shortDescription: productRaw.shortDescription,
     image: productRaw.images[0] || "📦"
   };
 
@@ -50,7 +51,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
             <ChevronRight className="w-4 h-4 mx-2" />
             <Link href="/products" className="hover:text-foreground transition-colors">Shop</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
-            <Link href={`/category/${product.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="hover:text-foreground transition-colors">
+            <Link href={`/products?category=${encodeURIComponent(product.category)}`} className="hover:text-foreground transition-colors">
               {product.category}
             </Link>
             <ChevronRight className="w-4 h-4 mx-2" />

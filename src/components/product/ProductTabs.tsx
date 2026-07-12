@@ -39,11 +39,8 @@ export default function ProductTabs({ product }: { product: any }) {
         {activeTab === "description" && (
           <div className="prose prose-blue dark:prose-invert max-w-none">
             <h3 className="text-xl font-heading font-semibold mb-4 text-gray-900 dark:text-white">Product Overview</h3>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              Experience the ultimate blend of design and functionality with this premium gadget. Crafted with aerospace-grade materials, it offers unparalleled durability while maintaining a sleek, modern aesthetic. Whether you're a professional on the go or a tech enthusiast, this device is engineered to meet and exceed your expectations.
-            </p>
-            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              Equipped with our latest processing technology, it delivers lightning-fast performance, ensuring seamless multitasking and breathtaking graphics. The advanced cooling system guarantees optimal efficiency even during the most demanding tasks. Step into the future of technology today.
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 whitespace-pre-wrap">
+              {product.description}
             </p>
           </div>
         )}

@@ -4,14 +4,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LayoutDashboard, ShoppingBag, Heart, Settings, LogOut, UserCircle, Home } from "lucide-react";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 export default function DashboardSidebar() {
   const pathname = usePathname();
-  const menuItems = [
+  const { data: session } = useSession();
+  const isAdmin = session?.user?.role === "admin";
+
+  const menuItems = isAdmin ? [
+    { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
+    { name: "Manage Products", icon: LayoutDashboard, href: "/items/manage" },
+    { name: "Settings", icon: Settings, href: "/dashboard/settings" },
+  ] : [
     { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
     { name: "My Orders", icon: ShoppingBag, href: "/dashboard/orders" },
     { name: "Wishlist", icon: Heart, href: "/dashboard/wishlist" },
-    { name: "Manage Products", icon: LayoutDashboard, href: "/items/manage" },
     { name: "Settings", icon: Settings, href: "/dashboard/settings" },
   ];
 
@@ -28,8 +35,8 @@ export default function DashboardSidebar() {
           <UserCircle className="w-7 h-7" />
         </div>
         <div>
-          <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-1">John Doe</h3>
-          <p className="text-sm text-gray-500 line-clamp-1">john@example.com</p>
+          <h3 className="font-semibold text-gray-900 dark:text-white line-clamp-1">{session?.user?.name || "Loading..."}</h3>
+          <p className="text-sm text-gray-500 line-clamp-1">{session?.user?.email}</p>
         </div>
       </div>
 
