@@ -28,29 +28,40 @@ export default function Navbar() {
   if (session) {
     navLinks.push(
       { name: "Dashboard", href: "/dashboard" },
-      { name: "Add Item", href: "/dashboard/add-product" },
-      { name: "Manage Items", href: "/dashboard/products" }
+      { name: "Add Item", href: "/items/add" },
+      { name: "Manage Items", href: "/items/manage" }
     );
   }
 
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-lg bg-background/80 border-b border-gray-200/50 shadow-sm transition-all">
+    <>
+      {/* Top Promo Bar */}
+      <div className="bg-[#4a4a4a] text-[#f4f1eb] py-2 px-4 text-xs font-medium flex justify-between items-center hidden sm:flex">
+        <p>Free delivery on orders over $1499. Don't miss discount.</p>
+        <div className="flex items-center space-x-6">
+          <Link href="/contact" className="hover:text-white transition-colors">Help & contact</Link>
+          <Link href="/products" className="hover:text-white transition-colors">Deals of the day</Link>
+        </div>
+      </div>
+
+      <nav className="sticky top-0 z-50 w-full bg-background border-b border-gray-200 dark:border-zinc-800 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="font-heading text-2xl font-bold text-primary tracking-tight">
-              Gadget<span className="text-secondary">Grid</span>
+          <div className="flex-shrink-0 flex items-center w-1/4">
+            <Link href="/" className="font-heading text-3xl font-medium text-foreground tracking-tight flex items-center gap-2">
+              <ShoppingCart className="w-6 h-6 stroke-1" />
+              GadgetGrid
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex flex-1 justify-center space-x-10 items-center">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-foreground hover:text-primary font-medium transition-colors"
+                className="text-foreground hover:text-gray-500 font-medium text-sm transition-colors"
               >
                 {link.name}
               </Link>
@@ -58,12 +69,12 @@ export default function Navbar() {
           </div>
 
           {/* Icons & Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center justify-end w-1/4 space-x-4">
             
             {/* Search Button */}
             <button 
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 text-foreground hover:text-primary transition-colors"
+              className="p-2 text-foreground hover:text-primary active:scale-95 transition-all"
             >
               <Search className="w-5 h-5" />
             </button>
@@ -72,17 +83,16 @@ export default function Navbar() {
             {mounted && (
               <button 
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 text-foreground hover:text-primary transition-colors"
+                className="p-2 text-foreground hover:text-primary active:scale-95 transition-all"
               >
                 {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </button>
             )}
 
             {/* Cart Icon */}
-            <Link href="/cart" className="p-2 text-foreground hover:text-primary transition-colors relative">
-              <ShoppingCart className="w-5 h-5" />
-              {/* Dummy badge for UI effect */}
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-primary rounded-full">3</span>
+            <Link href="/cart" className="p-2 text-foreground hover:text-gray-500 transition-colors relative">
+              <ShoppingCart className="w-5 h-5 stroke-1" />
+              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-background bg-foreground rounded-full">3</span>
             </Link>
 
             {status === "loading" ? (
@@ -94,7 +104,7 @@ export default function Navbar() {
                 </Link>
                 <button
                   onClick={() => signOut({ callbackUrl: "/" })}
-                  className="p-2 text-foreground hover:text-red-500 transition-colors"
+                  className="p-2 text-foreground hover:text-red-500 active:scale-95 transition-all"
                   title="Logout"
                 >
                   <LogOut className="w-5 h-5" />
@@ -103,7 +113,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="flex items-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"
+                className="flex items-center space-x-2 bg-foreground text-background px-5 py-2 rounded-full font-medium hover:bg-foreground/90 active:scale-95 transition-all"
               >
                 <User className="w-4 h-4" />
                 <span>Login</span>
@@ -163,5 +173,6 @@ export default function Navbar() {
       {/* Search Modal */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </nav>
+    </>
   );
 }

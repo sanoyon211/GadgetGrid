@@ -11,21 +11,21 @@ export const metadata = {
 
 export default function CheckoutPage() {
   return (
-    <div className="bg-white dark:bg-black min-h-screen pb-20">
+    <div className="bg-background min-h-screen pb-24">
       
       {/* Breadcrumbs */}
-      <div className="border-b border-gray-100 dark:border-zinc-900 bg-gray-50/50 dark:bg-zinc-950/50">
+      <div className="border-b border-gray-200 dark:border-zinc-800 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex items-center text-sm font-medium text-gray-500">
-            <Link href="/cart" className="hover:text-primary transition-colors">Cart</Link>
+            <Link href="/cart" className="hover:text-foreground transition-colors">Cart</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-gray-900 dark:text-gray-300">Checkout</span>
+            <span className="text-foreground">Checkout</span>
           </nav>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <h1 className="text-3xl font-heading font-extrabold text-gray-900 dark:text-white mb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h1 className="text-4xl sm:text-5xl font-heading font-medium text-foreground mb-12">
           Checkout
         </h1>
 

@@ -28,56 +28,38 @@ export default function ProductGrid({ initialGadgets, totalPages, currentPage }:
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {initialGadgets.map((product: any) => (
-          <div key={product.id} className="group relative bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden hover:shadow-xl transition-all duration-300">
-            {product.badge && (
-              <div className={`absolute top-4 left-4 z-10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white rounded-full ${
-                product.badge === 'Sale' ? 'bg-red-500' : product.badge === 'New' ? 'bg-blue-500' : 'bg-green-500'
-              }`}>
-                {product.badge}
+          <div key={product.id} className="group relative flex flex-col items-center">
+            <Link href={`/product/${product.id}`} className="w-full">
+              <div className="relative w-full aspect-square bg-[var(--accent)] flex items-center justify-center p-6 mb-4 transition-colors duration-300 group-hover:bg-gray-200/50 dark:group-hover:bg-zinc-800">
+                {product.badge && (
+                  <div className="absolute top-4 right-4 z-10 px-2 py-1 text-[10px] font-bold bg-foreground text-background tracking-wider">
+                    {product.badge}
+                  </div>
+                )}
+                {product.image || product.images?.[0] ? (
+                  <img src={product.image || product.images?.[0]} alt={product.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out drop-shadow-md" />
+                ) : (
+                  <div className="text-6xl">📦</div>
+                )}
               </div>
-            )}
+            </Link>
             
-            <button className="absolute top-4 right-4 z-10 p-2 bg-white/80 dark:bg-black/50 backdrop-blur-md rounded-full text-gray-400 hover:text-red-500 hover:bg-white transition-colors">
-              <Heart className="w-5 h-5" />
-            </button>
-
-            <div className="aspect-square bg-gray-50 dark:bg-zinc-800 flex items-center justify-center p-6 relative overflow-hidden">
-              <div className="text-8xl group-hover:scale-110 transition-transform duration-500">
-                {product.image || "📦"}
-              </div>
+            <h3 className="text-sm font-semibold font-heading tracking-wide text-foreground mb-2 text-center">
+              <Link href={`/product/${product.id}`}>
+                {product.name}
+              </Link>
+            </h3>
+            
+            <div className="flex items-center justify-center gap-3 text-sm mb-4">
+              {product.originalPrice && (
+                <span className="text-gray-400 line-through">${product.originalPrice.toFixed(2)}</span>
+              )}
+              <span className="text-gray-600 dark:text-gray-300 font-medium">${product.price.toFixed(2)}</span>
             </div>
 
-            <div className="p-6">
-              <div className="flex items-center text-sm text-gray-500 mb-2">
-                <span className="text-primary font-medium">{product.category}</span>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-primary transition-colors">
-                <Link href={`/product/${product.id}`}>
-                  <span className="absolute inset-0" />
-                  {product.name}
-                </Link>
-              </h3>
-              
-              <div className="flex items-center mb-4">
-                <div className="flex items-center text-yellow-400">
-                  <Star className="w-4 h-4 fill-current" />
-                </div>
-                <span className="text-sm font-medium text-gray-900 dark:text-gray-300 ml-1">{product.rating}</span>
-                <span className="text-sm text-gray-500 ml-1">({product.reviews})</span>
-              </div>
-
-              <div className="flex items-center justify-between mt-auto">
-                <div className="flex flex-col">
-                  <span className="text-xl font-bold text-gray-900 dark:text-white">${product.price}</span>
-                  {product.originalPrice && (
-                    <span className="text-sm text-gray-400 line-through">${product.originalPrice}</span>
-                  )}
-                </div>
-                <button className="p-3 bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-white transition-colors relative z-20">
-                  <ShoppingCart className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
+            <Link href={`/product/${product.id}`} className="text-xs font-bold tracking-widest uppercase text-foreground border-b border-transparent hover:border-foreground transition-colors pb-1">
+              View Details
+            </Link>
           </div>
         ))}
       </div>

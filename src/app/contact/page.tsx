@@ -22,25 +22,25 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-white dark:bg-black min-h-screen pb-20">
+    <div className="bg-background min-h-screen pb-24">
       
       {/* Breadcrumbs */}
-      <div className="border-b border-gray-100 dark:border-zinc-900 bg-gray-50/50 dark:bg-zinc-950/50">
+      <div className="border-b border-gray-200 dark:border-zinc-800 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex items-center text-sm font-medium text-gray-500">
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-gray-900 dark:text-gray-300">Contact Us</span>
+            <span className="text-foreground">Contact Us</span>
           </nav>
         </div>
       </div>
 
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <h1 className="text-4xl md:text-5xl font-heading font-extrabold text-gray-900 dark:text-white mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <h1 className="text-5xl md:text-6xl font-heading font-medium text-foreground mb-6">
           Get in Touch
         </h1>
-        <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+        <p className="text-sm tracking-wide text-gray-500 max-w-2xl mx-auto">
           Have a question about a product, order, or just want to say hi? We'd love to hear from you.
         </p>
       </div>
@@ -49,107 +49,101 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-3 gap-10">
           
           {/* Contact Information Cards */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-12 pt-8">
             
-            <div className="bg-gray-50 dark:bg-zinc-900 p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 flex flex-col items-center text-center hover:border-primary transition-colors">
-              <div className="w-14 h-14 bg-white dark:bg-black rounded-full flex items-center justify-center shadow-sm mb-4">
-                <MapPin className="w-6 h-6 text-primary" />
+            <div className="flex flex-col text-left">
+              <div className="w-10 h-10 border border-foreground rounded-full flex items-center justify-center mb-6">
+                <MapPin className="w-4 h-4 text-foreground" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Our Office</h3>
-              <p className="text-gray-500 dark:text-gray-400">
+              <h3 className="text-lg font-heading font-medium text-foreground mb-3">Our Office</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
                 123 Tech Avenue, Suite 400<br />
                 San Francisco, CA 94105
               </p>
             </div>
 
-            <div className="bg-gray-50 dark:bg-zinc-900 p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 flex flex-col items-center text-center hover:border-primary transition-colors">
-              <div className="w-14 h-14 bg-white dark:bg-black rounded-full flex items-center justify-center shadow-sm mb-4">
-                <Phone className="w-6 h-6 text-primary" />
+            <div className="flex flex-col text-left">
+              <div className="w-10 h-10 border border-foreground rounded-full flex items-center justify-center mb-6">
+                <Phone className="w-4 h-4 text-foreground" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Phone</h3>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">Mon-Fri from 8am to 5pm.</p>
-              <a href="tel:+15551234567" className="text-primary font-medium hover:underline">+1 (555) 123-4567</a>
+              <h3 className="text-lg font-heading font-medium text-foreground mb-3">Phone</h3>
+              <p className="text-gray-500 text-sm mb-2">Mon-Fri from 8am to 5pm.</p>
+              <a href="tel:+15551234567" className="text-foreground text-sm hover:text-gray-500 transition-colors">+1 (555) 123-4567</a>
             </div>
 
-            <div className="bg-gray-50 dark:bg-zinc-900 p-8 rounded-2xl border border-gray-100 dark:border-zinc-800 flex flex-col items-center text-center hover:border-primary transition-colors">
-              <div className="w-14 h-14 bg-white dark:bg-black rounded-full flex items-center justify-center shadow-sm mb-4">
-                <Mail className="w-6 h-6 text-primary" />
+            <div className="flex flex-col text-left">
+              <div className="w-10 h-10 border border-foreground rounded-full flex items-center justify-center mb-6">
+                <Mail className="w-4 h-4 text-foreground" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Email</h3>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">Our friendly team is here to help.</p>
-              <a href="mailto:support@gadgetgrid.com" className="text-primary font-medium hover:underline">support@gadgetgrid.com</a>
+              <h3 className="text-lg font-heading font-medium text-foreground mb-3">Email</h3>
+              <p className="text-gray-500 text-sm mb-2">Our friendly team is here to help.</p>
+              <a href="mailto:support@gadgetgrid.com" className="text-foreground text-sm hover:text-gray-500 transition-colors">support@gadgetgrid.com</a>
             </div>
 
           </div>
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-zinc-900 p-8 sm:p-10 rounded-2xl border border-gray-200 dark:border-zinc-800 shadow-sm">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send us a message</h2>
+            <div className="bg-[var(--accent)] p-8 sm:p-12">
+              <h2 className="text-3xl font-heading font-medium text-foreground mb-8">Send us a message</h2>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid sm:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid sm:grid-cols-2 gap-8">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">First Name</label>
                     <input 
                       type="text" 
                       required
-                      className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                      placeholder="Jane"
+                      className="block w-full px-0 py-3 bg-transparent border-0 border-b border-gray-300 text-foreground focus:ring-0 focus:border-foreground transition-colors placeholder-gray-500 text-sm"
+                      placeholder="First Name"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Last Name</label>
                     <input 
                       type="text" 
                       required
-                      className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                      placeholder="Doe"
+                      className="block w-full px-0 py-3 bg-transparent border-0 border-b border-gray-300 text-foreground focus:ring-0 focus:border-foreground transition-colors placeholder-gray-500 text-sm"
+                      placeholder="Last Name"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email Address</label>
                   <input 
                     type="email" 
                     required
-                    className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                    placeholder="jane@example.com"
+                    className="block w-full px-0 py-3 bg-transparent border-0 border-b border-gray-300 text-foreground focus:ring-0 focus:border-foreground transition-colors placeholder-gray-500 text-sm"
+                    placeholder="Email Address"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Subject</label>
                   <input 
                     type="text" 
                     required
-                    className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                    placeholder="How can we help you?"
+                    className="block w-full px-0 py-3 bg-transparent border-0 border-b border-gray-300 text-foreground focus:ring-0 focus:border-foreground transition-colors placeholder-gray-500 text-sm"
+                    placeholder="Subject"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Message</label>
                   <textarea 
                     required
                     rows={5}
-                    className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-none"
-                    placeholder="Write your message here..."
+                    className="block w-full px-0 py-3 bg-transparent border-0 border-b border-gray-300 text-foreground focus:ring-0 focus:border-foreground transition-colors placeholder-gray-500 text-sm resize-none"
+                    placeholder="Message"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex justify-center items-center gap-2 py-4 px-6 rounded-xl shadow-lg shadow-primary/25 text-white bg-primary hover:bg-primary/90 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all disabled:opacity-70 disabled:cursor-not-allowed font-medium text-lg"
+                  className="w-full flex justify-center items-center gap-2 py-4 px-6 border border-foreground text-foreground hover:bg-foreground hover:text-background transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm tracking-wider uppercase mt-4"
                 >
                   {isSubmitting ? (
-                    <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <>
                       Send Message
-                      <Send className="w-5 h-5" />
                     </>
                   )}
                 </button>

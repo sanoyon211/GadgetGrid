@@ -42,7 +42,7 @@ export default function AddProductPage() {
       if (!res.ok) throw new Error("Failed to add product");
       
       toast.success("Product added successfully!");
-      router.push("/dashboard/products");
+      router.push("/items/manage");
       router.refresh();
     } catch (error) {
       toast.error("Error adding product");

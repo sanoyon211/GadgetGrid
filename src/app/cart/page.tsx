@@ -10,22 +10,22 @@ export const metadata = {
 
 export default function CartPage() {
   return (
-    <div className="bg-gray-50 dark:bg-black min-h-screen pb-16">
+    <div className="bg-background min-h-screen pb-24">
       
       {/* Breadcrumbs */}
-      <div className="border-b border-gray-200 dark:border-zinc-900 bg-white dark:bg-zinc-950/50">
+      <div className="border-b border-gray-200 dark:border-zinc-800 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex items-center text-sm font-medium text-gray-500">
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-gray-900 dark:text-gray-300">Shopping Cart</span>
+            <span className="text-foreground">Shopping Cart</span>
           </nav>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-heading font-extrabold text-gray-900 dark:text-white tracking-tight">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="mb-12">
+          <h1 className="text-4xl sm:text-5xl font-heading font-medium text-foreground tracking-tight">
             Shopping Cart
           </h1>
         </div>

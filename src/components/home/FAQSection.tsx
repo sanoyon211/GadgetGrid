@@ -34,36 +34,36 @@ export default function FAQSection() {
   };
 
   return (
-    <section className="py-16 bg-white dark:bg-black">
+    <section className="py-24 bg-background border-t border-gray-100 dark:border-zinc-800">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white">Frequently Asked Questions</h2>
-          <p className="mt-4 text-lg text-gray-500">Have questions? We're here to help.</p>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-heading font-medium text-foreground mb-4">Frequently Asked Questions</h2>
+          <p className="text-gray-500 text-sm tracking-wide">Have questions? We're here to help.</p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-0 border-t border-gray-200 dark:border-zinc-800">
           {faqs.map((faq, index) => (
             <div 
               key={index} 
-              className={`border rounded-2xl overflow-hidden transition-colors duration-300 ${openIndex === index ? 'border-primary/50 bg-primary/5 dark:bg-primary/10' : 'border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-900'}`}
+              className="border-b border-gray-200 dark:border-zinc-800 transition-colors duration-300"
             >
               <button
-                className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
+                className="w-full py-6 text-left flex justify-between items-center focus:outline-none"
                 onClick={() => toggleFAQ(index)}
               >
-                <span className={`font-semibold text-lg ${openIndex === index ? 'text-primary' : 'text-gray-900 dark:text-white'}`}>
+                <span className={`text-sm font-medium uppercase tracking-wide ${openIndex === index ? 'text-gray-500' : 'text-foreground'}`}>
                   {faq.question}
                 </span>
                 {openIndex === index ? (
-                  <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
+                  <ChevronUp className="w-4 h-4 text-gray-500 flex-shrink-0" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                  <ChevronDown className="w-4 h-4 text-foreground flex-shrink-0" />
                 )}
               </button>
               <div 
-                className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-40 pb-4 opacity-100' : 'max-h-0 opacity-0'}`}
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-40 pb-6 opacity-100' : 'max-h-0 opacity-0'}`}
               >
-                <p className="text-gray-600 dark:text-gray-400">
+                <p className="text-gray-500 text-sm leading-relaxed">
                   {faq.answer}
                 </p>
               </div>

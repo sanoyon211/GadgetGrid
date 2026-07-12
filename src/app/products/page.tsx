@@ -52,14 +52,14 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   }));
 
   return (
-    <div className="bg-gray-50 dark:bg-black min-h-screen py-12">
+    <div className="bg-background min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="mb-10">
-          <h1 className="text-4xl font-heading font-extrabold text-gray-900 dark:text-white tracking-tight mb-4">
-            Explore Gadgets
+        <div className="mb-16 border-b border-gray-200 dark:border-zinc-800 pb-8 text-center">
+          <h1 className="text-4xl md:text-5xl font-heading font-medium text-foreground tracking-tight mb-4">
+            Collection
           </h1>
-          <p className="text-lg text-gray-500 max-w-2xl">
+          <p className="text-sm tracking-wide text-gray-500 max-w-2xl mx-auto">
             Discover the latest and greatest in tech. From cutting-edge smartphones to high-fidelity audio, we have everything you need to upgrade your lifestyle.
           </p>
         </div>

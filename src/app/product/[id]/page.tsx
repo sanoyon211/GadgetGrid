@@ -40,21 +40,21 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
   };
 
   return (
-    <div className="bg-white dark:bg-black min-h-screen">
+    <div className="bg-background min-h-screen">
       
       {/* Breadcrumbs */}
-      <div className="border-b border-gray-100 dark:border-zinc-900 bg-gray-50/50 dark:bg-zinc-950/50">
+      <div className="border-b border-gray-200 dark:border-zinc-800 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="flex items-center text-sm font-medium text-gray-500">
-            <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
-            <Link href="/products" className="hover:text-primary transition-colors">Shop</Link>
+            <Link href="/products" className="hover:text-foreground transition-colors">Shop</Link>
             <ChevronRight className="w-4 h-4 mx-2" />
-            <Link href={`/category/${product.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="hover:text-primary transition-colors">
+            <Link href={`/category/${product.category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="hover:text-foreground transition-colors">
               {product.category}
             </Link>
             <ChevronRight className="w-4 h-4 mx-2" />
-            <span className="text-gray-900 dark:text-gray-300 truncate">{product.name}</span>
+            <span className="text-foreground truncate">{product.name}</span>
           </nav>
         </div>
       </div>
@@ -83,7 +83,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
       </main>
 
       {/* Related Products Section */}
-      <div className="border-t border-gray-100 dark:border-zinc-900 bg-gray-50 dark:bg-black pb-12">
+      <div className="border-t border-gray-200 dark:border-zinc-800 bg-background pb-12">
         {/* We reuse the TrendingGadgets component but treat it as Related Products here */}
         <TrendingGadgets />
       </div>

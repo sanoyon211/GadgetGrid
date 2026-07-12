@@ -1,4 +1,5 @@
 import { Package, Clock, ShieldCheck, CreditCard } from "lucide-react";
+import SalesChart from "./SalesChart";
 
 export default function DashboardOverview() {
   const stats = [
@@ -75,6 +76,13 @@ export default function DashboardOverview() {
               <span className="text-sm font-medium text-gray-900 dark:text-white">+1 (555) 123-4567</span>
             </div>
           </div>
+        </div>
+
+        {/* Sales Overview Chart */}
+        <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-6 lg:col-span-2">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Sales Overview</h2>
+          <p className="text-sm text-gray-500">Your revenue stream over the last 7 months.</p>
+          <SalesChart />
         </div>
 
       </div>

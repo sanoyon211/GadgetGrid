@@ -55,23 +55,23 @@ export default function ProductFilters() {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-950 rounded-2xl border border-gray-200 dark:border-zinc-800 p-6">
-      <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-100 dark:border-zinc-800">
-        <SlidersHorizontal className="w-5 h-5 text-primary" />
-        <h2 className="text-lg font-heading font-semibold text-gray-900 dark:text-white">Filters</h2>
+    <div className="bg-transparent p-0">
+      <div className="flex items-center gap-2 mb-8 pb-4 border-b border-gray-200 dark:border-zinc-800">
+        <SlidersHorizontal className="w-4 h-4 text-foreground" />
+        <h2 className="text-sm font-heading font-medium tracking-widest uppercase text-foreground">Filters</h2>
       </div>
 
-      <div className="mb-8">
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 uppercase tracking-wider">Categories</h3>
-        <ul className="space-y-3">
+      <div className="mb-10">
+        <h3 className="text-xs font-semibold text-foreground mb-4 uppercase tracking-widest">Categories</h3>
+        <ul className="space-y-4">
           {categories.map((category) => (
             <li key={category}>
               <button
                 onClick={() => handleCategoryChange(category)}
                 className={`flex items-center justify-between w-full text-left text-sm transition-colors ${
                   selectedCategory === category 
-                    ? "text-primary font-medium" 
-                    : "text-gray-600 dark:text-gray-400 hover:text-primary"
+                    ? "text-foreground font-medium" 
+                    : "text-gray-500 hover:text-foreground"
                 }`}
               >
                 <span>{category}</span>
@@ -83,8 +83,8 @@ export default function ProductFilters() {
       </div>
 
       <div className="mb-8">
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 uppercase tracking-wider">Price</h3>
-        <ul className="space-y-3">
+        <h3 className="text-xs font-semibold text-foreground mb-4 uppercase tracking-widest">Price</h3>
+        <ul className="space-y-4">
           {priceRanges.map((range) => (
             <li key={range.id}>
               <label className="flex items-center cursor-pointer group">
@@ -96,10 +96,10 @@ export default function ProductFilters() {
                     checked={selectedPrice === range.id}
                     onChange={() => handlePriceChange(range.id)}
                   />
-                  <div className="w-4 h-4 border-2 border-gray-300 dark:border-gray-600 rounded-full peer-checked:border-primary peer-checked:border-[5px] transition-all"></div>
+                  <div className="w-4 h-4 border border-gray-300 dark:border-gray-600 rounded-full peer-checked:border-foreground peer-checked:border-[4px] transition-all"></div>
                 </div>
                 <span className={`text-sm transition-colors ${
-                  selectedPrice === range.id ? "text-gray-900 dark:text-white font-medium" : "text-gray-600 dark:text-gray-400 group-hover:text-primary"
+                  selectedPrice === range.id ? "text-foreground font-medium" : "text-gray-500 group-hover:text-foreground"
                 }`}>
                   {range.label}
                 </span>

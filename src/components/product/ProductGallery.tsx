@@ -10,9 +10,9 @@ export default function ProductGallery({ mainImage = "📱" }: { mainImage?: str
 
   const images = [
     { id: 0, content: mainImage },
-    { id: 1, content: "📦" }, // Box
-    { id: 2, content: "🔌" }, // Charger
-    { id: 3, content: "✨" }, // Shine
+    { id: 1, content: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=1000" }, // Laptop box/setup
+    { id: 2, content: "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=1000" }, // Charger/tech
+    { id: 3, content: "https://images.unsplash.com/photo-1550009158-9effb6e97313?auto=format&fit=crop&q=80&w=1000" }, // Shiny tech
   ];
 
   return (
@@ -29,16 +29,26 @@ export default function ProductGallery({ mainImage = "📱" }: { mainImage?: str
                 : "border-transparent hover:border-gray-300 dark:hover:border-gray-600"
             }`}
           >
-            <span className="text-4xl">{img.content}</span>
+            {img.content.startsWith('http') ? (
+              <img src={img.content} alt="Thumbnail" className="w-full h-full object-cover" />
+            ) : (
+              <span className="text-4xl">{img.content}</span>
+            )}
           </button>
         ))}
       </div>
 
       {/* Main Image */}
       <div className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-square bg-gray-50 dark:bg-zinc-900 rounded-2xl overflow-hidden flex items-center justify-center group">
-        <span className="text-9xl sm:text-[12rem] transform group-hover:scale-110 transition-transform duration-500 ease-out">
-          {images[activeImage].content}
-        </span>
+        <div className="w-full h-full transform group-hover:scale-105 transition-transform duration-500 ease-out">
+          {images[activeImage].content.startsWith('http') ? (
+            <img src={images[activeImage].content} alt="Product" className="w-full h-full object-contain p-8 drop-shadow-xl" />
+          ) : (
+            <span className="text-9xl sm:text-[12rem] flex items-center justify-center h-full">
+              {images[activeImage].content}
+            </span>
+          )}
+        </div>
         
         {/* Fullscreen Button */}
         <button className="absolute top-4 right-4 p-3 bg-white/80 dark:bg-black/50 backdrop-blur-md rounded-full text-gray-500 hover:text-gray-900 dark:hover:text-white hover:scale-110 transition-all opacity-0 group-hover:opacity-100">

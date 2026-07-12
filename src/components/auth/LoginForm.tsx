@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Mail, Lock, LogIn } from "lucide-react";
+import { Mail, Lock, LogIn, User } from "lucide-react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";

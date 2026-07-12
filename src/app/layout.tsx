@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/globals/Navbar";
 import Footer from "@/components/globals/Footer";
 import { ThemeProvider } from "@/components/globals/ThemeProvider";
@@ -11,8 +11,8 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} antialiased h-full`}
+      className={`${inter.variable} ${playfair.variable} antialiased h-full`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">

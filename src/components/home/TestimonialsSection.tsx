@@ -29,37 +29,35 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-16 bg-gray-50 dark:bg-black/20">
+    <section className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white">What Our Customers Say</h2>
-          <p className="mt-4 text-lg text-gray-500">Don't just take our word for it.</p>
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-heading font-medium text-foreground mb-2">What Our Customers Say</h2>
+          <p className="text-gray-500 text-sm tracking-wide">Don't just take our word for it.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white dark:bg-zinc-900 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-zinc-800 flex flex-col hover:shadow-md transition-shadow">
+            <div key={testimonial.id} className="flex flex-col items-center text-center">
               <div className="flex items-center mb-6">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className={`w-5 h-5 ${i < testimonial.rating ? "text-yellow-400 fill-current" : "text-gray-300 dark:text-gray-600"}`}
+                    className={`w-4 h-4 mx-0.5 ${i < testimonial.rating ? "text-yellow-500 fill-current" : "text-gray-200 dark:text-gray-700"}`}
                   />
                 ))}
               </div>
-              <p className="text-gray-600 dark:text-gray-300 flex-grow mb-6 italic">
+              <p className="text-foreground leading-relaxed flex-grow mb-8 text-sm">
                 "{testimonial.content}"
               </p>
-              <div className="flex items-center mt-auto">
+              <div className="flex flex-col items-center mt-auto">
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.author}
-                  className="w-12 h-12 rounded-full mr-4"
+                  className="w-12 h-12 rounded-full mb-3 grayscale hover:grayscale-0 transition-all duration-300"
                 />
-                <div>
-                  <h4 className="text-sm font-bold text-gray-900 dark:text-white">{testimonial.author}</h4>
-                  <p className="text-xs text-gray-500">{testimonial.role}</p>
-                </div>
+                <h4 className="text-xs font-bold text-foreground uppercase tracking-widest mb-1">{testimonial.author}</h4>
+                <p className="text-xs text-gray-500">{testimonial.role}</p>
               </div>
             </div>
           ))}
