@@ -26,7 +26,7 @@ export default function ProductGrid({ initialGadgets, totalPages, currentPage }:
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {initialGadgets.map((product: any) => (
           <div key={product.id} className="group relative bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 overflow-hidden hover:shadow-xl transition-all duration-300">
             {product.badge && (

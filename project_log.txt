@@ -165,5 +165,17 @@ Step 20: Details Page API Integration & Final Polish
 - Technologies Used: Mongoose, Next.js Server Components.
 - How it was done:
   * `src/app/product/[id]/page.tsx` এ Mongoose ব্যবহার করে ডেটাবেস থেকে ডাইনামিক ডেটা ফেচ করা হয়েছে।
-  * `ProductGallery.tsx` এবং `ProductInfo.tsx` কে ডাইনামিক ডেটা সাপোর্ট করার জন্য আপডেট করা হয়েছে।
   * পুরো প্রজেক্টটি রিভিউ করে ফাইনাল স্টেপগুলো কমপ্লিট মার্ক করা হয়েছে।
+
+Step 21: Complete Home Page Sections
+-----------------------------------------------------------------------------
+- Technologies Used: React, Tailwind CSS, Recharts.
+- How it was done:
+  * `StatisticsSection`, `TestimonialsSection`, এবং `FAQSection` আগে থেকেই তৈরি করা ছিল এবং `page.tsx`-এ সঠিকভাবে রেন্ডার করা হয়েছে।
+
+Step 22: Update Navbar for Authenticated Users
+-----------------------------------------------------------------------------
+- Technologies Used: NextAuth, React Hooks.
+- How it was done:
+  * `Navbar.tsx`-এ `useSession` ব্যবহার করে লগিন করা ইউজারদের জন্য 'Dashboard', 'Add Item', 'Manage Items' লিংকগুলো ডায়নামিক ভাবে অ্যাড করা হয়েছে।
+  * লগিন করা থাকলে ইউজারের নামের প্রথম অক্ষর দিয়ে একটি অ্যাভাটার এবং একটি Logout বাটন যুক্ত করা হয়েছে।
