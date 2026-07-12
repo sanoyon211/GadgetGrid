@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import DashboardSidebar from "@/components/dashboard/DashboardSidebar";
 
 export const metadata = {
   title: "Manage Items | GadgetGrid",
@@ -9,17 +8,9 @@ export const metadata = {
 export default function ItemsLayout({ children }: { children: ReactNode }) {
   return (
     <div className="bg-gray-50 dark:bg-black min-h-screen">
-      <div className="flex flex-col lg:flex-row min-h-screen">
-        
-        {/* Sidebar */}
-        <DashboardSidebar />
-
-        {/* Main Content Area */}
-        <main className="flex-1 min-w-0 p-4 sm:p-8 lg:p-12">
-          {children}
-        </main>
-
-      </div>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        {children}
+      </main>
     </div>
   );
 }

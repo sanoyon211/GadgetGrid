@@ -3,6 +3,8 @@ import { Inter, Playfair_Display } from "next/font/google";
 import LayoutWrapper from "@/components/globals/LayoutWrapper";
 import { ThemeProvider } from "@/components/globals/ThemeProvider";
 import AuthProvider from "@/components/globals/AuthProvider";
+import { ShopProvider } from "@/context/ShopContext";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -39,9 +41,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <LayoutWrapper>
-              {children}
-            </LayoutWrapper>
+            <ShopProvider>
+              <LayoutWrapper>
+                {children}
+              </LayoutWrapper>
+              <Toaster richColors position="top-right" />
+            </ShopProvider>
           </ThemeProvider>
         </AuthProvider>
       </body>

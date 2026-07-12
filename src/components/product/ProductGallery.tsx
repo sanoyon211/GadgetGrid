@@ -3,23 +3,18 @@
 import { useState } from "react";
 import { Maximize2 } from "lucide-react";
 
-export default function ProductGallery({ mainImage = "📱" }: { mainImage?: string }) {
-  // We'll use the mainImage emoji as the placeholder for the main image, 
-  // and some varying shades for thumbnails
+export default function ProductGallery({ images = [] }: { images?: string[] }) {
   const [activeImage, setActiveImage] = useState(0);
 
-  const images = [
-    { id: 0, content: mainImage },
-    { id: 1, content: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=1000" }, // Laptop box/setup
-    { id: 2, content: "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=1000" }, // Charger/tech
-    { id: 3, content: "https://images.unsplash.com/photo-1550009158-9effb6e97313?auto=format&fit=crop&q=80&w=1000" }, // Shiny tech
-  ];
+  const displayImages = images.length > 0 
+    ? images.map((img, id) => ({ id, content: img })) 
+    : [{ id: 0, content: "📦" }];
 
   return (
     <div className="flex flex-col-reverse lg:flex-row gap-4">
       {/* Thumbnails */}
       <div className="flex lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 scrollbar-hide w-full lg:w-24 shrink-0">
-        {images.map((img, idx) => (
+        {displayImages.map((img, idx) => (
           <button
             key={img.id}
             onClick={() => setActiveImage(idx)}
@@ -41,11 +36,11 @@ export default function ProductGallery({ mainImage = "📱" }: { mainImage?: str
       {/* Main Image */}
       <div className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-square bg-gray-50 dark:bg-zinc-900 rounded-2xl overflow-hidden flex items-center justify-center group">
         <div className="w-full h-full transform group-hover:scale-105 transition-transform duration-500 ease-out">
-          {images[activeImage].content.startsWith('http') ? (
-            <img src={images[activeImage].content} alt="Product" className="w-full h-full object-contain p-8 drop-shadow-xl" />
+          {displayImages[activeImage].content.startsWith('http') ? (
+            <img src={displayImages[activeImage].content} alt="Product" className="w-full h-full object-contain p-8 drop-shadow-xl" />
           ) : (
             <span className="text-9xl sm:text-[12rem] flex items-center justify-center h-full">
-              {images[activeImage].content}
+              {displayImages[activeImage].content}
             </span>
           )}
         </div>

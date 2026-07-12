@@ -6,6 +6,7 @@ import { Menu, X, Search, ShoppingCart, User, Sun, Moon, LogOut } from "lucide-r
 import { useTheme } from "next-themes";
 import { useSession, signOut } from "next-auth/react";
 import SearchModal from "./SearchModal";
+import { useShop } from "@/context/ShopContext";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +14,9 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const { data: session, status } = useSession();
+  const { cart } = useShop();
+
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   useEffect(() => {
     setMounted(true);
@@ -106,7 +110,11 @@ export default function Navbar() {
             {/* Cart Icon */}
             <Link href="/cart" className="p-2 text-foreground hover:text-gray-500 transition-colors relative">
               <ShoppingCart className="w-5 h-5 stroke-1" />
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-background bg-foreground rounded-full">3</span>
+              {cartItemCount > 0 && (
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-background bg-foreground rounded-full">
+                  {cartItemCount}
+                </span>
+              )}
             </Link>
 
             {status === "loading" ? (

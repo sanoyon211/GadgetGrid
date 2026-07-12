@@ -11,6 +11,7 @@ export default function CheckoutForm() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">First Name</label>
             <input 
               type="text" 
+              name="firstName"
               required
               className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
               placeholder="John"
@@ -20,6 +21,7 @@ export default function CheckoutForm() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Last Name</label>
             <input 
               type="text" 
+              name="lastName"
               required
               className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
               placeholder="Doe"
@@ -31,6 +33,7 @@ export default function CheckoutForm() {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Email Address</label>
           <input 
             type="email" 
+            name="email"
             required
             className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
             placeholder="john@example.com"
@@ -41,6 +44,7 @@ export default function CheckoutForm() {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Street Address</label>
           <input 
             type="text" 
+            name="address"
             required
             className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
             placeholder="123 Tech Avenue"
@@ -52,6 +56,7 @@ export default function CheckoutForm() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">City</label>
             <input 
               type="text" 
+              name="city"
               required
               className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
               placeholder="San Francisco"
@@ -61,6 +66,7 @@ export default function CheckoutForm() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">State/Province</label>
             <input 
               type="text" 
+              name="state"
               required
               className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
               placeholder="CA"
@@ -70,6 +76,7 @@ export default function CheckoutForm() {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">ZIP / Postal Code</label>
             <input 
               type="text" 
+              name="zip"
               required
               className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
               placeholder="94105"
@@ -81,6 +88,7 @@ export default function CheckoutForm() {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">Phone Number</label>
           <input 
             type="tel" 
+            name="phone"
             required
             className="block w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
             placeholder="+1 (555) 000-0000"

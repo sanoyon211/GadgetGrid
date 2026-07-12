@@ -3,10 +3,13 @@
 import { useState } from "react";
 import { ShoppingCart, Heart, Share2, Minus, Plus } from "lucide-react";
 import { toast } from "sonner";
+import { useShop } from "@/context/ShopContext";
 
 export default function ProductActions({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { addToCart, toggleWishlist, wishlist } = useShop();
+  
+  const isWishlisted = wishlist.some(item => item._id === product._id);
 
   const handleDecrease = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -16,20 +19,12 @@ export default function ProductActions({ product }: { product: any }) {
     if (quantity < 10) setQuantity(quantity + 1);
   };
 
-  const handleAddToCart = () => {
-    toast.success(`Added ${quantity} ${quantity > 1 ? 'items' : 'item'} to cart!`, {
-      description: `${product.name} has been added to your shopping cart.`,
-      icon: <ShoppingCart className="w-5 h-5" />
-    });
+  const handleAddToCart = async () => {
+    await addToCart(product._id, quantity);
   };
 
-  const handleToggleWishlist = () => {
-    setIsWishlisted(!isWishlisted);
-    if (!isWishlisted) {
-      toast.success("Added to wishlist", {
-        icon: <Heart className="w-5 h-5 text-red-500 fill-current" />
-      });
-    }
+  const handleToggleWishlist = async () => {
+    await toggleWishlist(product._id);
   };
 
   const handleShare = () => {

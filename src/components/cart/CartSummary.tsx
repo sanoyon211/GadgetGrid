@@ -2,11 +2,15 @@
 
 import { ArrowRight, Lock, Tag } from "lucide-react";
 
+import { useShop } from "@/context/ShopContext";
+import Link from "next/link";
+
 export default function CartSummary() {
-  // Dummy calculated data
-  const subtotal = 3897;
+  const { cart } = useShop();
+
+  const subtotal = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   const shipping = 0; // Free shipping
-  const tax = 311.76;
+  const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
   return (
@@ -54,10 +58,10 @@ export default function CartSummary() {
       </div>
 
       {/* Checkout Button */}
-      <button className="w-full flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:-translate-y-1">
+      <Link href="/checkout" className="w-full flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:-translate-y-1">
         Proceed to Checkout
         <ArrowRight className="w-5 h-5" />
-      </button>
+      </Link>
 
       <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
         <Lock className="w-4 h-4" />

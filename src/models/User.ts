@@ -6,6 +6,8 @@ export interface IUser extends Document {
   password?: string;
   role: 'user' | 'admin';
   image?: string;
+  wishlist: mongoose.Types.ObjectId[];
+  cart: { product: mongoose.Types.ObjectId; quantity: number }[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -33,7 +35,28 @@ const UserSchema: Schema = new Schema(
     },
     image: {
       type: String,
-    }
+    },
+    wishlist: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Gadget',
+      }
+    ],
+    cart: [
+      {
+        product: {
+          type: Schema.Types.ObjectId,
+          ref: 'Gadget',
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          default: 1,
+          min: 1,
+        }
+      }
+    ]
   },
   {
     timestamps: true,

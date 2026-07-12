@@ -4,24 +4,21 @@ import { useState } from "react";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
 
-const initialItems: any[] = [];
+import { useShop } from "@/context/ShopContext";
 
 export default function CartItemsList() {
-  const [items, setItems] = useState(initialItems);
+  const { cart: items, updateCartQuantity, removeFromCart, isLoading } = useShop();
 
-  const updateQuantity = (id: number, delta: number) => {
-    setItems(items.map(item => {
-      if (item.id === id) {
-        const newQuantity = item.quantity + delta;
-        return { ...item, quantity: newQuantity > 0 ? newQuantity : 1 };
-      }
-      return item;
-    }));
+  const handleUpdateQuantity = (id: string, delta: number) => {
+    const item = items.find((i) => i.product._id === id);
+    if (item) {
+      updateCartQuantity(id, item.quantity + delta);
+    }
   };
 
-  const removeItem = (id: number) => {
-    setItems(items.filter(item => item.id !== id));
-  };
+  if (isLoading) {
+    return <div className="p-12 text-center text-gray-500">Loading cart...</div>;
+  }
 
   if (items.length === 0) {
     return (
@@ -51,10 +48,10 @@ export default function CartItemsList() {
 
       <ul className="divide-y divide-gray-200 dark:divide-zinc-800">
         {items.map((item) => (
-          <li key={item.id} className="p-6 flex flex-col sm:flex-row gap-6">
+          <li key={item.product._id} className="p-6 flex flex-col sm:flex-row gap-6">
             {/* Image */}
-            <div className="w-full sm:w-32 h-32 bg-gray-50 dark:bg-zinc-950 rounded-xl flex items-center justify-center shrink-0 border border-gray-100 dark:border-zinc-800">
-              <span className="text-5xl">{item.image}</span>
+            <div className="w-full sm:w-32 h-32 bg-gray-50 dark:bg-zinc-950 rounded-xl flex items-center justify-center shrink-0 border border-gray-100 dark:border-zinc-800 overflow-hidden">
+              <img src={item.product.images[0]} alt={item.product.name} className="w-full h-full object-cover" />
             </div>
 
             {/* Details */}
@@ -62,14 +59,14 @@ export default function CartItemsList() {
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-1">
-                    <Link href={`/product/${item.id}`} className="hover:text-primary transition-colors">
-                      {item.name}
+                    <Link href={`/product/${item.product._id}`} className="hover:text-primary transition-colors">
+                      {item.product.name}
                     </Link>
                   </h3>
-                  <p className="text-sm text-gray-500 mt-1">{item.variant}</p>
+                  <p className="text-sm text-gray-500 mt-1">{item.product.category}</p>
                 </div>
                 <p className="text-lg font-bold text-gray-900 dark:text-white ml-4">
-                  ${(item.price * item.quantity).toLocaleString()}
+                  ${(item.product.price * item.quantity).toLocaleString()}
                 </p>
               </div>
 
@@ -77,7 +74,7 @@ export default function CartItemsList() {
                 {/* Quantity Controls */}
                 <div className="flex items-center bg-gray-50 dark:bg-black rounded-lg border border-gray-200 dark:border-zinc-700 overflow-hidden">
                   <button 
-                    onClick={() => updateQuantity(item.id, -1)}
+                    onClick={() => handleUpdateQuantity(item.product._id, -1)}
                     className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-white dark:hover:bg-zinc-800 transition-colors"
                   >
                     <Minus className="w-3.5 h-3.5" />
@@ -86,7 +83,7 @@ export default function CartItemsList() {
                     {item.quantity}
                   </div>
                   <button 
-                    onClick={() => updateQuantity(item.id, 1)}
+                    onClick={() => handleUpdateQuantity(item.product._id, 1)}
                     className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-white dark:hover:bg-zinc-800 transition-colors"
                   >
                     <Plus className="w-3.5 h-3.5" />
@@ -95,7 +92,7 @@ export default function CartItemsList() {
 
                 {/* Remove Button */}
                 <button 
-                  onClick={() => removeItem(item.id)}
+                  onClick={() => removeFromCart(item.product._id)}
                   className="text-sm font-medium text-red-500 hover:text-red-600 transition-colors flex items-center gap-1.5"
                 >
                   <Trash2 className="w-4 h-4" />

@@ -21,7 +21,7 @@ export default function PaymentMethods() {
             <CreditCard className={`w-6 h-6 ${method === "card" ? "text-primary" : "text-gray-400"}`} />
             <span className="font-medium text-gray-900 dark:text-white">Credit Card</span>
           </div>
-          <input type="radio" className="hidden" name="payment" value="card" checked={method === "card"} onChange={() => setMethod("card")} />
+          <input type="radio" className="hidden" name="paymentMethod" value="Credit Card" checked={method === "card"} onChange={() => setMethod("card")} />
           
           {/* Card Details (Only visible if selected) */}
           {method === "card" && (
@@ -56,7 +56,7 @@ export default function PaymentMethods() {
               <span className="block text-xs text-gray-500 mt-0.5">Pay with cash when your order is delivered.</span>
             </div>
           </div>
-          <input type="radio" className="hidden" name="payment" value="cod" checked={method === "cod"} onChange={() => setMethod("cod")} />
+          <input type="radio" className="hidden" name="paymentMethod" value="Cash on Delivery" checked={method === "cod"} onChange={() => setMethod("cod")} />
         </label>
 
       </div>

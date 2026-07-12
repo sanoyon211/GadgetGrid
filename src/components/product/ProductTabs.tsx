@@ -1,15 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
+import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 
 export default function ProductTabs({ product }: { product: any }) {
   const [activeTab, setActiveTab] = useState("description");
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [showForm, setShowForm] = useState(false);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState("");
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (activeTab === "reviews") {
+      fetch(`/api/gadgets/${product._id}/reviews`)
+        .then(res => res.json())
+        .then(data => setReviews(data.reviews || []))
+        .catch(err => console.error("Error fetching reviews:", err));
+    }
+  }, [activeTab, product._id]);
+
+  const handleSubmitReview = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!session) {
+      toast.error("You must be logged in to review");
+      return;
+    }
+    
+    try {
+      const res = await fetch(`/api/gadgets/${product._id}/reviews`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rating, comment }),
+      });
+      
+      const data = await res.json();
+      
+      if (res.ok) {
+        toast.success("Review added!");
+        setReviews([data.review, ...reviews]);
+        setShowForm(false);
+        setComment("");
+        setRating(5);
+      } else {
+        toast.error(data.message || "Failed to add review");
+      }
+    } catch (err) {
+      toast.error("Failed to add review");
+    }
+  };
 
   const tabs = [
     { id: "description", label: "Description" },
     { id: "specifications", label: "Specifications" },
-    { id: "reviews", label: `Reviews (${product.reviews})` }
+    { id: "reviews", label: `Reviews (${product.reviewsCount || 0})` }
   ];
 
   return (
@@ -51,19 +97,18 @@ export default function ProductTabs({ product }: { product: any }) {
             <h3 className="text-xl font-heading font-semibold mb-6 text-gray-900 dark:text-white">Technical Specifications</h3>
             <div className="border border-gray-200 dark:border-zinc-800 rounded-xl overflow-hidden">
               <dl className="divide-y divide-gray-200 dark:divide-zinc-800">
-                {[
-                  { label: "Model", value: product.name },
-                  { label: "Weight", value: "1.2 kg (2.6 lbs)" },
-                  { label: "Dimensions", value: "30.4 x 21.2 x 1.5 cm" },
-                  { label: "Battery Life", value: "Up to 18 hours" },
-                  { label: "Connectivity", value: "Wi-Fi 6E, Bluetooth 5.3" },
-                  { label: "Warranty", value: "1 Year Limited Warranty" }
-                ].map((spec, idx) => (
-                  <div key={idx} className="bg-white dark:bg-black px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{spec.label}</dt>
-                    <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2 font-medium">{spec.value}</dd>
+                {product.specifications && Object.keys(product.specifications).length > 0 ? (
+                  Object.entries(product.specifications).map(([key, value], idx) => (
+                    <div key={idx} className="bg-white dark:bg-black px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                      <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">{key}</dt>
+                      <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2 font-medium">{value as React.ReactNode}</dd>
+                    </div>
+                  ))
+                ) : (
+                  <div className="bg-white dark:bg-black px-4 py-5 sm:px-6 text-sm text-gray-500 dark:text-gray-400">
+                    No specifications available for this product.
                   </div>
-                ))}
+                )}
               </dl>
             </div>
           </div>
@@ -84,30 +129,73 @@ export default function ProductTabs({ product }: { product: any }) {
                   <span className="font-medium text-gray-900 dark:text-white">{product.rating} out of 5</span>
                 </div>
               </div>
-              <button className="mt-4 sm:mt-0 px-6 py-2.5 border-2 border-primary text-primary font-medium rounded-full hover:bg-primary hover:text-white transition-colors">
-                Write a Review
+              <button 
+                onClick={() => setShowForm(!showForm)}
+                className="mt-4 sm:mt-0 px-6 py-2.5 border-2 border-primary text-primary font-medium rounded-full hover:bg-primary hover:text-white transition-colors"
+              >
+                {showForm ? "Cancel" : "Write a Review"}
               </button>
             </div>
 
-            <div className="space-y-8">
-              {[
-                { name: "Alex Johnson", rating: 5, date: "October 12, 2026", comment: "Absolutely incredible! The build quality is phenomenal and it works perfectly right out of the box. Worth every penny." },
-                { name: "Sarah Williams", rating: 4, date: "September 28, 2026", comment: "Really great product. It's fast, looks beautiful, and the battery life is surprisingly good. Just wish the included cable was a bit longer." },
-                { name: "Michael Chen", rating: 5, date: "September 15, 2026", comment: "Upgraded from the previous generation and the difference is night and day. Highly recommend to anyone on the fence!" }
-              ].map((review, idx) => (
-                <div key={idx} className="pb-8 border-b border-gray-100 dark:border-zinc-800 last:border-0 last:pb-0">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-gray-900 dark:text-white">{review.name}</span>
-                    <span className="text-sm text-gray-500">{review.date}</span>
-                  </div>
-                  <div className="flex items-center mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300 dark:text-gray-600'}`} />
+            {showForm && (
+              <form onSubmit={handleSubmitReview} className="mb-10 bg-gray-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-gray-100 dark:border-zinc-800">
+                <h4 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Write a Review</h4>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rating</label>
+                  <div className="flex gap-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => setRating(star)}
+                        className={`w-8 h-8 rounded-full flex items-center justify-center border ${rating >= star ? 'border-yellow-400 bg-yellow-50 dark:bg-yellow-400/10' : 'border-gray-200 dark:border-zinc-700'}`}
+                      >
+                        <Star className={`w-4 h-4 ${rating >= star ? 'text-yellow-500 fill-current' : 'text-gray-400'}`} />
+                      </button>
                     ))}
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{review.comment}</p>
                 </div>
-              ))}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Comment</label>
+                  <textarea
+                    required
+                    rows={4}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
+                    placeholder="Share your thoughts about this product..."
+                  />
+                </div>
+                <button type="submit" className="bg-primary text-white px-6 py-2.5 rounded-full font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30">
+                  Submit Review
+                </button>
+              </form>
+            )}
+
+            <div className="space-y-8">
+              {reviews.length === 0 ? (
+                <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+              ) : (
+                reviews.map((review: any) => (
+                  <div key={review._id} className="pb-8 border-b border-gray-100 dark:border-zinc-800 last:border-0 last:pb-0">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+                          {review.user?.name?.charAt(0) || "U"}
+                        </div>
+                        <span className="font-semibold text-gray-900 dark:text-white">{review.user?.name || "Unknown"}</span>
+                      </div>
+                      <span className="text-sm text-gray-500">{new Date(review.createdAt).toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex items-center mb-3">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-current' : 'text-gray-300 dark:text-gray-600'}`} />
+                      ))}
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{review.comment}</p>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         )}

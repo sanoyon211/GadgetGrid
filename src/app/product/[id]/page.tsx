@@ -26,6 +26,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
 
   const product = {
     id: productRaw._id.toString(),
+    _id: productRaw._id.toString(),
     name: productRaw.name,
     price: productRaw.price,
     originalPrice: productRaw.originalPrice,
@@ -37,7 +38,9 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     storage: ["1TB SSD", "2TB SSD", "4TB SSD"], // Defaulting
     description: productRaw.description,
     shortDescription: productRaw.shortDescription,
-    image: productRaw.images[0] || "📦"
+    image: productRaw.images[0] || "📦",
+    images: productRaw.images || [],
+    specifications: productRaw.specifications || {}
   };
 
   return (
@@ -66,7 +69,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
           {/* Left Column: Gallery */}
           <div className="mb-10 lg:mb-0">
             <div className="sticky top-24">
-              <ProductGallery mainImage={product.image} />
+              <ProductGallery images={product.images} />
             </div>
           </div>
 

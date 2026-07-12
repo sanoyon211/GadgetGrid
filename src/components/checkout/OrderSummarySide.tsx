@@ -1,30 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useShop } from "@/context/ShopContext";
 import { Lock } from "lucide-react";
 
 export default function OrderSummarySide() {
-  // Dummy cart data for checkout
-  const cartItems = [
-    {
-      id: 1,
-      name: "iPhone 15 Pro Max",
-      price: 1199.00,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&q=80&w=200",
-      color: "Natural Titanium",
-    },
-    {
-      id: 2,
-      name: "Sony WH-1000XM5",
-      price: 348.00,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=200",
-      color: "Silver",
-    },
-  ];
+  const { cart: cartItems } = useShop();
 
-  const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const subtotal = cartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   const shipping = 15.00; // Flat rate for demo
   const tax = subtotal * 0.08; // 8% tax
   const total = subtotal + shipping + tax;
@@ -36,11 +19,11 @@ export default function OrderSummarySide() {
       {/* Items List */}
       <div className="space-y-4 mb-6">
         {cartItems.map((item) => (
-          <div key={item.id} className="flex gap-4">
+          <div key={item.product._id} className="flex gap-4">
             <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-white dark:bg-black border border-gray-100 dark:border-zinc-800 shrink-0">
               <Image 
-                src={item.image} 
-                alt={item.name} 
+                src={item.product.images[0]} 
+                alt={item.product.name} 
                 fill 
                 className="object-cover"
               />
@@ -49,12 +32,12 @@ export default function OrderSummarySide() {
               </div>
             </div>
             <div className="flex-1 min-w-0 flex flex-col justify-center">
-              <h4 className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">{item.name}</h4>
-              <p className="text-xs text-gray-500 mt-1">{item.color}</p>
+              <h4 className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">{item.product.name}</h4>
+              <p className="text-xs text-gray-500 mt-1">{item.product.category}</p>
             </div>
             <div className="flex items-center justify-end">
               <span className="text-sm font-medium text-gray-900 dark:text-white">
-                ${(item.price * item.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                ${(item.product.price * item.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </span>
             </div>
           </div>
@@ -97,6 +80,7 @@ export default function OrderSummarySide() {
 
       {/* Place Order Button */}
       <button 
+        type="submit"
         className="w-full flex justify-center items-center gap-2 py-4 px-6 rounded-xl shadow-lg shadow-primary/25 text-white bg-primary hover:bg-primary/90 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all font-bold text-lg"
       >
         <Lock className="w-5 h-5" />
