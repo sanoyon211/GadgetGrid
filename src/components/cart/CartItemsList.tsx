@@ -4,25 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Minus, Plus, Trash2 } from "lucide-react";
 
-// Dummy data for cart items
-const initialItems = [
-  {
-    id: 1,
-    name: "MacBook Pro 16\" (M3 Max)",
-    price: 3499,
-    image: "💻",
-    variant: "Space Gray | 1TB SSD",
-    quantity: 1
-  },
-  {
-    id: 2,
-    name: "Sony WH-1000XM5",
-    price: 398,
-    image: "🎧",
-    variant: "Black",
-    quantity: 2
-  }
-];
+const initialItems: any[] = [];
 
 export default function CartItemsList() {
   const [items, setItems] = useState(initialItems);

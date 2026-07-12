@@ -50,6 +50,15 @@ export default function ProductGrid({ initialGadgets, totalPages, currentPage }:
               </Link>
             </h3>
             
+            <p className="text-xs text-gray-500 mb-2 text-center line-clamp-2 px-2">
+              {product.description}
+            </p>
+
+            <div className="flex items-center justify-center gap-1 mb-2">
+              <Star className="w-3 h-3 fill-foreground text-foreground" />
+              <span className="text-xs font-medium text-foreground">{product.rating} ({product.reviewsCount})</span>
+            </div>
+            
             <div className="flex items-center justify-center gap-3 text-sm mb-4">
               {product.originalPrice && (
                 <span className="text-gray-400 line-through">${product.originalPrice.toFixed(2)}</span>

@@ -17,10 +17,10 @@ export default function Footer() {
               Your ultimate destination for premium tech gadgets. Buy, sell, and discover the best devices on the market.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="text-gray-400 hover:text-foreground transition-colors"><FaFacebook className="w-4 h-4" /></a>
-              <a href="#" className="text-gray-400 hover:text-foreground transition-colors"><FaTwitter className="w-4 h-4" /></a>
-              <a href="#" className="text-gray-400 hover:text-foreground transition-colors"><FaInstagram className="w-4 h-4" /></a>
-              <a href="#" className="text-gray-400 hover:text-foreground transition-colors"><FaGithub className="w-4 h-4" /></a>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-foreground transition-colors"><FaFacebook className="w-4 h-4" /></a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-foreground transition-colors"><FaTwitter className="w-4 h-4" /></a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-foreground transition-colors"><FaInstagram className="w-4 h-4" /></a>
+              <a href="https://github.com" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-foreground transition-colors"><FaGithub className="w-4 h-4" /></a>
             </div>
           </div>
 
@@ -40,7 +40,7 @@ export default function Footer() {
             <h3 className="font-heading font-semibold text-lg mb-4 text-foreground">Customer Support</h3>
             <ul className="space-y-3">
               <li><Link href="/contact" className="text-gray-500 hover:text-foreground transition-colors text-sm">Contact Us</Link></li>
-              <li><Link href="/faq" className="text-gray-500 hover:text-foreground transition-colors text-sm">FAQ</Link></li>
+              <li><Link href="/#faq" className="text-gray-500 hover:text-foreground transition-colors text-sm">FAQ</Link></li>
               <li><Link href="/terms" className="text-gray-500 hover:text-foreground transition-colors text-sm">Terms of Service</Link></li>
               <li><Link href="/privacy" className="text-gray-500 hover:text-foreground transition-colors text-sm">Privacy Policy</Link></li>
             </ul>

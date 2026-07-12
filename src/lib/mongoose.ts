@@ -29,6 +29,7 @@ async function connectToDatabase() {
 
   if (!cached.promise) {
     const opts = {
+      dbName: "gadgetgrid",
       bufferCommands: false,
     };
 

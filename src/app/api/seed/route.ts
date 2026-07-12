@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
+import User from "@/models/User";
+import bcrypt from "bcryptjs";
 
 const dummyGadgets = [
   {
@@ -117,9 +119,29 @@ export async function GET() {
     
     // Clear existing
     await Gadget.deleteMany({});
+    await User.deleteMany({});
     
-    // Insert new
+    // Insert new gadgets
     await Gadget.insertMany(dummyGadgets);
+
+    // Insert new users
+    const hashedAdminPassword = await bcrypt.hash("admin123", 10);
+    const hashedUserPassword = await bcrypt.hash("user123", 10);
+
+    await User.insertMany([
+      {
+        name: "Admin User",
+        email: "admin@gadgetgrid.com",
+        password: hashedAdminPassword,
+        role: "admin",
+      },
+      {
+        name: "Regular User",
+        email: "user@gadgetgrid.com",
+        password: hashedUserPassword,
+        role: "user",
+      }
+    ]);
     
     return NextResponse.json({ message: "Database seeded successfully" });
   } catch (error) {

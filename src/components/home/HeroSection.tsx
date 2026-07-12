@@ -3,7 +3,7 @@ import { ArrowRight, ShoppingBag } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background pt-16 pb-20 lg:pt-24 lg:pb-32">
+    <section className="relative overflow-hidden bg-background min-h-[70vh] flex items-center pt-16 pb-24 lg:pt-0 lg:pb-0">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
           
@@ -35,6 +35,12 @@ export default function HeroSection() {
           </div>
 
         </div>
+      </div>
+
+      {/* Scroll indicator for visual flow */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce opacity-70">
+        <span className="text-[10px] tracking-widest uppercase text-gray-500 mb-2">Scroll</span>
+        <div className="w-px h-6 bg-gray-400"></div>
       </div>
     </section>
   );

@@ -10,6 +10,7 @@ export default async function TrendingGadgets() {
   const products = productsRaw.map((p: any) => ({
     id: p._id.toString(),
     name: p.name,
+    description: p.description,
     price: p.price,
     originalPrice: p.originalPrice,
     rating: p.rating,
@@ -50,6 +51,15 @@ export default async function TrendingGadgets() {
                 {product.name}
               </Link>
             </h3>
+            
+            <p className="text-xs text-gray-500 mb-2 text-center line-clamp-2 px-2">
+              {product.description}
+            </p>
+
+            <div className="flex items-center justify-center gap-1 mb-2">
+              <Star className="w-3 h-3 fill-foreground text-foreground" />
+              <span className="text-xs font-medium text-foreground">{product.rating} ({product.reviews})</span>
+            </div>
             
             <div className="flex items-center justify-center gap-3 text-sm mb-4">
               {product.originalPrice && (
