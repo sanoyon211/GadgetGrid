@@ -205,3 +205,9 @@ Step 26: Update Gadget Schema
 -----------------------------------------------------------------------------
 - How it was done:
   * Added `userId` field to `src/models/Gadget.ts` to support ownership-based permissions for editing/deleting products.
+
+Step 27: Add Extra Home Page Section
+-----------------------------------------------------------------------------
+- How it was done:
+  * Created `WhyChooseUs.tsx` component and added it to `src/app/page.tsx`.
+  * This guarantees exactly 7 meaningful sections (excluding the Hero section) to fulfill the rubric requirements.
