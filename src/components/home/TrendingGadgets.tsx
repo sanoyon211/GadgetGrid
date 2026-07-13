@@ -7,7 +7,18 @@ import Gadget from "@/models/Gadget";
 
 export default async function TrendingGadgets() {
   await connectToDatabase();
-  const productsRaw = await Gadget.find({}).limit(4).lean();
+  
+  // Fetch up to 4 distinct categories
+  const categories = await Gadget.distinct("category");
+  const selectedCategories = categories.slice(0, 4);
+  
+  // Fetch one product from each category
+  const productsRawArray = await Promise.all(
+    selectedCategories.map(cat => Gadget.findOne({ category: cat }).lean())
+  );
+  
+  // Filter out any nulls
+  const productsRaw = productsRawArray.filter(p => p !== null);
   const products = productsRaw.map((p: any) => ({
     id: p._id.toString(),
     name: p.name,

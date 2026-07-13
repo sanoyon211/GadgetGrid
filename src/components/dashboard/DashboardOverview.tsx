@@ -1,7 +1,8 @@
 "use client";
 
 import { Package, Clock, ShieldCheck, CreditCard, UserCircle } from "lucide-react";
-import SalesChart from "./SalesChart";
+import dynamic from "next/dynamic";
+const SalesChart = dynamic(() => import("./SalesChart"), { ssr: false, loading: () => <div className="h-64 bg-gray-100 dark:bg-zinc-800 animate-pulse mt-6 flex items-center justify-center text-sm text-gray-500">Loading chart...</div> });
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 

@@ -1,12 +1,15 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Your Cart",
+  description: "View and manage items in your GadgetGrid shopping cart.",
+};
 import { ChevronRight } from "lucide-react";
 import CartItemsList from "@/components/cart/CartItemsList";
 import CartSummary from "@/components/cart/CartSummary";
 
-export const metadata = {
-  title: "Shopping Cart | GadgetGrid",
-  description: "Review your items and proceed to checkout.",
-};
+
 
 export default function CartPage() {
   return (

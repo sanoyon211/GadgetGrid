@@ -40,16 +40,36 @@ export default function LoginForm() {
     }
   };
 
-  const handleDemoAdminLogin = () => {
+  const handleDemoAdminLogin = async () => {
+    setIsLoading(true);
     setEmail("admin@gadgetgrid.com");
     setPassword("admin123");
-    toast("Admin credentials auto-filled. Please click Sign in.");
+    try {
+      const res = await signIn("credentials", { email: "admin@gadgetgrid.com", password: "admin123", redirect: false });
+      if (res?.error) toast.error("Invalid email or password");
+      else {
+        toast.success("Successfully logged in!");
+        router.push("/");
+        router.refresh();
+      }
+    } catch (error) { toast.error("Something went wrong"); }
+    finally { setIsLoading(false); }
   };
 
-  const handleDemoUserLogin = () => {
+  const handleDemoUserLogin = async () => {
+    setIsLoading(true);
     setEmail("user@gadgetgrid.com");
     setPassword("user123");
-    toast("User credentials auto-filled. Please click Sign in.");
+    try {
+      const res = await signIn("credentials", { email: "user@gadgetgrid.com", password: "user123", redirect: false });
+      if (res?.error) toast.error("Invalid email or password");
+      else {
+        toast.success("Successfully logged in!");
+        router.push("/");
+        router.refresh();
+      }
+    } catch (error) { toast.error("Something went wrong"); }
+    finally { setIsLoading(false); }
   };
 
   return (

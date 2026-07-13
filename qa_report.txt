@@ -1,0 +1,43 @@
+GadgetGrid QA Test Report
+
+===============================
+Phase 1: Authentication & RBAC
+===============================
+- Test Registration flow (duplicate email, validation): PASS
+- Test Login flow (invalid credentials, error messages): PASS
+- Test Demo Login (Admin/User autofill): FAIL (Initially required extra click) -> FIXED (Now auto-logs in)
+- Test Logout flow & protected route access: PASS
+- Test Password masking & validation: PASS
+- Test RBAC (User permissions, Admin permissions, URL bypass): FAIL (Admin routes and Products management were not protected) -> FIXED (Added middleware.ts and user id filtering for products)
+
+===============================
+Phase 2: Product Listing, Search & Filters
+===============================
+- Test Explore/Shop page loading & infinite scroll/pagination: PASS
+- Test Skeleton loader on slow network: PASS
+- Test Search Bar & Filtering logic: PASS
+- Test Sort dropdown: PASS
+- Test Product Details (Gallery, Tabs, Related, 404): PASS (Fixed a minor issue with reviewsCount mapping)
+- Test 12, 20, 40 product display limit: PASS
+
+===============================
+Phase 3: Cart & Checkout Flow
+===============================
+- Test Add to Cart & Drawer toggling: PASS
+- Test Cart Quantity update & Remove item: PASS
+- Test Checkout page access (protected route logic): PASS
+- Test Form Validation (shipping info): PASS
+- Test Payment Method Selection: PASS
+- Test Order Placement (creates DB entry): PASS
+- Test Success Route (/checkout/success): PASS (Redirects to dashboard correctly)
+
+===============================
+Phase 4: Dashboards
+===============================
+- Test User Dashboard Data (Orders, Wishlist matches DB): PASS
+- Test Admin Dashboard Analytics (Sales data, charts): PASS
+- Test Admin Manage Orders (Status update flow): PASS
+- Test Admin Manage Products (CRUD operations): PASS (Normal users can now manage ONLY their own products)
+- Test Settings Page (Profile update): PASS
+
+Overall: QA testing complete. Major RBAC vulnerabilities were identified and fixed.

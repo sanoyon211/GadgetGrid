@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Maximize2 } from "lucide-react";
+import Image from "next/image";
 
 export default function ProductGallery({ images = [] }: { images?: string[] }) {
   const [activeImage, setActiveImage] = useState(0);
@@ -37,7 +38,16 @@ export default function ProductGallery({ images = [] }: { images?: string[] }) {
       <div className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-square bg-gray-50 dark:bg-zinc-900 rounded-2xl overflow-hidden flex items-center justify-center group">
         <div className="w-full h-full transform group-hover:scale-105 transition-transform duration-500 ease-out">
           {displayImages[activeImage].content.startsWith('http') ? (
-            <img src={displayImages[activeImage].content} alt="Product" className="w-full h-full object-contain p-8 drop-shadow-xl" />
+            <div className="relative w-full h-full p-8">
+              <Image 
+                src={displayImages[activeImage].content} 
+                alt="Product" 
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain drop-shadow-xl" 
+              />
+            </div>
           ) : (
             <span className="text-9xl sm:text-[12rem] flex items-center justify-center h-full">
               {displayImages[activeImage].content}

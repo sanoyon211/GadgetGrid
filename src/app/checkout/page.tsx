@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useShop } from "@/context/ShopContext";
 
+
 export default function CheckoutPage() {
   const router = useRouter();
   const { clearCart, fetchCartAndWishlist } = useShop();

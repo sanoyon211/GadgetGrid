@@ -1,9 +1,11 @@
 import AuthLayout from "@/components/auth/AuthLayout";
 import LoginForm from "@/components/auth/LoginForm";
 
-export const metadata = {
-  title: "Login | GadgetGrid",
-  description: "Sign in to your GadgetGrid account.",
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Log In",
+  description: "Sign in to your GadgetGrid account to track orders and manage your profile.",
 };
 
 export default function LoginPage() {

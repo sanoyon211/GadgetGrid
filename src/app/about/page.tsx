@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { ChevronRight, ShieldCheck, Zap, HeartHandshake } from "lucide-react";
 
-export const metadata = {
-  title: "About Us | GadgetGrid",
-  description: "Learn more about GadgetGrid and our mission.",
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn about the mission, vision, and team behind GadgetGrid.",
 };
 
 export default function AboutPage() {

@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { Menu, X, Search, ShoppingCart, User, Sun, Moon, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSession, signOut } from "next-auth/react";
-import SearchModal from "./SearchModal";
+import dynamic from "next/dynamic";
+const SearchModal = dynamic(() => import("./SearchModal"), { ssr: false });
 import { useShop } from "@/context/ShopContext";
 
 export default function Navbar() {
@@ -98,13 +99,14 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex flex-1 justify-center space-x-6 xl:space-x-10 items-center">
-            {navLinks.map((link) =>                <Link
-                  key={link.name}
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors hover:text-foreground ${
-                    pathname === link.href ? "text-foreground border-b-2 border-foreground" : "text-gray-500"
-                  }`}
-                >
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-sm font-medium transition-colors hover:text-foreground ${
+                  pathname === link.href ? "text-foreground border-b-2 border-foreground" : "text-gray-500"
+                }`}
+              >
                 {link.name}
               </Link>
             ))}

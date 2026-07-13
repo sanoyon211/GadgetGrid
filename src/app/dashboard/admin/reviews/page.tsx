@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { MessageSquare, Trash2, Star } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 export default function ManageReviewsPage() {
   const [reviews, setReviews] = useState([]);
@@ -28,7 +29,19 @@ export default function ManageReviewsPage() {
   };
 
   const deleteReview = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this review?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this review? You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        popup: "rounded-none"
+      }
+    });
+    if (!result.isConfirmed) return;
     
     try {
       const res = await fetch(`/api/admin/reviews/${id}`, {

@@ -5,6 +5,7 @@ import { ChevronRight, MapPin, Phone, Mail, Send } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
 
+
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 

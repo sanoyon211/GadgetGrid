@@ -35,6 +35,7 @@ export default function HeroSection() {
                 src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=1200&bg=faf8f5" 
                 alt="Premium Headphones" 
                 fill
+                priority
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-contain mix-blend-multiply dark:mix-blend-normal drop-shadow-2xl hover:scale-105 transition-transform duration-1000 ease-out" 
               />

@@ -5,10 +5,21 @@ import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
 import { Suspense } from "react";
 
-export const metadata = {
-  title: "Explore Gadgets | GadgetGrid",
-  description: "Browse our premium collection of smartphones, laptops, audio, and wearables.",
-};
+import { Metadata } from "next";
+
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }): Promise<Metadata> {
+  const params = await searchParams;
+  const category = typeof params.category === 'string' && params.category !== "All Products" ? params.category : "All Gadgets";
+  const search = typeof params.search === 'string' ? params.search : '';
+  
+  let title = `Explore ${category}`;
+  if (search) title = `Search: ${search} | ${title}`;
+
+  return {
+    title,
+    description: `Browse our premium collection of ${category.toLowerCase()}, smartphones, laptops, audio, and wearables.`,
+  };
+}
 
 export default async function ProductsPage({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   await connectToDatabase();
@@ -20,7 +31,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const maxPrice = typeof params.maxPrice === 'string' ? Number(params.maxPrice) : 100000;
   const sort = typeof params.sort === 'string' ? params.sort : 'newest';
   const page = typeof params.page === 'string' ? Number(params.page) : 1;
-  const limit = 9;
+  const limit = typeof params.limit === 'string' ? Number(params.limit) : 12;
 
   const query: any = {
     price: { $gte: minPrice, $lte: maxPrice }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Mail, MailOpen, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 export default function ManageMessagesPage() {
   const [messages, setMessages] = useState([]);
@@ -39,7 +40,19 @@ export default function ManageMessagesPage() {
   };
 
   const deleteMessage = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this message?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this message? You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        popup: "rounded-none"
+      }
+    });
+    if (!result.isConfirmed) return;
     
     try {
       const res = await fetch(`/api/admin/messages/${id}`, {

@@ -8,6 +8,27 @@ import TrendingGadgets from "@/components/home/TrendingGadgets"; // Using this a
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  await connectToDatabase();
+  try {
+    const productRaw = await Gadget.findById(resolvedParams.id).lean();
+    if (!productRaw) return { title: "Product Not Found" };
+    return {
+      title: productRaw.name,
+      description: productRaw.shortDescription || productRaw.description.substring(0, 160),
+      openGraph: {
+        title: productRaw.name,
+        description: productRaw.shortDescription || productRaw.description.substring(0, 160),
+        images: productRaw.images && productRaw.images.length > 0 ? [{ url: productRaw.images[0] }] : [],
+      },
+    };
+  } catch (error) {
+    return { title: "Product" };
+  }
+}
 
 export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params;

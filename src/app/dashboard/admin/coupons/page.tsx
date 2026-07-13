@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Ticket, Plus, Trash2, CheckCircle2, XCircle } from "lucide-react";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 export default function ManageCouponsPage() {
   const [coupons, setCoupons] = useState([]);
@@ -71,7 +72,19 @@ export default function ManageCouponsPage() {
   };
 
   const deleteCoupon = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this coupon?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this coupon? You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        popup: "rounded-none"
+      }
+    });
+    if (!result.isConfirmed) return;
     
     try {
       const res = await fetch(`/api/admin/coupons/${id}`, {

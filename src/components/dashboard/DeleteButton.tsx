@@ -3,13 +3,26 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 export default function DeleteButton({ id }: { id: string }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this product?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this product? You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        popup: "rounded-none"
+      }
+    });
+    if (!result.isConfirmed) return;
     
     setIsDeleting(true);
     try {

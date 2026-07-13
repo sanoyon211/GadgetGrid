@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Users, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
 
 export default function ManageUsersPage() {
   const [users, setUsers] = useState([]);
@@ -48,7 +49,19 @@ export default function ManageUsersPage() {
   };
 
   const deleteUser = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this user?")) return;
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You want to delete this user? You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        popup: "rounded-none"
+      }
+    });
+    if (!result.isConfirmed) return;
     
     try {
       const res = await fetch(`/api/admin/users/${id}`, {

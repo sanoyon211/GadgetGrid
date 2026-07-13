@@ -34,6 +34,14 @@ export default function SearchAndSort() {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("sort", e.target.value);
+    params.set("page", "1");
+    router.push(pathname + "?" + params.toString());
+  };
+
+  const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("limit", e.target.value);
+    params.set("page", "1");
     router.push(pathname + "?" + params.toString());
   };
 
@@ -69,6 +77,22 @@ export default function SearchAndSort() {
             <option value="price-asc">Low to High</option>
             <option value="price-desc">High to Low</option>
             <option value="rating">Top Rated</option>
+          </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-0 text-foreground group-hover:text-gray-500 transition-colors">
+            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+        <div className="relative w-full sm:w-auto shrink-0 border-0 sm:border-b border-gray-300 group">
+          <select
+            value={searchParams.get("limit") || "12"}
+            onChange={handleLimitChange}
+            className="block w-full pl-0 pr-8 py-2 text-sm uppercase tracking-wider bg-transparent border-0 focus:outline-none focus:ring-0 text-foreground appearance-none cursor-pointer group-hover:text-gray-500 transition-colors"
+          >
+            <option value="12">Show: 12</option>
+            <option value="20">Show: 20</option>
+            <option value="40">Show: 40</option>
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-0 text-foreground group-hover:text-gray-500 transition-colors">
             <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

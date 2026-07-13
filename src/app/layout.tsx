@@ -18,8 +18,23 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "GadgetGrid | Tech Marketplace",
-  description: "Your ultimate destination for premium tech gadgets.",
+  title: {
+    template: "%s | GadgetGrid",
+    default: "GadgetGrid | Premium Tech Marketplace",
+  },
+  description: "Your ultimate destination for premium tech gadgets, smartphones, laptops, and accessories.",
+  openGraph: {
+    title: "GadgetGrid | Premium Tech Marketplace",
+    description: "Your ultimate destination for premium tech gadgets, smartphones, laptops, and accessories.",
+    url: "https://gadgetgrid.com",
+    siteName: "GadgetGrid",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GadgetGrid | Premium Tech Marketplace",
+    description: "Your ultimate destination for premium tech gadgets, smartphones, laptops, and accessories.",
+  },
 };
 
 export default function RootLayout({
