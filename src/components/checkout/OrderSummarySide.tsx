@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { useShop } from "@/context/ShopContext";
-import { Lock } from "lucide-react";
+import { Lock, Trash2 } from "lucide-react";
 
 export default function OrderSummarySide() {
-  const { cart: cartItems } = useShop();
+  const { cart: cartItems, removeFromCart } = useShop();
 
   const subtotal = cartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   const shipping = 15.00; // Flat rate for demo
@@ -35,10 +35,18 @@ export default function OrderSummarySide() {
               <h4 className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">{item.product.name}</h4>
               <p className="text-xs text-gray-500 mt-1">{item.product.category}</p>
             </div>
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-end gap-3">
               <span className="text-sm font-medium text-gray-900 dark:text-white">
                 ${(item.product.price * item.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </span>
+              <button 
+                type="button" 
+                onClick={() => removeFromCart(item.product._id)} 
+                className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                title="Remove item"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
             </div>
           </div>
         ))}
@@ -81,7 +89,7 @@ export default function OrderSummarySide() {
       {/* Place Order Button */}
       <button 
         type="submit"
-        className="w-full flex justify-center items-center gap-2 py-4 px-6 rounded-xl shadow-lg shadow-primary/25 text-white bg-primary hover:bg-primary/90 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all font-bold text-lg"
+        className="w-full flex justify-center items-center gap-2 py-4 px-6 rounded-xl shadow-lg shadow-primary/25 text-white dark:text-black bg-primary hover:bg-primary/90 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all font-bold text-lg"
       >
         <Lock className="w-5 h-5" />
         Place Order

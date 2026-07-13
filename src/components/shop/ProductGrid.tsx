@@ -90,7 +90,7 @@ export default function ProductGrid({ initialGadgets, totalPages, currentPage }:
                 onClick={() => handlePageChange(i + 1)}
                 className={`w-10 h-10 flex items-center justify-center rounded-lg font-medium transition-colors ${
                   currentPage === i + 1
-                    ? "bg-primary text-white border border-primary"
+                    ? "bg-primary text-white dark:text-black border border-primary"
                     : "border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800"
                 }`}
               >

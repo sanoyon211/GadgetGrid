@@ -181,7 +181,7 @@ export default function Navbar() {
               ) : (
                 <Link
                   href="/login"
-                  className="flex items-center justify-center space-x-2 bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"
+                  className="flex items-center justify-center space-x-2 bg-primary text-white dark:text-black px-4 py-2 rounded-lg font-medium hover:bg-primary/90 transition-all shadow-sm"
                   onClick={() => setIsOpen(false)}
                 >
                   <User className="w-4 h-4" />

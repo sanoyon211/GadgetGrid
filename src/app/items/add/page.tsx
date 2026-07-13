@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Save, Plus, Trash2 } from "lucide-react";
 
+import BackButton from "@/components/globals/BackButton";
+
 export default function AddProductPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -79,6 +81,7 @@ export default function AddProductPage() {
 
   return (
     <div className="bg-transparent p-6">
+      <BackButton />
       <h2 className="text-2xl font-heading font-bold text-foreground mb-8 pb-4 border-b border-gray-200 dark:border-zinc-800">Add New Product</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
@@ -156,26 +159,30 @@ export default function AddProductPage() {
             </div>
             <div className="space-y-3">
               {specs.map((spec, index) => (
-                <div key={index} className="flex gap-4 items-center">
-                  <input
-                    type="text"
-                    value={spec.label}
-                    onChange={(e) => handleSpecChange(index, "label", e.target.value)}
-                    placeholder="e.g. Battery Life"
-                    className="flex-1 px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-lg focus:outline-none focus:border-foreground"
-                  />
-                  <input
-                    type="text"
-                    value={spec.value}
-                    onChange={(e) => handleSpecChange(index, "value", e.target.value)}
-                    placeholder="e.g. 18 hours"
-                    className="flex-1 px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-lg focus:outline-none focus:border-foreground"
-                  />
-                  {specs.length > 1 && (
-                    <button type="button" onClick={() => removeSpec(index)} className="text-red-500 hover:text-red-700 p-2">
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  )}
+                <div key={index} className="flex flex-col sm:flex-row gap-2 sm:gap-4 items-start sm:items-center">
+                  <div className="w-full sm:flex-1">
+                    <input
+                      type="text"
+                      value={spec.label}
+                      onChange={(e) => handleSpecChange(index, "label", e.target.value)}
+                      placeholder="e.g. Battery Life"
+                      className="w-full px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-lg focus:outline-none focus:border-foreground"
+                    />
+                  </div>
+                  <div className="w-full sm:flex-1 flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={spec.value}
+                      onChange={(e) => handleSpecChange(index, "value", e.target.value)}
+                      placeholder="e.g. 18 hours"
+                      className="w-full px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-lg focus:outline-none focus:border-foreground"
+                    />
+                    {specs.length > 1 && (
+                      <button type="button" onClick={() => removeSpec(index)} className="text-red-500 hover:text-red-700 p-2 shrink-0">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

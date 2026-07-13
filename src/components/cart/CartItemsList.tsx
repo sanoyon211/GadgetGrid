@@ -30,7 +30,7 @@ export default function CartItemsList() {
         <p className="text-gray-500 mb-8">Looks like you haven't added any premium gadgets to your cart yet.</p>
         <Link 
           href="/products" 
-          className="inline-flex items-center justify-center bg-primary text-white px-8 py-3.5 rounded-full font-medium hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/30"
+          className="inline-flex items-center justify-center bg-primary text-white dark:text-black px-8 py-3.5 rounded-full font-medium hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/30"
         >
           Start Shopping
         </Link>

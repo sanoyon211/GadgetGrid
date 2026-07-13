@@ -58,10 +58,12 @@ export default function CartSummary() {
       </div>
 
       {/* Checkout Button */}
-      <Link href="/checkout" className="w-full flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:-translate-y-1">
+      <div className="mt-8">
+      <Link href="/checkout" className="w-full flex items-center justify-center gap-2 bg-primary text-white dark:text-black px-8 py-4 rounded-xl font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/25 hover:-translate-y-1">
         Proceed to Checkout
         <ArrowRight className="w-5 h-5" />
       </Link>
+      </div>
 
       <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
         <Lock className="w-4 h-4" />

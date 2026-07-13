@@ -18,7 +18,7 @@ export default function ProductGallery({ images = [] }: { images?: string[] }) {
           <button
             key={img.id}
             onClick={() => setActiveImage(idx)}
-            className={`relative flex items-center justify-center h-24 w-24 sm:w-auto sm:h-24 lg:w-full lg:h-24 rounded-xl border-2 transition-all overflow-hidden bg-gray-50 dark:bg-zinc-900 shrink-0 ${
+            className={`relative flex items-center justify-center h-20 w-20 md:w-24 md:h-24 lg:w-full lg:h-24 rounded-xl border-2 transition-all overflow-hidden bg-gray-50 dark:bg-zinc-900 shrink-0 ${
               activeImage === idx 
                 ? "border-primary ring-2 ring-primary/20 ring-offset-2 dark:ring-offset-black" 
                 : "border-transparent hover:border-gray-300 dark:hover:border-gray-600"

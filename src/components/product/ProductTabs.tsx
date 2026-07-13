@@ -61,7 +61,7 @@ export default function ProductTabs({ product }: { product: any }) {
   return (
     <div className="mt-16">
       <div className="border-b border-gray-200 dark:border-zinc-800">
-        <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+        <nav className="-mb-px flex space-x-8 overflow-x-auto scrollbar-hide whitespace-nowrap pb-1" aria-label="Tabs">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -131,7 +131,7 @@ export default function ProductTabs({ product }: { product: any }) {
               </div>
               <button 
                 onClick={() => setShowForm(!showForm)}
-                className="mt-4 sm:mt-0 px-6 py-2.5 border-2 border-primary text-primary font-medium rounded-full hover:bg-primary hover:text-white transition-colors"
+                className="mt-4 sm:mt-0 px-6 py-2.5 border-2 border-primary text-primary dark:text-white font-medium rounded-full hover:bg-primary hover:text-white dark:hover:text-black transition-colors"
               >
                 {showForm ? "Cancel" : "Write a Review"}
               </button>
@@ -166,9 +166,11 @@ export default function ProductTabs({ product }: { product: any }) {
                     placeholder="Share your thoughts about this product..."
                   />
                 </div>
-                <button type="submit" className="bg-primary text-white px-6 py-2.5 rounded-full font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30">
-                  Submit Review
-                </button>
+                <div className="flex justify-end gap-3">
+                  <button type="submit" className="bg-primary text-white dark:text-black px-6 py-2.5 rounded-full font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30">
+                    Submit Review
+                  </button>
+                </div>
               </form>
             )}
 

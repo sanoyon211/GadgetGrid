@@ -4,10 +4,12 @@ import { useState } from "react";
 import { ShoppingCart, Heart, Share2, Minus, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { useShop } from "@/context/ShopContext";
+import { useRouter } from "next/navigation";
 
 export default function ProductActions({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1);
   const { addToCart, toggleWishlist, wishlist } = useShop();
+  const router = useRouter();
   
   const isWishlisted = wishlist.some(item => item._id === product._id);
 
@@ -21,6 +23,11 @@ export default function ProductActions({ product }: { product: any }) {
 
   const handleAddToCart = async () => {
     await addToCart(product._id, quantity);
+  };
+
+  const handleBuyNow = async () => {
+    await addToCart(product._id, quantity);
+    router.push('/checkout');
   };
 
   const handleToggleWishlist = async () => {
@@ -62,12 +69,13 @@ export default function ProductActions({ product }: { product: any }) {
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <button 
           onClick={handleAddToCart}
-          className="flex-1 flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 rounded-full font-medium hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/30"
+          className="flex-1 flex items-center justify-center gap-2 bg-primary text-white dark:text-black px-8 py-3.5 rounded-full font-medium hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/30"
         >
           <ShoppingCart className="w-5 h-5" />
           Add to Cart
         </button>
         <button 
+          onClick={handleBuyNow}
           className="flex-1 flex items-center justify-center bg-black dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full font-medium hover:bg-black/90 dark:hover:bg-gray-100 transition-all hover:scale-[1.02]"
         >
           Buy It Now
