@@ -242,3 +242,9 @@ Step 32: Order Details Page
 - How it was done:
   * Created `src/app/dashboard/orders/[id]/page.tsx` to show individual order details (shipping, items, payment).
   * Wrapped the 'Eye' icon in `OrderHistory.tsx` with a Next.js Link navigating to the details page.
+
+Step 33: Basic Image Upload Functionality
+-----------------------------------------------------------------------------
+- How it was done:
+  * Added file inputs and `handleImageUpload` function to both `AddProductPage` and `EditProductPage`.
+  * The file input uses `FileReader` to convert the uploaded local image to a Base64 string and sets it as the image value, serving as a functional local mock uploader.

@@ -38,6 +38,17 @@ export default function AddProductPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, [fieldName]: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -133,19 +144,35 @@ export default function AddProductPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 1 (Primary)</label>
-                <input required type="text" name="image1" value={formData.image1} onChange={handleChange} placeholder="URL or Emoji" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                <div className="flex gap-2">
+                  <input required type="text" name="image1" value={formData.image1} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image1')} className="hidden" id="upload-image1" />
+                  <label htmlFor="upload-image1" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                </div>
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 2 (Optional)</label>
-                <input type="text" name="image2" value={formData.image2} onChange={handleChange} placeholder="URL or Emoji" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                <div className="flex gap-2">
+                  <input type="text" name="image2" value={formData.image2} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image2')} className="hidden" id="upload-image2" />
+                  <label htmlFor="upload-image2" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                </div>
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 3 (Optional)</label>
-                <input type="text" name="image3" value={formData.image3} onChange={handleChange} placeholder="URL or Emoji" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                <div className="flex gap-2">
+                  <input type="text" name="image3" value={formData.image3} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image3')} className="hidden" id="upload-image3" />
+                  <label htmlFor="upload-image3" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                </div>
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 4 (Optional)</label>
-                <input type="text" name="image4" value={formData.image4} onChange={handleChange} placeholder="URL or Emoji" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                <div className="flex gap-2">
+                  <input type="text" name="image4" value={formData.image4} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image4')} className="hidden" id="upload-image4" />
+                  <label htmlFor="upload-image4" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                </div>
               </div>
             </div>
           </div>
