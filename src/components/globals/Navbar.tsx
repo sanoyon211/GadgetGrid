@@ -32,7 +32,8 @@ export default function Navbar() {
   if (session) {
     navLinks.push(
       { name: "Add Item", href: "/items/add" },
-      { name: "Manage Items", href: "/items/manage" }
+      { name: "Manage Items", href: "/items/manage" },
+      { name: "Settings", href: "/dashboard/settings" }
     );
   }
 
@@ -47,7 +48,8 @@ export default function Navbar() {
     mobileNavLinks.push(
       { name: "Dashboard", href: "/dashboard" },
       { name: "Add Item", href: "/items/add" },
-      { name: "Manage Items", href: "/items/manage" }
+      { name: "Manage Items", href: "/items/manage" },
+      { name: "Settings", href: "/dashboard/settings" }
     );
   }
 

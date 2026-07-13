@@ -248,3 +248,10 @@ Step 33: Basic Image Upload Functionality
 - How it was done:
   * Added file inputs and `handleImageUpload` function to both `AddProductPage` and `EditProductPage`.
   * The file input uses `FileReader` to convert the uploaded local image to a Base64 string and sets it as the image value, serving as a functional local mock uploader.
+
+Step 34: User Profile Settings
+-----------------------------------------------------------------------------
+- How it was done:
+  * Created `PUT /api/user/settings/route.ts` to update the user's name and password securely using `bcryptjs`.
+  * Created `src/app/dashboard/settings/page.tsx` for the profile settings form.
+  * Added a 'Settings' link to the Navbar for authenticated users.
