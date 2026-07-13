@@ -216,3 +216,9 @@ Step 28: Stock Management
 -----------------------------------------------------------------------------
 - How it was done:
   * Updated `src/app/api/orders/route.ts` to deduct `Gadget.stock` by the quantity purchased when an order is successfully placed.
+
+Step 29: bKash Payment Mock Integration
+-----------------------------------------------------------------------------
+- How it was done:
+  * Added a 'bKash Mobile Menu' option to `PaymentMethods.tsx` with its authentic pink brand colors.
+  * Created mock input fields for 'bKash Account Number' and 'bKash Verification Code (OTP)' to simulate a real payment flow.

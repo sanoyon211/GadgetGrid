@@ -44,6 +44,37 @@ export default function PaymentMethods() {
           )}
         </label>
 
+        {/* bKash Option */}
+        <label className={`block border rounded-xl p-4 cursor-pointer transition-all ${method === "bkash" ? "border-pink-500 bg-pink-500/5 dark:bg-pink-500/10" : "border-gray-200 dark:border-zinc-800 hover:border-pink-500/50"}`}>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center w-5 h-5 rounded-full border border-gray-300 dark:border-zinc-600 shrink-0">
+              {method === "bkash" && <div className="w-3 h-3 rounded-full bg-pink-500" />}
+            </div>
+            <div className="w-8 h-8 rounded bg-pink-500 flex items-center justify-center text-white font-bold text-xs shrink-0">
+              bK
+            </div>
+            <div>
+              <span className="block font-medium text-gray-900 dark:text-white">bKash Mobile Menu</span>
+              <span className="block text-xs text-gray-500 mt-0.5">Pay via your bKash wallet.</span>
+            </div>
+          </div>
+          <input type="radio" className="hidden" name="paymentMethod" value="bKash" checked={method === "bkash"} onChange={() => setMethod("bkash")} />
+          
+          {/* bKash Details */}
+          {method === "bkash" && (
+            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-700/50 space-y-4">
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">bKash Account Number</label>
+                <input type="text" placeholder="e.g 01XXXXXXXXX" className="block w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-sm focus:ring-1 focus:ring-pink-500 focus:border-pink-500" required={method === "bkash"} />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">bKash Verification Code (OTP)</label>
+                <input type="text" placeholder="123456" className="block w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-sm focus:ring-1 focus:ring-pink-500 focus:border-pink-500" required={method === "bkash"} />
+              </div>
+            </div>
+          )}
+        </label>
+
         {/* Cash on Delivery Option */}
         <label className={`block border rounded-xl p-4 cursor-pointer transition-all ${method === "cod" ? "border-primary bg-primary/5" : "border-gray-200 dark:border-zinc-800 hover:border-primary/50"}`}>
           <div className="flex items-center gap-4">
