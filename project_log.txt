@@ -211,3 +211,8 @@ Step 27: Add Extra Home Page Section
 - How it was done:
   * Created `WhyChooseUs.tsx` component and added it to `src/app/page.tsx`.
   * This guarantees exactly 7 meaningful sections (excluding the Hero section) to fulfill the rubric requirements.
+
+Step 28: Stock Management
+-----------------------------------------------------------------------------
+- How it was done:
+  * Updated `src/app/api/orders/route.ts` to deduct `Gadget.stock` by the quantity purchased when an order is successfully placed.

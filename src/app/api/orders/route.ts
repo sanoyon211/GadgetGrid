@@ -67,6 +67,13 @@ export async function POST(req: Request) {
       paymentMethod,
     });
 
+    // Deduct stock for each product
+    await Promise.all(user.cart.map(async (cartItem: any) => {
+      const product = cartItem.product;
+      const quantity = cartItem.quantity;
+      await Gadget.findByIdAndUpdate(product._id, { $inc: { stock: -quantity } });
+    }));
+
     // Clear the user's cart
     user.cart = [];
     await user.save();
