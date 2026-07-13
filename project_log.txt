@@ -222,3 +222,11 @@ Step 29: bKash Payment Mock Integration
 - How it was done:
   * Added a 'bKash Mobile Menu' option to `PaymentMethods.tsx` with its authentic pink brand colors.
   * Created mock input fields for 'bKash Account Number' and 'bKash Verification Code (OTP)' to simulate a real payment flow.
+
+Step 30: Edit Product Functionality & Ownership Permissions
+-----------------------------------------------------------------------------
+- How it was done:
+  * Updated `api/gadgets/add/route.ts` to save `userId` upon gadget creation.
+  * Updated `api/gadgets/[id]/route.ts` to enforce ownership-based permissions on PUT and DELETE requests (only owner or admin can modify).
+  * Created `src/app/items/edit/[id]/page.tsx` that pre-fills with existing product data and allows updating.
+  * Added an 'Edit' button to `src/app/items/manage/page.tsx` next to the View and Delete actions.

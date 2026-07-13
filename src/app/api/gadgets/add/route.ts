@@ -1,13 +1,21 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
 
 export async function POST(req: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
     const data = await req.json();
     await connectToDatabase();
     
-    // In a real app, verify user session is admin here
+    // Assign ownership to the user who creates it
+    data.userId = session.user.id;
     
     const newGadget = await Gadget.create(data);
     return NextResponse.json({ message: "Gadget added successfully", gadget: newGadget }, { status: 201 });

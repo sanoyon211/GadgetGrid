@@ -55,6 +55,9 @@ export default async function ManageProductsPage() {
                     <Link href={`/product/${gadget._id.toString()}`} className="text-xs font-bold uppercase tracking-widest text-foreground hover:text-gray-500 transition-colors border-b border-foreground hover:border-gray-500 pb-0.5">
                       View
                     </Link>
+                    <Link href={`/items/edit/${gadget._id.toString()}`} className="text-xs font-bold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors border-b border-primary hover:border-primary/80 pb-0.5">
+                      Edit
+                    </Link>
                     <DeleteButton id={gadget._id.toString()} />
                   </div>
                 </td>
