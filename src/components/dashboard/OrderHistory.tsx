@@ -2,8 +2,13 @@
 
 import { Eye, Download } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 export default function OrderHistory() {
+  const { data: session } = useSession();
+  const isAdmin = session?.user?.role === 'admin';
+
   const [orders, setOrders] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,6 +29,24 @@ export default function OrderHistory() {
 
     fetchOrders();
   }, []);
+
+  const updateOrderStatus = async (orderId: string, newStatus: string) => {
+    try {
+      const res = await fetch(`/api/orders/${orderId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (res.ok) {
+        toast.success("Order status updated");
+        setOrders(orders.map(o => o._id === orderId ? { ...o, status: newStatus } : o));
+      } else {
+        toast.error("Failed to update status");
+      }
+    } catch (error) {
+      toast.error("Error updating status");
+    }
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -86,9 +109,23 @@ export default function OrderHistory() {
                     ${order.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full ${getStatusColor(order.status)}`}>
-                      {order.status}
-                    </span>
+                    {isAdmin ? (
+                      <select 
+                        value={order.status}
+                        onChange={(e) => updateOrderStatus(order._id, e.target.value)}
+                        className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-lg outline-none cursor-pointer ${getStatusColor(order.status)}`}
+                      >
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                      </select>
+                    ) : (
+                      <span className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full ${getStatusColor(order.status)}`}>
+                        {order.status}
+                      </span>
+                    )}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-3">

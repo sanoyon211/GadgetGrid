@@ -230,3 +230,9 @@ Step 30: Edit Product Functionality & Ownership Permissions
   * Updated `api/gadgets/[id]/route.ts` to enforce ownership-based permissions on PUT and DELETE requests (only owner or admin can modify).
   * Created `src/app/items/edit/[id]/page.tsx` that pre-fills with existing product data and allows updating.
   * Added an 'Edit' button to `src/app/items/manage/page.tsx` next to the View and Delete actions.
+
+Step 31: Admin Order Management
+-----------------------------------------------------------------------------
+- How it was done:
+  * Created `PUT /api/orders/[id]` API route to allow updating order statuses (Pending -> Shipped -> Delivered) securely by Admins.
+  * Updated `src/components/dashboard/OrderHistory.tsx` to conditionally render a status `<select>` dropdown instead of a static badge if the logged-in user is an admin.
