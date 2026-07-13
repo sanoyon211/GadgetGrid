@@ -78,6 +78,14 @@ export async function POST(req: Request) {
     user.cart = [];
     await user.save();
 
+    // Step 10: Mock Email Notification
+    console.log(`\n======================================================`);
+    console.log(`📧 MOCK EMAIL SENT`);
+    console.log(`To: ${session.user.email || 'user@example.com'}`);
+    console.log(`Subject: Order Confirmation - ${newOrder._id}`);
+    console.log(`Body: Thank you for your order! Your total is $${totalAmount.toFixed(2)}.`);
+    console.log(`======================================================\n`);
+
     return NextResponse.json({ message: "Order placed successfully", orderId: newOrder._id }, { status: 201 });
   } catch (error) {
     console.error("Orders POST error:", error);

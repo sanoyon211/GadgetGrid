@@ -255,3 +255,8 @@ Step 34: User Profile Settings
   * Created `PUT /api/user/settings/route.ts` to update the user's name and password securely using `bcryptjs`.
   * Created `src/app/dashboard/settings/page.tsx` for the profile settings form.
   * Added a 'Settings' link to the Navbar for authenticated users.
+
+Step 35: Email Notifications (Console Mock)
+-----------------------------------------------------------------------------
+- How it was done:
+  * Updated `src/app/api/orders/route.ts` to log a formatted 'Mock Email Sent' message to the server console whenever a user successfully places an order.
