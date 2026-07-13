@@ -4,6 +4,7 @@ import { Eye, Download } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function OrderHistory() {
   const { data: session } = useSession();
@@ -129,9 +130,9 @@ export default function OrderHistory() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-3">
-                      <button className="p-2 text-gray-500 hover:text-primary bg-gray-100 hover:bg-primary/10 dark:bg-zinc-800 dark:hover:bg-primary/20 rounded-lg transition-colors" title="View Details">
+                      <Link href={`/dashboard/orders/${order._id}`} className="p-2 text-gray-500 hover:text-primary bg-gray-100 hover:bg-primary/10 dark:bg-zinc-800 dark:hover:bg-primary/20 rounded-lg transition-colors" title="View Details">
                         <Eye className="w-4 h-4" />
-                      </button>
+                      </Link>
                       <button className="p-2 text-gray-500 hover:text-primary bg-gray-100 hover:bg-primary/10 dark:bg-zinc-800 dark:hover:bg-primary/20 rounded-lg transition-colors" title="Download Invoice">
                         <Download className="w-4 h-4" />
                       </button>

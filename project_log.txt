@@ -236,3 +236,9 @@ Step 31: Admin Order Management
 - How it was done:
   * Created `PUT /api/orders/[id]` API route to allow updating order statuses (Pending -> Shipped -> Delivered) securely by Admins.
   * Updated `src/components/dashboard/OrderHistory.tsx` to conditionally render a status `<select>` dropdown instead of a static badge if the logged-in user is an admin.
+
+Step 32: Order Details Page
+-----------------------------------------------------------------------------
+- How it was done:
+  * Created `src/app/dashboard/orders/[id]/page.tsx` to show individual order details (shipping, items, payment).
+  * Wrapped the 'Eye' icon in `OrderHistory.tsx` with a Next.js Link navigating to the details page.
