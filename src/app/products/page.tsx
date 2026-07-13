@@ -77,7 +77,7 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          <aside className="hidden lg:block w-72 shrink-0">
+          <aside className="hidden lg:block w-56 shrink-0">
             <div className="sticky top-24">
               <Suspense fallback={<div>Loading filters...</div>}>
                 <ProductFilters />
