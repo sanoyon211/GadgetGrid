@@ -1,17 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Save, Plus, Trash2 } from "lucide-react";
+
 import BackButton from "@/components/globals/BackButton";
 
-export default function EditProductPage() {
+export default function AddProductPage() {
   const router = useRouter();
-  const params = useParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [isFetching, setIsFetching] = useState(true);
-  
   const [formData, setFormData] = useState({
     name: "",
     shortDescription: "",
@@ -19,51 +17,13 @@ export default function EditProductPage() {
     price: "",
     originalPrice: "",
     category: "Smartphones",
-    image1: "",
+    image1: "📱",
     image2: "",
     image3: "",
     image4: "",
     stock: "10"
   });
   const [specs, setSpecs] = useState([{ label: "", value: "" }]);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(`/api/gadgets/${params.id}`);
-        if (!res.ok) throw new Error("Failed to fetch product");
-        const data = await res.json();
-        const gadget = data.gadget;
-
-        setFormData({
-          name: gadget.name || "",
-          shortDescription: gadget.shortDescription || "",
-          description: gadget.description || "",
-          price: gadget.price?.toString() || "",
-          originalPrice: gadget.originalPrice ? gadget.originalPrice.toString() : "",
-          category: gadget.category || "Smartphones",
-          image1: gadget.images?.[0] || "",
-          image2: gadget.images?.[1] || "",
-          image3: gadget.images?.[2] || "",
-          image4: gadget.images?.[3] || "",
-          stock: gadget.stock?.toString() || "0"
-        });
-
-        if (gadget.specifications && Object.keys(gadget.specifications).length > 0) {
-          const loadedSpecs = Object.entries(gadget.specifications).map(([key, value]) => ({
-            label: key,
-            value: value as string
-          }));
-          setSpecs(loadedSpecs);
-        }
-      } catch (error) {
-        toast.error("Error loading product");
-      } finally {
-        setIsFetching(false);
-      }
-    };
-    if (params.id) fetchProduct();
-  }, [params.id]);
 
   const handleSpecChange = (index: number, field: string, value: string) => {
     const newSpecs = [...specs];
@@ -102,8 +62,8 @@ export default function EditProductPage() {
         return acc;
       }, {} as Record<string, string>);
 
-      const res = await fetch(`/api/gadgets/${params.id}`, {
-        method: "PUT",
+      const res = await fetch("/api/gadgets/add", {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
@@ -118,33 +78,22 @@ export default function EditProductPage() {
         })
       });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Failed to update product");
-      }
+      if (!res.ok) throw new Error("Failed to add product");
       
-      toast.success("Product updated successfully!");
-      router.push("/items/manage");
+      toast.success("Product added successfully!");
+      router.push("/dashboard/products");
       router.refresh();
-    } catch (error: any) {
-      toast.error(error.message || "Error updating product");
+    } catch (error) {
+      toast.error("Error adding product");
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (isFetching) {
-    return (
-      <div className="bg-transparent p-6 flex justify-center items-center h-64">
-        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
   return (
     <div className="bg-transparent p-6">
       <BackButton />
-      <h2 className="text-2xl font-heading font-bold text-foreground mb-8 pb-4 border-b border-gray-200 dark:border-zinc-800">Edit Product</h2>
+      <h2 className="text-2xl font-heading font-bold text-foreground mb-8 pb-4 border-b border-gray-200 dark:border-zinc-800">Add New Product</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -197,32 +146,32 @@ export default function EditProductPage() {
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 1 (Primary)</label>
                 <div className="flex gap-2">
                   <input required type="text" name="image1" value={formData.image1} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
-                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image1')} className="hidden" id="upload-image1-edit" />
-                  <label htmlFor="upload-image1-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image1')} className="hidden" id="upload-image1" />
+                  <label htmlFor="upload-image1" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 2 (Optional)</label>
                 <div className="flex gap-2">
                   <input type="text" name="image2" value={formData.image2} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
-                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image2')} className="hidden" id="upload-image2-edit" />
-                  <label htmlFor="upload-image2-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image2')} className="hidden" id="upload-image2" />
+                  <label htmlFor="upload-image2" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 3 (Optional)</label>
                 <div className="flex gap-2">
                   <input type="text" name="image3" value={formData.image3} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
-                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image3')} className="hidden" id="upload-image3-edit" />
-                  <label htmlFor="upload-image3-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image3')} className="hidden" id="upload-image3" />
+                  <label htmlFor="upload-image3" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Image 4 (Optional)</label>
                 <div className="flex gap-2">
                   <input type="text" name="image4" value={formData.image4} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
-                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image4')} className="hidden" id="upload-image4-edit" />
-                  <label htmlFor="upload-image4-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image4')} className="hidden" id="upload-image4" />
+                  <label htmlFor="upload-image4" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
             </div>
@@ -269,7 +218,7 @@ export default function EditProductPage() {
 
         <button disabled={isLoading} type="submit" className="flex items-center gap-2 px-8 py-3 bg-foreground text-background font-medium hover:bg-foreground/90 transition-colors disabled:opacity-50 mt-8">
           <Save className="w-4 h-4" />
-          {isLoading ? "Updating..." : "Update Product"}
+          {isLoading ? "Saving..." : "Save Product"}
         </button>
       </form>
     </div>

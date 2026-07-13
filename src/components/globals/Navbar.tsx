@@ -31,9 +31,8 @@ export default function Navbar() {
 
   if (session) {
     navLinks.push(
-      { name: "Add Item", href: "/items/add" },
-      { name: "Manage Items", href: "/items/manage" },
-      { name: "Settings", href: "/dashboard/settings" }
+      { name: "Add Item", href: "/dashboard/products/add" },
+      { name: "Manage Items", href: "/dashboard/products" }
     );
   }
 
@@ -47,9 +46,8 @@ export default function Navbar() {
   if (session) {
     mobileNavLinks.push(
       { name: "Dashboard", href: "/dashboard" },
-      { name: "Add Item", href: "/items/add" },
-      { name: "Manage Items", href: "/items/manage" },
-      { name: "Settings", href: "/dashboard/settings" }
+      { name: "Add Item", href: "/dashboard/products/add" },
+      { name: "Manage Items", href: "/dashboard/products" }
     );
   }
 

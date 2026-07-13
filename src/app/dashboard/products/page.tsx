@@ -4,18 +4,15 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import DeleteButton from "@/components/dashboard/DeleteButton";
 
-import BackButton from "@/components/globals/BackButton";
-
 export default async function ManageProductsPage() {
   await connectToDatabase();
   const gadgets = await Gadget.find().sort({ createdAt: -1 }).lean();
 
   return (
-    <div className="bg-transparent p-6">
-      <BackButton />
+    <div className="bg-transparent">
       <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200 dark:border-zinc-800">
         <h2 className="text-2xl font-heading font-bold text-foreground">Manage Products</h2>
-        <Link href="/items/add" className="flex items-center gap-2 bg-foreground text-background px-4 py-2 hover:bg-foreground/90 transition-colors text-sm font-medium">
+        <Link href="/dashboard/products/add" className="flex items-center gap-2 bg-foreground text-background px-4 py-2 hover:bg-foreground/90 transition-colors text-sm font-medium">
           <Plus className="w-4 h-4" />
           Add Product
         </Link>
@@ -55,7 +52,7 @@ export default async function ManageProductsPage() {
                     <Link href={`/product/${gadget._id.toString()}`} className="text-xs font-bold uppercase tracking-widest text-foreground hover:text-gray-500 transition-colors border-b border-foreground hover:border-gray-500 pb-0.5">
                       View
                     </Link>
-                    <Link href={`/items/edit/${gadget._id.toString()}`} className="text-xs font-bold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors border-b border-primary hover:border-primary/80 pb-0.5">
+                    <Link href={`/dashboard/products/edit/${gadget._id.toString()}`} className="text-xs font-bold uppercase tracking-widest text-primary hover:text-primary/80 transition-colors border-b border-primary hover:border-primary/80 pb-0.5">
                       Edit
                     </Link>
                     <DeleteButton id={gadget._id.toString()} />

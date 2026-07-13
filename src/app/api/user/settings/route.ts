@@ -23,6 +23,10 @@ export async function PUT(req: Request) {
     }
 
     if (currentPassword && newPassword) {
+      if (!user.password) {
+        return NextResponse.json({ message: "User does not have a password set" }, { status: 400 });
+      }
+
       const isMatch = await bcrypt.compare(currentPassword, user.password);
       if (!isMatch) {
         return NextResponse.json({ message: "Incorrect current password" }, { status: 400 });

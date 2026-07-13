@@ -2,17 +2,11 @@
 
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 
-const data = [
-  { name: "Jan", sales: 4000 },
-  { name: "Feb", sales: 3000 },
-  { name: "Mar", sales: 5000 },
-  { name: "Apr", sales: 4500 },
-  { name: "May", sales: 6000 },
-  { name: "Jun", sales: 5500 },
-  { name: "Jul", sales: 7000 },
-];
+interface SalesChartProps {
+  data: { name: string; sales: number }[];
+}
 
-export default function SalesChart() {
+export default function SalesChart({ data }: SalesChartProps) {
   return (
     <div className="h-64 w-full mt-6">
       <ResponsiveContainer width="100%" height="100%">

@@ -3,26 +3,70 @@
 import { Package, Clock, ShieldCheck, CreditCard, UserCircle } from "lucide-react";
 import SalesChart from "./SalesChart";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default function DashboardOverview() {
   const { data: session } = useSession();
   const isAdmin = session?.user?.role === "admin";
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchDashboardData() {
+      try {
+        const response = await fetch("/api/dashboard");
+        if (response.ok) {
+          const result = await response.json();
+          setData(result);
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (session?.user) {
+      fetchDashboardData();
+    }
+  }, [session]);
 
   const adminStats = [
-    { title: "Total Users", value: "24", icon: UserCircle },
-    { title: "Total Products", value: "156", icon: Package },
-    { title: "Total Sales", value: "$42,500", icon: CreditCard },
-    { title: "Pending Orders", value: "8", icon: Clock },
+    { title: "Total Users", value: data?.totalUsers || "0", icon: UserCircle },
+    { title: "Total Products", value: data?.totalProducts || "0", icon: Package },
+    { title: "Total Sales", value: `$${data?.totalSales?.toLocaleString() || "0"}`, icon: CreditCard },
+    { title: "Pending Orders", value: data?.pendingOrders || "0", icon: Clock },
   ];
 
   const userStats = [
-    { title: "Total Orders", value: "12", icon: Package },
-    { title: "Pending Delivery", value: "2", icon: Clock },
-    { title: "Active Warranty", value: "5", icon: ShieldCheck },
-    { title: "Reward Points", value: "1,250", icon: CreditCard },
+    { title: "Total Orders", value: data?.totalOrders || "0", icon: Package },
+    { title: "Pending Delivery", value: data?.pendingDelivery || "0", icon: Clock },
+    { title: "Total Spent", value: `$${data?.totalSpent?.toLocaleString() || "0"}`, icon: ShieldCheck },
+    { title: "Reward Points", value: data?.rewardPoints?.toLocaleString() || "0", icon: CreditCard },
   ];
 
   const stats = isAdmin ? adminStats : userStats;
+
+  const getProgress = (status: string) => {
+    switch (status) {
+      case 'pending': return '10%';
+      case 'processing': return '33%';
+      case 'shipped': return '66%';
+      case 'delivered': return '100%';
+      case 'cancelled': return '100%';
+      default: return '0%';
+    }
+  };
+
+  if (loading) {
+    return <div className="animate-pulse space-y-8 mt-4">
+      <div className="h-10 bg-gray-200 dark:bg-zinc-800 rounded w-1/3"></div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {[1, 2, 3, 4].map((i) => <div key={i} className="h-32 bg-gray-200 dark:bg-zinc-800 rounded"></div>)}
+      </div>
+      <div className="h-64 bg-gray-200 dark:bg-zinc-800 rounded w-full"></div>
+    </div>;
+  }
 
   return (
     <div>
@@ -55,41 +99,47 @@ export default function DashboardOverview() {
         {!isAdmin ? (
           <div className="bg-transparent border border-gray-200 dark:border-zinc-800 p-8">
             <h2 className="text-xs uppercase tracking-widest font-bold text-foreground mb-8">Latest Order Status</h2>
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div className="w-20 h-20 bg-gray-100 dark:bg-zinc-900 flex items-center justify-center shrink-0">
-              <span className="text-2xl opacity-50 text-foreground">📱</span>
-            </div>
-            <div className="flex-1 w-full">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="font-heading text-xl text-foreground line-clamp-1">iPhone 15 Pro Max</h3>
-                <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground border border-gray-200 dark:border-zinc-800 shrink-0">
-                  Shipped
-                </span>
+            {data?.latestOrder ? (
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+              <div className="w-20 h-20 bg-gray-100 dark:bg-zinc-900 flex items-center justify-center shrink-0">
+                {data.latestOrder.items?.[0]?.image ? (
+                  <img src={data.latestOrder.items[0].image} alt="Product" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-2xl opacity-50 text-foreground">📦</span>
+                )}
               </div>
-              <p className="text-xs text-gray-500 mb-4 tracking-wider">ORDER #ORD-84920</p>
-              <div className="w-full bg-gray-100 dark:bg-zinc-900 h-1">
-                <div className="bg-foreground h-1 w-2/3"></div>
+              <div className="flex-1 w-full">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-heading text-xl text-foreground line-clamp-1">{data.latestOrder.items?.[0]?.name || "Your Order"}</h3>
+                  <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-foreground border border-gray-200 dark:border-zinc-800 shrink-0">
+                    {data.latestOrder.status}
+                  </span>
+                </div>
+                <p className="text-xs text-gray-500 mb-4 tracking-wider">ORDER #{data.latestOrder._id.slice(-6).toUpperCase()}</p>
+                <div className="w-full bg-gray-100 dark:bg-zinc-900 h-1">
+                  <div className={`bg-${data.latestOrder.status === 'cancelled' ? 'red-500' : 'foreground'} h-1`} style={{ width: getProgress(data.latestOrder.status) }}></div>
+                </div>
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Date: {new Date(data.latestOrder.createdAt).toLocaleDateString()}</p>
               </div>
-              <p className="text-[10px] text-gray-500 uppercase tracking-widest mt-3">Expected delivery: Tomorrow</p>
             </div>
+            ) : (
+              <p className="text-sm text-gray-500">No recent orders found.</p>
+            )}
           </div>
-        </div>
         ) : (
           <div className="bg-transparent border border-gray-200 dark:border-zinc-800 p-8">
             <h2 className="text-xs uppercase tracking-widest font-bold text-foreground mb-8">Recent Activities</h2>
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">New user registered</span>
-                <span className="text-xs text-gray-400">2 mins ago</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">Order #84920 placed</span>
-                <span className="text-xs text-gray-400">1 hour ago</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-gray-500">Product stock updated</span>
-                <span className="text-xs text-gray-400">3 hours ago</span>
-              </div>
+              {data?.recentActivities?.length > 0 ? (
+                data.recentActivities.map((activity: any) => (
+                  <div key={activity.id} className="flex items-center justify-between">
+                    <span className="text-sm text-gray-500">{activity.title}</span>
+                    <span className="text-xs text-gray-400">{new Date(activity.time).toLocaleDateString()}</span>
+                  </div>
+                ))
+              ) : (
+                <p className="text-sm text-gray-500">No recent activities.</p>
+              )}
             </div>
           </div>
         )}
@@ -117,8 +167,8 @@ export default function DashboardOverview() {
         {isAdmin && (
           <div className="bg-transparent border border-gray-200 dark:border-zinc-800 p-8 lg:col-span-2">
             <h2 className="text-xs uppercase tracking-widest font-bold text-foreground mb-2">Sales Overview</h2>
-            <p className="text-sm text-gray-500 mb-6">Your revenue stream over the last 7 months.</p>
-            <SalesChart />
+            <p className="text-sm text-gray-500 mb-6">Your revenue stream over the last 6 months.</p>
+            <SalesChart data={data?.salesData || []} />
           </div>
         )}
 
