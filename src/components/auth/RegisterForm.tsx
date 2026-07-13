@@ -6,7 +6,7 @@ import { Mail, Lock, User, UserPlus, Eye, EyeOff } from "lucide-react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-
+import { signIn } from "next-auth/react";
 export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -55,22 +55,14 @@ export default function RegisterForm() {
       </p>
 
       {/* Social Login */}
-      <div className="flex gap-4 mb-6">
+      <div className="mb-6">
         <button 
           type="button"
-          onClick={() => toast("Google signup would open here")}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 border border-gray-300 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+          className="w-full flex items-center justify-center gap-2 h-12 border border-gray-300 dark:border-zinc-700 rounded-none hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
         >
           <FaGoogle className="text-red-500" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Google</span>
-        </button>
-        <button 
-          type="button"
-          onClick={() => toast("GitHub signup would open here")}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 border border-gray-300 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
-        >
-          <FaGithub className="text-gray-900 dark:text-white" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">GitHub</span>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Continue with Google</span>
         </button>
       </div>
 
@@ -97,7 +89,7 @@ export default function RegisterForm() {
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="block w-full pl-10 px-4 py-3 border border-gray-200 dark:border-zinc-800 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+              className="block w-full h-12 pl-10 px-4 border border-gray-200 dark:border-zinc-800 rounded-none bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-base"
               placeholder="John Doe"
             />
           </div>
@@ -116,7 +108,7 @@ export default function RegisterForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="block w-full pl-10 px-4 py-3 border border-gray-200 dark:border-zinc-800 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+              className="block w-full h-12 pl-10 px-4 border border-gray-200 dark:border-zinc-800 rounded-none bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-base"
               placeholder="you@example.com"
             />
           </div>
@@ -135,7 +127,7 @@ export default function RegisterForm() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="block w-full pl-10 pr-10 py-3 border border-gray-200 dark:border-zinc-800 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+              className="block w-full h-12 pl-10 pr-10 border border-gray-200 dark:border-zinc-800 rounded-none bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-base"
               placeholder="••••••••"
               minLength={8}
             />
@@ -157,7 +149,7 @@ export default function RegisterForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all disabled:opacity-70 disabled:cursor-not-allowed mt-4"
+          className="w-full flex justify-center items-center gap-2 h-12 px-4 border border-transparent rounded-none shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all disabled:opacity-70 disabled:cursor-not-allowed mt-4"
         >
           {isLoading ? (
             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

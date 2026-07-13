@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongoose";
 import User from "@/models/User";
-import Gadget from "@/models/Gadget";
+import "@/models/Gadget";
 
 export async function GET() {
   try {

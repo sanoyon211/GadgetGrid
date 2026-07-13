@@ -11,14 +11,19 @@ export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
+    image: "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: ""
   });
 
   useEffect(() => {
-    if (session?.user?.name) {
-      setFormData(prev => ({ ...prev, name: session.user.name || "" }));
+    if (session?.user) {
+      setFormData(prev => ({ 
+        ...prev, 
+        name: session.user.name || "",
+        image: session.user.image || ""
+      }));
     }
   }, [session]);
 
@@ -40,6 +45,7 @@ export default function SettingsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
+          image: formData.image,
           currentPassword: formData.currentPassword,
           newPassword: formData.newPassword
         })
@@ -49,8 +55,8 @@ export default function SettingsPage() {
       if (!res.ok) throw new Error(data.message || "Failed to update settings");
 
       toast.success("Profile updated successfully!");
-      if (formData.name !== session?.user?.name) {
-        await update({ name: formData.name });
+      if (formData.name !== session?.user?.name || formData.image !== session?.user?.image) {
+        await update({ name: formData.name, image: formData.image });
       }
       setFormData(prev => ({ ...prev, currentPassword: "", newPassword: "", confirmPassword: "" }));
     } catch (error: any) {
@@ -70,7 +76,28 @@ export default function SettingsPage() {
         Update your personal information and password.
       </p>
 
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl p-6 space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-none p-6 space-y-6">
+        <div className="flex items-center gap-4">
+          <div className="w-16 h-16 rounded-none-full overflow-hidden bg-gray-200 dark:bg-zinc-800 flex items-center justify-center shrink-0">
+            {formData.image ? (
+              <img src={formData.image} alt="Profile" className="w-full h-full object-cover" />
+            ) : (
+              <span className="text-xl text-gray-500 font-bold">{formData.name?.charAt(0) || "U"}</span>
+            )}
+          </div>
+          <div className="flex-1">
+            <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Profile Image URL</label>
+            <input 
+              type="text" 
+              name="image" 
+              placeholder="https://example.com/avatar.png"
+              value={formData.image} 
+              onChange={handleChange} 
+              className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" 
+            />
+          </div>
+        </div>
+
         <div>
           <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-2">Name</label>
           <input 
@@ -121,7 +148,7 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <button disabled={isLoading} type="submit" className="flex items-center justify-center w-full sm:w-auto gap-2 px-8 py-3 bg-foreground text-background font-medium rounded-lg hover:bg-foreground/90 transition-colors disabled:opacity-50 mt-8">
+        <button disabled={isLoading} type="submit" className="flex items-center justify-center w-full sm:w-auto gap-2 px-8 py-3 bg-foreground text-background font-medium rounded-none hover:bg-foreground/90 transition-colors disabled:opacity-50 mt-8">
           <Save className="w-4 h-4" />
           {isLoading ? "Saving..." : "Save Changes"}
         </button>

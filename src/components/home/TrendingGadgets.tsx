@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Star, ShoppingCart, Heart } from "lucide-react";
 
 import connectToDatabase from "@/lib/mongoose";
@@ -21,14 +22,14 @@ export default async function TrendingGadgets() {
   }));
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-12 lg:py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-heading font-bold text-foreground mb-2">Deal on gadgets</h2>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-2">Deal on gadgets</h2>
           <p className="text-gray-500 text-sm tracking-wide">Find the latest tech accessories to improve your daily life</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-x-6 md:gap-y-12">
           {products.map((product) => (
           <div key={product.id} className="group relative flex flex-col items-center">
             <Link href={`/product/${product.id}`} className="w-full">
@@ -39,7 +40,7 @@ export default async function TrendingGadgets() {
                   </div>
                 )}
                 {product.image ? (
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+                  <Image src={product.image} alt={product.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 ) : (
                   <div className="text-6xl">📦</div>
                 )}
@@ -76,7 +77,7 @@ export default async function TrendingGadgets() {
         </div>
         
         <div className="mt-16 text-center">
-          <Link href="/products" className="inline-flex items-center justify-center px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium text-foreground hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors">
+          <Link href="/products" className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] px-8 py-3 border border-gray-300 dark:border-gray-700 text-sm font-medium text-foreground hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors">
             See Collection
           </Link>
         </div>

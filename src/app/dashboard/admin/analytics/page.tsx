@@ -42,7 +42,7 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Revenue Chart */}
-        <div className="bg-white dark:bg-zinc-950 p-6 border border-gray-100 dark:border-zinc-900 rounded-lg shadow-sm">
+        <div className="bg-white dark:bg-zinc-950 p-6 border border-gray-100 dark:border-zinc-900 rounded-none shadow-sm">
           <h3 className="font-bold text-foreground mb-6">Revenue (Last 6 Months)</h3>
           <div className="h-72">
             {data?.revenueChart && data.revenueChart.length > 0 ? (
@@ -61,7 +61,7 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Category Chart */}
-        <div className="bg-white dark:bg-zinc-950 p-6 border border-gray-100 dark:border-zinc-900 rounded-lg shadow-sm">
+        <div className="bg-white dark:bg-zinc-950 p-6 border border-gray-100 dark:border-zinc-900 rounded-none shadow-sm">
           <h3 className="font-bold text-foreground mb-6">Sales by Category</h3>
           <div className="h-72">
             {data?.categoryChart && data.categoryChart.some((d: any) => d.value > 0) ? (

@@ -7,13 +7,13 @@ export default function PaymentMethods() {
   const [method, setMethod] = useState("card");
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 p-6 sm:p-8 mt-6">
+    <div className="bg-white dark:bg-zinc-900 rounded-none border border-gray-200 dark:border-zinc-800 p-6 sm:p-8 mt-6">
       <h2 className="text-xl font-heading font-bold text-gray-900 dark:text-white mb-6">Payment Method</h2>
       
       <div className="space-y-4">
         
         {/* Credit Card Option */}
-        <label className={`block border rounded-xl p-4 cursor-pointer transition-all ${method === "card" ? "border-primary bg-primary/5" : "border-gray-200 dark:border-zinc-800 hover:border-primary/50"}`}>
+        <label className={`block border rounded-none p-4 cursor-pointer transition-all ${method === "card" ? "border-primary bg-primary/5" : "border-gray-200 dark:border-zinc-800 hover:border-primary/50"}`}>
           <div className="flex items-center gap-4">
             <div className="flex items-center justify-center w-5 h-5 rounded-full border border-gray-300 dark:border-zinc-600">
               {method === "card" && <div className="w-3 h-3 rounded-full bg-primary" />}
@@ -28,16 +28,16 @@ export default function PaymentMethods() {
             <div className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-700/50 space-y-4">
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">Card Number</label>
-                <input type="text" placeholder="0000 0000 0000 0000" className="block w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-sm focus:ring-1 focus:ring-primary focus:border-primary" />
+                <input type="text" placeholder="0000 0000 0000 0000" className="block w-full h-12 px-4 border border-gray-200 dark:border-zinc-700 rounded-none bg-white dark:bg-zinc-950 text-sm focus:ring-2 focus:ring-primary focus:border-primary" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-gray-500 mb-1">Expiry Date</label>
-                  <input type="text" placeholder="MM/YY" className="block w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-sm focus:ring-1 focus:ring-primary focus:border-primary" />
+                  <input type="text" placeholder="MM/YY" className="block w-full h-12 px-4 border border-gray-200 dark:border-zinc-700 rounded-none bg-white dark:bg-zinc-950 text-sm focus:ring-2 focus:ring-primary focus:border-primary" />
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-gray-500 mb-1">CVC</label>
-                  <input type="text" placeholder="123" className="block w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-sm focus:ring-1 focus:ring-primary focus:border-primary" />
+                  <input type="text" placeholder="123" className="block w-full h-12 px-4 border border-gray-200 dark:border-zinc-700 rounded-none bg-white dark:bg-zinc-950 text-sm focus:ring-2 focus:ring-primary focus:border-primary" />
                 </div>
               </div>
             </div>
@@ -45,7 +45,7 @@ export default function PaymentMethods() {
         </label>
 
         {/* bKash Option */}
-        <label className={`block border rounded-xl p-4 cursor-pointer transition-all ${method === "bkash" ? "border-pink-500 bg-pink-500/5 dark:bg-pink-500/10" : "border-gray-200 dark:border-zinc-800 hover:border-pink-500/50"}`}>
+        <label className={`block border rounded-none p-4 cursor-pointer transition-all ${method === "bkash" ? "border-pink-500 bg-pink-500/5 dark:bg-pink-500/10" : "border-gray-200 dark:border-zinc-800 hover:border-pink-500/50"}`}>
           <div className="flex items-center gap-4">
             <div className="flex items-center justify-center w-5 h-5 rounded-full border border-gray-300 dark:border-zinc-600 shrink-0">
               {method === "bkash" && <div className="w-3 h-3 rounded-full bg-pink-500" />}
@@ -65,18 +65,18 @@ export default function PaymentMethods() {
             <div className="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-700/50 space-y-4">
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">bKash Account Number</label>
-                <input type="text" placeholder="e.g 01XXXXXXXXX" className="block w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-sm focus:ring-1 focus:ring-pink-500 focus:border-pink-500" required={method === "bkash"} />
+                <input type="text" placeholder="e.g 01XXXXXXXXX" className="block w-full h-12 px-4 border border-gray-200 dark:border-zinc-700 rounded-none bg-white dark:bg-zinc-950 text-sm focus:ring-2 focus:ring-pink-500 focus:border-pink-500" required={method === "bkash"} />
               </div>
               <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">bKash Verification Code (OTP)</label>
-                <input type="text" placeholder="123456" className="block w-full px-3 py-2 border border-gray-200 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-950 text-sm focus:ring-1 focus:ring-pink-500 focus:border-pink-500" required={method === "bkash"} />
+                <input type="text" placeholder="123456" className="block w-full h-12 px-4 border border-gray-200 dark:border-zinc-700 rounded-none bg-white dark:bg-zinc-950 text-sm focus:ring-2 focus:ring-pink-500 focus:border-pink-500" required={method === "bkash"} />
               </div>
             </div>
           )}
         </label>
 
         {/* Cash on Delivery Option */}
-        <label className={`block border rounded-xl p-4 cursor-pointer transition-all ${method === "cod" ? "border-primary bg-primary/5" : "border-gray-200 dark:border-zinc-800 hover:border-primary/50"}`}>
+        <label className={`block border rounded-none p-4 cursor-pointer transition-all ${method === "cod" ? "border-primary bg-primary/5" : "border-gray-200 dark:border-zinc-800 hover:border-primary/50"}`}>
           <div className="flex items-center gap-4">
             <div className="flex items-center justify-center w-5 h-5 rounded-full border border-gray-300 dark:border-zinc-600">
               {method === "cod" && <div className="w-3 h-3 rounded-full bg-primary" />}

@@ -90,7 +90,8 @@ export async function GET(req: Request) {
         totalOrders,
         pendingDelivery,
         spentResult,
-        latestOrders
+        latestOrders,
+        monthlySpentResult
       ] = await Promise.all([
         Order.countDocuments({ user: userObjectId }),
         Order.countDocuments({ 
@@ -101,19 +102,48 @@ export async function GET(req: Request) {
           { $match: { user: userObjectId, status: { $ne: "cancelled" } } },
           { $group: { _id: null, total: { $sum: "$totalAmount" } } }
         ]),
-        Order.find({ user: userObjectId }).sort({ createdAt: -1 }).limit(1)
+        Order.find({ user: userObjectId }).sort({ createdAt: -1 }).limit(1),
+        Order.aggregate([
+          { $match: { user: userObjectId, status: { $ne: "cancelled" } } },
+          {
+            $group: {
+              _id: { 
+                year: { $year: "$createdAt" }, 
+                month: { $month: "$createdAt" } 
+              },
+              total: { $sum: "$totalAmount" }
+            }
+          },
+          { $sort: { "_id.year": 1, "_id.month": 1 } }
+        ])
       ]);
 
       const totalSpent = spentResult.length > 0 ? spentResult[0].total : 0;
       const rewardPoints = Math.floor(totalSpent); 
       const latestOrder = latestOrders.length > 0 ? latestOrders[0] : null;
 
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const currentDate = new Date();
+      const spendingData = [];
+      for (let i = 5; i >= 0; i--) {
+        const d = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
+        const year = d.getFullYear();
+        const month = d.getMonth() + 1;
+        
+        const found = monthlySpentResult.find(item => item._id.year === year && item._id.month === month);
+        spendingData.push({
+          name: months[month - 1],
+          sales: found ? found.total : 0
+        });
+      }
+
       return NextResponse.json({
         totalOrders,
         pendingDelivery,
         totalSpent,
         rewardPoints,
-        latestOrder
+        latestOrder,
+        spendingData
       });
     }
   } catch (error) {

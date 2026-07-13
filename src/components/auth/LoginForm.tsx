@@ -30,7 +30,7 @@ export default function LoginForm() {
         toast.error("Invalid email or password");
       } else {
         toast.success("Successfully logged in!");
-        router.push("/dashboard");
+        router.push("/");
         router.refresh();
       }
     } catch (error) {
@@ -61,23 +61,14 @@ export default function LoginForm() {
         Please enter your details to sign in.
       </p>
 
-      {/* Social Login */}
-      <div className="flex gap-4 mb-6">
+      <div className="mb-6">
         <button 
           type="button"
-          onClick={() => toast("Google login would open here")}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 border border-gray-300 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+          className="w-full flex items-center justify-center gap-2 h-12 border border-gray-300 dark:border-zinc-700 rounded-none hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
         >
           <FaGoogle className="text-red-500" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Google</span>
-        </button>
-        <button 
-          type="button"
-          onClick={() => toast("GitHub login would open here")}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 border border-gray-300 dark:border-zinc-700 rounded-xl hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
-        >
-          <FaGithub className="text-gray-900 dark:text-white" />
-          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">GitHub</span>
+          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Continue with Google</span>
         </button>
       </div>
 
@@ -85,7 +76,7 @@ export default function LoginForm() {
         <button 
           type="button"
           onClick={handleDemoAdminLogin}
-          className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-primary/20 bg-primary/5 text-primary rounded-xl font-bold hover:bg-primary/10 transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 h-12 border-2 border-primary/20 bg-primary/5 text-primary rounded-none font-bold hover:bg-primary/10 transition-colors"
         >
           <User className="w-5 h-5" />
           Demo Admin
@@ -94,7 +85,7 @@ export default function LoginForm() {
         <button 
           type="button"
           onClick={handleDemoUserLogin}
-          className="flex-1 flex items-center justify-center gap-2 py-3 border-2 border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+          className="flex-1 flex items-center justify-center gap-2 h-12 border-2 border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-gray-300 rounded-none font-bold hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
         >
           <User className="w-5 h-5" />
           Demo User
@@ -124,7 +115,7 @@ export default function LoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="block w-full pl-10 px-4 py-3 border border-gray-200 dark:border-zinc-800 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+              className="block w-full h-12 pl-10 px-4 border border-gray-200 dark:border-zinc-800 rounded-none bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-base"
               placeholder="you@example.com"
             />
           </div>
@@ -143,7 +134,7 @@ export default function LoginForm() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="block w-full pl-10 pr-10 py-3 border border-gray-200 dark:border-zinc-800 rounded-xl bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-sm"
+              className="block w-full h-12 pl-10 pr-10 border border-gray-200 dark:border-zinc-800 rounded-none bg-gray-50 dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all sm:text-base"
               placeholder="••••••••"
             />
             <button
@@ -183,7 +174,7 @@ export default function LoginForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full flex justify-center items-center gap-2 py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all disabled:opacity-70 disabled:cursor-not-allowed mt-2"
+          className="w-full flex justify-center items-center gap-2 h-12 px-4 border border-transparent rounded-none shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all disabled:opacity-70 disabled:cursor-not-allowed mt-2"
         >
           {isLoading ? (
             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

@@ -5,16 +5,15 @@ import Footer from "./Footer";
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  // Check if current route is an admin/dashboard route
-  const isAdmin = pathname?.startsWith("/dashboard") || pathname?.startsWith("/items");
+  const isNoNav = pathname?.startsWith("/dashboard") || pathname?.startsWith("/items") || pathname === "/login" || pathname === "/register";
 
   return (
     <>
-      {!isAdmin && <Navbar />}
+      {!isNoNav && <Navbar />}
       <main className="flex-grow">
         {children}
       </main>
-      {!isAdmin && <Footer />}
+      {!isNoNav && <Footer />}
     </>
   );
 }

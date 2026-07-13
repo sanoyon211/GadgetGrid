@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Smartphone, Laptop, Headphones, Watch, Camera, Gamepad2 } from "lucide-react";
 
 const categories = [
@@ -12,10 +13,10 @@ const categories = [
 
 export default function FeaturedCategories() {
   return (
-    <section id="categories" className="py-20 bg-background">
+    <section id="categories" className="py-12 lg:py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-heading font-bold text-foreground mb-2">Shop by categories</h2>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-2">Shop by categories</h2>
           <p className="text-gray-500 text-sm tracking-wide">Find exactly what you are looking for.</p>
         </div>
 
@@ -26,8 +27,8 @@ export default function FeaturedCategories() {
               href={category.href}
               className="group flex flex-col items-center justify-center space-y-4"
             >
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-[var(--accent)] transition-transform duration-500 group-hover:scale-105">
-                <img src={category.image} alt={category.name} className="w-full h-full object-cover" />
+              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-[var(--accent)] transition-transform duration-500 group-hover:scale-105">
+                <Image src={category.image} alt={category.name} fill sizes="(max-width: 768px) 128px, 160px" className="object-cover" />
               </div>
               <span className="text-sm font-semibold font-heading tracking-wide text-foreground group-hover:text-gray-500 transition-colors">
                 {category.name}

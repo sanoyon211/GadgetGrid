@@ -97,22 +97,22 @@ export default function ManageCouponsPage() {
         
         {/* Create Form */}
         <div className="lg:col-span-1">
-          <div className="bg-white dark:bg-zinc-950 p-6 border border-gray-100 dark:border-zinc-900 rounded-lg shadow-sm">
+          <div className="bg-white dark:bg-zinc-950 p-6 border border-gray-100 dark:border-zinc-900 rounded-none shadow-sm">
             <h3 className="font-bold mb-4 flex items-center gap-2"><Plus className="w-4 h-4"/> Add New Coupon</h3>
             <form onSubmit={handleAddCoupon} className="space-y-4">
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Code</label>
-                <input required type="text" value={formData.code} onChange={(e)=>setFormData({...formData, code: e.target.value.toUpperCase()})} placeholder="e.g. EID20" className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-800 bg-transparent rounded focus:outline-none focus:border-primary uppercase" />
+                <input required type="text" value={formData.code} onChange={(e)=>setFormData({...formData, code: e.target.value.toUpperCase()})} placeholder="e.g. EID20" className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-800 bg-transparent rounded-none focus:outline-none focus:border-primary uppercase" />
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Discount (%)</label>
-                <input required type="number" min="1" max="100" value={formData.discountPercentage} onChange={(e)=>setFormData({...formData, discountPercentage: e.target.value})} placeholder="20" className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-800 bg-transparent rounded focus:outline-none focus:border-primary" />
+                <input required type="number" min="1" max="100" value={formData.discountPercentage} onChange={(e)=>setFormData({...formData, discountPercentage: e.target.value})} placeholder="20" className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-800 bg-transparent rounded-none focus:outline-none focus:border-primary" />
               </div>
               <div>
                 <label className="block text-xs uppercase tracking-widest font-bold text-gray-500 mb-1">Expiry Date</label>
-                <input required type="date" value={formData.expiresAt} onChange={(e)=>setFormData({...formData, expiresAt: e.target.value})} className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-800 bg-transparent rounded focus:outline-none focus:border-primary" />
+                <input required type="date" value={formData.expiresAt} onChange={(e)=>setFormData({...formData, expiresAt: e.target.value})} className="w-full px-3 py-2 border border-gray-200 dark:border-zinc-800 bg-transparent rounded-none focus:outline-none focus:border-primary" />
               </div>
-              <button disabled={isAdding} type="submit" className="w-full bg-foreground text-background py-2 font-medium hover:bg-foreground/90 disabled:opacity-50 transition-colors rounded">
+              <button disabled={isAdding} type="submit" className="w-full bg-foreground text-background py-2 font-medium hover:bg-foreground/90 disabled:opacity-50 transition-colors rounded-none">
                 {isAdding ? "Adding..." : "Create Coupon"}
               </button>
             </form>
@@ -124,7 +124,7 @@ export default function ManageCouponsPage() {
           {isLoading ? (
             <div className="p-8 animate-pulse text-gray-500 text-center">Loading coupons...</div>
           ) : coupons.length === 0 ? (
-            <div className="p-12 text-center text-gray-500 border border-dashed border-gray-200 dark:border-zinc-800 rounded-lg">
+            <div className="p-12 text-center text-gray-500 border border-dashed border-gray-200 dark:border-zinc-800 rounded-none">
               No coupons created yet.
             </div>
           ) : (
@@ -132,13 +132,13 @@ export default function ManageCouponsPage() {
               {coupons.map((coupon: any) => {
                 const isExpired = new Date(coupon.expiresAt) < new Date();
                 return (
-                  <div key={coupon._id} className="p-4 bg-white dark:bg-zinc-950 border border-gray-100 dark:border-zinc-900 rounded-lg shadow-sm relative group flex flex-col justify-between">
+                  <div key={coupon._id} className="p-4 bg-white dark:bg-zinc-950 border border-gray-100 dark:border-zinc-900 rounded-none shadow-sm relative group flex flex-col justify-between">
                     <div>
                       <div className="flex justify-between items-start">
                         <div className="font-mono text-xl font-bold tracking-widest text-primary">{coupon.code}</div>
                         <button 
                           onClick={() => toggleStatus(coupon._id, coupon.isActive)}
-                          className={`text-xs px-2 py-1 rounded font-bold uppercase tracking-widest ${coupon.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500 dark:bg-zinc-800 dark:text-gray-400'}`}
+                          className={`text-xs px-2 py-1 rounded-none font-bold uppercase tracking-widest ${coupon.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500 dark:bg-zinc-800 dark:text-gray-400'}`}
                         >
                           {coupon.isActive ? "Active" : "Inactive"}
                         </button>

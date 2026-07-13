@@ -4,19 +4,20 @@ import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongoose";
 import Order from "@/models/Order";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
+    const { id } = await params;
     const { status } = await req.json();
 
     await connectToDatabase();
     
     const updatedOrder = await Order.findByIdAndUpdate(
-      params.id,
+      id,
       { status },
       { new: true }
     );

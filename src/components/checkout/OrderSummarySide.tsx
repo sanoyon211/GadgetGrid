@@ -13,14 +13,14 @@ export default function OrderSummarySide() {
   const total = subtotal + shipping + tax;
 
   return (
-    <div className="bg-gray-50 dark:bg-zinc-900/50 rounded-2xl border border-gray-200 dark:border-zinc-800 p-6 sm:p-8 sticky top-8">
+    <div className="bg-gray-50 dark:bg-zinc-900/50 rounded-none border border-gray-200 dark:border-zinc-800 p-6 sm:p-8 sticky top-8">
       <h2 className="text-xl font-heading font-bold text-gray-900 dark:text-white mb-6">Order Summary</h2>
 
       {/* Items List */}
       <div className="space-y-4 mb-6">
         {cartItems.map((item) => (
           <div key={item.product._id} className="flex gap-4">
-            <div className="relative w-16 h-16 rounded-xl overflow-hidden bg-white dark:bg-black border border-gray-100 dark:border-zinc-800 shrink-0">
+            <div className="relative w-16 h-16 rounded-none overflow-hidden bg-white dark:bg-black border border-gray-100 dark:border-zinc-800 shrink-0">
               <Image 
                 src={item.product.images[0]} 
                 alt={item.product.name} 
@@ -42,10 +42,10 @@ export default function OrderSummarySide() {
               <button 
                 type="button" 
                 onClick={() => removeFromCart(item.product._id)} 
-                className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                className="text-gray-400 hover:text-red-500 transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center border border-transparent hover:border-red-500/20 rounded-none"
                 title="Remove item"
               >
-                <Trash2 className="w-4 h-4" />
+                <Trash2 className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function OrderSummarySide() {
       {/* Place Order Button */}
       <button 
         type="submit"
-        className="w-full flex justify-center items-center gap-2 py-4 px-6 rounded-xl shadow-lg shadow-primary/25 text-white dark:text-black bg-primary hover:bg-primary/90 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all font-bold text-lg"
+        className="w-full flex justify-center items-center gap-2 py-4 px-6 rounded-none shadow-lg shadow-primary/25 text-white dark:text-black bg-primary hover:bg-primary/90 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-all font-bold text-lg"
       >
         <Lock className="w-5 h-5" />
         Place Order

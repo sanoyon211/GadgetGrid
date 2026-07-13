@@ -39,3 +39,8 @@
     font-weight: 600;
   }
 }
+
+
+button {
+  cursor: pointer;
+}

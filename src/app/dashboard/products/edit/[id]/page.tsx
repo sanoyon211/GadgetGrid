@@ -136,7 +136,7 @@ export default function EditProductPage() {
   if (isFetching) {
     return (
       <div className="bg-transparent p-6 flex justify-center items-center h-64">
-        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-none-full animate-spin"></div>
       </div>
     );
   }
@@ -198,7 +198,7 @@ export default function EditProductPage() {
                 <div className="flex gap-2">
                   <input required type="text" name="image1" value={formData.image1} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
                   <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image1')} className="hidden" id="upload-image1-edit" />
-                  <label htmlFor="upload-image1-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <label htmlFor="upload-image1-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-none hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
               <div>
@@ -206,7 +206,7 @@ export default function EditProductPage() {
                 <div className="flex gap-2">
                   <input type="text" name="image2" value={formData.image2} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
                   <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image2')} className="hidden" id="upload-image2-edit" />
-                  <label htmlFor="upload-image2-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <label htmlFor="upload-image2-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-none hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
               <div>
@@ -214,7 +214,7 @@ export default function EditProductPage() {
                 <div className="flex gap-2">
                   <input type="text" name="image3" value={formData.image3} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
                   <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image3')} className="hidden" id="upload-image3-edit" />
-                  <label htmlFor="upload-image3-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <label htmlFor="upload-image3-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-none hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
               <div>
@@ -222,7 +222,7 @@ export default function EditProductPage() {
                 <div className="flex gap-2">
                   <input type="text" name="image4" value={formData.image4} onChange={handleChange} placeholder="URL or Base64" className="w-full px-4 py-3 bg-transparent border-b border-gray-200 dark:border-zinc-800 text-foreground focus:outline-none focus:border-foreground transition-colors" />
                   <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, 'image4')} className="hidden" id="upload-image4-edit" />
-                  <label htmlFor="upload-image4-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
+                  <label htmlFor="upload-image4-edit" className="cursor-pointer bg-gray-100 dark:bg-zinc-800 px-4 flex items-center justify-center rounded-none hover:bg-gray-200 dark:hover:bg-zinc-700 transition-colors text-sm font-medium">Upload</label>
                 </div>
               </div>
             </div>
@@ -244,7 +244,7 @@ export default function EditProductPage() {
                       value={spec.label}
                       onChange={(e) => handleSpecChange(index, "label", e.target.value)}
                       placeholder="e.g. Battery Life"
-                      className="w-full px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-lg focus:outline-none focus:border-foreground"
+                      className="w-full px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-none focus:outline-none focus:border-foreground"
                     />
                   </div>
                   <div className="w-full sm:flex-1 flex items-center gap-2">
@@ -253,7 +253,7 @@ export default function EditProductPage() {
                       value={spec.value}
                       onChange={(e) => handleSpecChange(index, "value", e.target.value)}
                       placeholder="e.g. 18 hours"
-                      className="w-full px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-lg focus:outline-none focus:border-foreground"
+                      className="w-full px-4 py-2 bg-transparent border border-gray-200 dark:border-zinc-800 text-foreground rounded-none focus:outline-none focus:border-foreground"
                     />
                     {specs.length > 1 && (
                       <button type="button" onClick={() => removeSpec(index)} className="text-red-500 hover:text-red-700 p-2 shrink-0">

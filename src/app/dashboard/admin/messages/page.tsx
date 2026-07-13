@@ -67,14 +67,14 @@ export default function ManageMessagesPage() {
 
       <div className="grid gap-4">
         {messages.length === 0 ? (
-          <div className="py-12 text-center text-gray-500 border border-dashed border-gray-200 dark:border-zinc-800 rounded-lg">
+          <div className="py-12 text-center text-gray-500 border border-dashed border-gray-200 dark:border-zinc-800 rounded-none">
             No messages found.
           </div>
         ) : (
           messages.map((msg: any) => (
             <div 
               key={msg._id} 
-              className={`p-6 border rounded-lg shadow-sm relative group transition-colors ${msg.isRead ? 'bg-gray-50 dark:bg-zinc-900/50 border-gray-100 dark:border-zinc-900' : 'bg-white dark:bg-zinc-950 border-primary/20 dark:border-primary/20'}`}
+              className={`p-6 border rounded-none shadow-sm relative group transition-colors ${msg.isRead ? 'bg-gray-50 dark:bg-zinc-900/50 border-gray-100 dark:border-zinc-900' : 'bg-white dark:bg-zinc-950 border-primary/20 dark:border-primary/20'}`}
             >
               <div className="flex justify-between items-start mb-4">
                 <div>
@@ -83,7 +83,7 @@ export default function ManageMessagesPage() {
                   </h3>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="font-medium text-sm text-gray-900 dark:text-gray-100">{msg.name}</span>
-                    <span className="text-xs text-gray-500 border px-2 py-0.5 rounded">{msg.email}</span>
+                    <span className="text-xs text-gray-500 border px-2 py-0.5 rounded-none">{msg.email}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">

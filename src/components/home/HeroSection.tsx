@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ShoppingBag } from "lucide-react";
 
 export default function HeroSection() {
@@ -10,7 +11,7 @@ export default function HeroSection() {
           {/* Text Content */}
           <div className="sm:text-center md:mx-auto lg:col-span-6 lg:text-left">
             <p className="text-sm tracking-widest text-gray-500 uppercase mb-4">Limited Edition</p>
-            <h1 className="font-heading text-5xl tracking-normal text-foreground sm:text-6xl md:text-7xl leading-tight mb-6">
+            <h1 className="font-heading text-4xl tracking-normal text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-6">
               The smarter way to <br className="hidden lg:block" />
               listen music
             </h1>
@@ -20,7 +21,7 @@ export default function HeroSection() {
             <div className="sm:flex sm:justify-center lg:justify-start">
               <Link
                 href="/products"
-                className="inline-flex items-center justify-center px-10 py-3 border border-foreground text-sm font-medium text-foreground hover:bg-foreground hover:text-background transition-colors"
+                className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] px-10 py-3 border border-foreground text-sm font-medium text-foreground hover:bg-foreground hover:text-background transition-colors"
               >
                 Shop Now
               </Link>
@@ -30,7 +31,13 @@ export default function HeroSection() {
           {/* Image/Visual Content */}
           <div className="mt-16 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center justify-end">
             <div className="relative w-full aspect-square md:w-[120%] md:-mr-[20%]">
-              <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=1200&bg=faf8f5" alt="Premium Headphones" className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal drop-shadow-2xl hover:scale-105 transition-transform duration-1000 ease-out" />
+              <Image 
+                src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&q=80&w=1200&bg=faf8f5" 
+                alt="Premium Headphones" 
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-contain mix-blend-multiply dark:mix-blend-normal drop-shadow-2xl hover:scale-105 transition-transform duration-1000 ease-out" 
+              />
             </div>
           </div>
 

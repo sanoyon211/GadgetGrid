@@ -95,7 +95,7 @@ export default function ProductTabs({ product }: { product: any }) {
         {activeTab === "specifications" && (
           <div className="max-w-3xl">
             <h3 className="text-xl font-heading font-semibold mb-6 text-gray-900 dark:text-white">Technical Specifications</h3>
-            <div className="border border-gray-200 dark:border-zinc-800 rounded-xl overflow-hidden">
+            <div className="border border-gray-200 dark:border-zinc-800 rounded-none overflow-hidden">
               <dl className="divide-y divide-gray-200 dark:divide-zinc-800">
                 {product.specifications && Object.keys(product.specifications).length > 0 ? (
                   Object.entries(product.specifications).map(([key, value], idx) => (
@@ -131,14 +131,14 @@ export default function ProductTabs({ product }: { product: any }) {
               </div>
               <button 
                 onClick={() => setShowForm(!showForm)}
-                className="mt-4 sm:mt-0 px-6 py-2.5 border-2 border-primary text-primary dark:text-white font-medium rounded-full hover:bg-primary hover:text-white dark:hover:text-black transition-colors"
+                className="mt-4 sm:mt-0 px-6 py-2.5 border-2 border-primary text-primary dark:text-white font-medium rounded-none hover:bg-primary hover:text-white dark:hover:text-black transition-colors"
               >
                 {showForm ? "Cancel" : "Write a Review"}
               </button>
             </div>
 
             {showForm && (
-              <form onSubmit={handleSubmitReview} className="mb-10 bg-gray-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-gray-100 dark:border-zinc-800">
+              <form onSubmit={handleSubmitReview} className="mb-10 bg-gray-50 dark:bg-zinc-900/50 p-6 rounded-none border border-gray-100 dark:border-zinc-800">
                 <h4 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Write a Review</h4>
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Rating</label>
@@ -148,7 +148,7 @@ export default function ProductTabs({ product }: { product: any }) {
                         key={star}
                         type="button"
                         onClick={() => setRating(star)}
-                        className={`w-8 h-8 rounded-full flex items-center justify-center border ${rating >= star ? 'border-yellow-400 bg-yellow-50 dark:bg-yellow-400/10' : 'border-gray-200 dark:border-zinc-700'}`}
+                        className={`w-8 h-8 rounded-none flex items-center justify-center border ${rating >= star ? 'border-yellow-400 bg-yellow-50 dark:bg-yellow-400/10' : 'border-gray-200 dark:border-zinc-700'}`}
                       >
                         <Star className={`w-4 h-4 ${rating >= star ? 'text-yellow-500 fill-current' : 'text-gray-400'}`} />
                       </button>
@@ -162,12 +162,12 @@ export default function ProductTabs({ product }: { product: any }) {
                     rows={4}
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
+                    className="w-full px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-none bg-white dark:bg-zinc-950 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-all text-sm"
                     placeholder="Share your thoughts about this product..."
                   />
                 </div>
                 <div className="flex justify-end gap-3">
-                  <button type="submit" className="bg-primary text-white dark:text-black px-6 py-2.5 rounded-full font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30">
+                  <button type="submit" className="bg-primary text-white dark:text-black px-6 py-2.5 rounded-none font-medium hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 min-h-[44px]">
                     Submit Review
                   </button>
                 </div>

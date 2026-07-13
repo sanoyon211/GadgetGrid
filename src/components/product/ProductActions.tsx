@@ -41,12 +41,12 @@ export default function ProductActions({ product }: { product: any }) {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-zinc-900/50 rounded-2xl p-6 border border-gray-100 dark:border-zinc-800">
+    <div className="bg-gray-50 dark:bg-zinc-900/50 rounded-none p-6 border border-gray-100 dark:border-zinc-800">
       
       {/* Quantity Selector */}
       <div className="flex items-center mb-6">
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300 mr-4 w-16">Quantity</span>
-        <div className="flex items-center bg-white dark:bg-black rounded-lg border border-gray-200 dark:border-zinc-700 overflow-hidden">
+        <div className="flex items-center bg-white dark:bg-black rounded-none border border-gray-200 dark:border-zinc-700 overflow-hidden min-h-[44px]">
           <button 
             onClick={handleDecrease}
             className="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-primary hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
@@ -69,14 +69,14 @@ export default function ProductActions({ product }: { product: any }) {
       <div className="flex flex-col sm:flex-row gap-3 mb-6">
         <button 
           onClick={handleAddToCart}
-          className="flex-1 flex items-center justify-center gap-2 bg-primary text-white dark:text-black px-8 py-3.5 rounded-full font-medium hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/30"
+          className="flex-1 flex items-center justify-center gap-2 bg-primary text-white dark:text-black px-8 py-3.5 rounded-none font-medium hover:bg-primary/90 transition-all hover:scale-[1.02] shadow-lg shadow-primary/30 min-h-[44px]"
         >
           <ShoppingCart className="w-5 h-5" />
           Add to Cart
         </button>
         <button 
           onClick={handleBuyNow}
-          className="flex-1 flex items-center justify-center bg-black dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full font-medium hover:bg-black/90 dark:hover:bg-gray-100 transition-all hover:scale-[1.02]"
+          className="flex-1 flex items-center justify-center bg-black dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-none font-medium hover:bg-black/90 dark:hover:bg-gray-100 transition-all hover:scale-[1.02] min-h-[44px]"
         >
           Buy It Now
         </button>

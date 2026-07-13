@@ -59,7 +59,7 @@ export default function ManageReviewsPage() {
 
       <div className="grid gap-6">
         {reviews.length === 0 ? (
-          <div className="py-12 text-center text-gray-500 border border-dashed border-gray-200 dark:border-zinc-800 rounded-lg">
+          <div className="py-12 text-center text-gray-500 border border-dashed border-gray-200 dark:border-zinc-800 rounded-none">
             No reviews found.
           </div>
         ) : (
@@ -69,7 +69,7 @@ export default function ManageReviewsPage() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <div className="font-medium text-foreground">{review.user?.name || "Unknown User"}</div>
-                    <span className="text-gray-400 text-xs px-2 py-0.5 border border-gray-200 dark:border-zinc-800 rounded">
+                    <span className="text-gray-400 text-xs px-2 py-0.5 border border-gray-200 dark:border-zinc-800 rounded-none">
                       {review.user?.email}
                     </span>
                   </div>
@@ -90,7 +90,7 @@ export default function ManageReviewsPage() {
                 </div>
               </div>
               
-              <div className="text-gray-700 dark:text-gray-300 text-sm mt-4 bg-gray-50 dark:bg-zinc-900/50 p-4 rounded border-l-2 border-primary italic">
+              <div className="text-gray-700 dark:text-gray-300 text-sm mt-4 bg-gray-50 dark:bg-zinc-900/50 p-4 rounded-none border-l-2 border-primary italic">
                 "{review.comment}"
               </div>
               

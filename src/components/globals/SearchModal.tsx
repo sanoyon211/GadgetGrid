@@ -62,7 +62,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
       />
       
       {/* Modal Content */}
-      <div className="relative w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl border border-gray-100 dark:border-zinc-800 overflow-hidden transform transition-all animate-in fade-in slide-in-from-top-4 duration-200">
+      <div className="relative w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-none shadow-2xl border border-gray-100 dark:border-zinc-800 overflow-hidden transform transition-all animate-in fade-in slide-in-from-top-4 duration-200">
         
         <form onSubmit={handleSearch} className="relative border-b border-gray-100 dark:border-zinc-800 flex items-center px-6 py-4">
           <Search className="w-6 h-6 text-gray-400 shrink-0" />
@@ -77,7 +77,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <button 
             type="button" 
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors shrink-0 bg-gray-100 dark:bg-zinc-800 rounded-lg ml-2"
+            className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors shrink-0 bg-gray-100 dark:bg-zinc-800 rounded-none ml-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <span className="text-xs font-semibold">ESC</span>
           </button>
@@ -93,7 +93,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               <button 
                 key={idx}
                 onClick={() => handlePopularSearch(term)}
-                className="px-4 py-2 bg-gray-50 dark:bg-zinc-800/50 hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-xl transition-colors border border-transparent hover:border-gray-200 dark:hover:border-zinc-700"
+                className="px-4 py-2 bg-gray-50 dark:bg-zinc-800/50 hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-none transition-colors border border-transparent hover:border-gray-200 dark:hover:border-zinc-700 min-h-[44px] flex items-center"
               >
                 {term}
               </button>

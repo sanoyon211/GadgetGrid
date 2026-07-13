@@ -76,12 +76,12 @@ export default function OrderHistory() {
       {isLoading ? (
         <div className="text-center p-12 text-gray-500">Loading orders...</div>
       ) : orders.length === 0 ? (
-        <div className="text-center p-12 border border-gray-200 dark:border-zinc-800 rounded-2xl">
+        <div className="text-center p-12 border border-gray-200 dark:border-zinc-800 rounded-none">
           <p className="text-gray-500">You haven't placed any orders yet.</p>
         </div>
       ) : (
 
-      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
+      <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-none overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead className="text-xs text-gray-500 uppercase bg-gray-50 dark:bg-zinc-950/50 border-b border-gray-200 dark:border-zinc-800">
@@ -114,7 +114,7 @@ export default function OrderHistory() {
                       <select 
                         value={order.status}
                         onChange={(e) => updateOrderStatus(order._id, e.target.value)}
-                        className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-lg outline-none cursor-pointer ${getStatusColor(order.status)}`}
+                        className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-none outline-none cursor-pointer ${getStatusColor(order.status)}`}
                       >
                         <option value="pending">Pending</option>
                         <option value="processing">Processing</option>
@@ -123,17 +123,17 @@ export default function OrderHistory() {
                         <option value="cancelled">Cancelled</option>
                       </select>
                     ) : (
-                      <span className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-full ${getStatusColor(order.status)}`}>
+                      <span className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider rounded-none-full ${getStatusColor(order.status)}`}>
                         {order.status}
                       </span>
                     )}
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-3">
-                      <Link href={`/dashboard/orders/${order._id}`} className="p-2 text-gray-500 hover:text-primary bg-gray-100 hover:bg-primary/10 dark:bg-zinc-800 dark:hover:bg-primary/20 rounded-lg transition-colors" title="View Details">
+                      <Link href={`/dashboard/orders/${order._id}`} className="p-2 text-gray-500 hover:text-primary bg-gray-100 hover:bg-primary/10 dark:bg-zinc-800 dark:hover:bg-primary/20 rounded-none transition-colors" title="View Details">
                         <Eye className="w-4 h-4" />
                       </Link>
-                      <button className="p-2 text-gray-500 hover:text-primary bg-gray-100 hover:bg-primary/10 dark:bg-zinc-800 dark:hover:bg-primary/20 rounded-lg transition-colors" title="Download Invoice">
+                      <button className="p-2 text-gray-500 hover:text-primary bg-gray-100 hover:bg-primary/10 dark:bg-zinc-800 dark:hover:bg-primary/20 rounded-none transition-colors" title="Download Invoice">
                         <Download className="w-4 h-4" />
                       </button>
                     </div>

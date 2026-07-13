@@ -61,19 +61,19 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
             Order ID: <span className="font-mono text-foreground">{order._id.toString()}</span>
           </p>
         </div>
-        <div className={`px-4 py-2 rounded-full font-bold uppercase tracking-wider text-sm ${getStatusColor(order.status)}`}>
+        <div className={`px-4 py-2 rounded-none-full font-bold uppercase tracking-wider text-sm ${getStatusColor(order.status)}`}>
           {order.status}
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-2 space-y-6">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 p-6">
+          <div className="bg-white dark:bg-zinc-900 rounded-none border border-gray-200 dark:border-zinc-800 p-6">
             <h2 className="text-lg font-bold mb-4 border-b border-gray-200 dark:border-zinc-800 pb-2">Items Ordered</h2>
             <div className="divide-y divide-gray-100 dark:divide-zinc-800">
               {order.items.map((item: any, idx: number) => (
                 <div key={idx} className="py-4 flex gap-4 items-center">
-                  <div className="w-16 h-16 bg-gray-100 dark:bg-zinc-800 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
+                  <div className="w-16 h-16 bg-gray-100 dark:bg-zinc-800 rounded-none flex items-center justify-center shrink-0 overflow-hidden">
                     {item.image?.startsWith('http') ? (
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     ) : (
@@ -100,7 +100,7 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
         </div>
 
         <div className="space-y-6">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 p-6">
+          <div className="bg-white dark:bg-zinc-900 rounded-none border border-gray-200 dark:border-zinc-800 p-6">
             <h2 className="text-lg font-bold mb-4 border-b border-gray-200 dark:border-zinc-800 pb-2">Shipping Information</h2>
             <div className="text-sm space-y-2 text-gray-600 dark:text-gray-400">
               <p><span className="font-medium text-foreground">Name:</span> {order.shippingAddress.fullName}</p>
@@ -109,7 +109,7 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
             </div>
           </div>
 
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 p-6">
+          <div className="bg-white dark:bg-zinc-900 rounded-none border border-gray-200 dark:border-zinc-800 p-6">
             <h2 className="text-lg font-bold mb-4 border-b border-gray-200 dark:border-zinc-800 pb-2">Payment Details</h2>
             <div className="text-sm space-y-2 text-gray-600 dark:text-gray-400">
               <p><span className="font-medium text-foreground">Method:</span> {order.paymentMethod}</p>

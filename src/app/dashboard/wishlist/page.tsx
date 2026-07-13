@@ -32,7 +32,7 @@ export default function WishlistPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {wishlist.map((item) => (
           <div key={item._id} className="bg-transparent border border-gray-200 dark:border-zinc-800 p-6 flex flex-col">
-            <div className="w-full h-48 bg-gray-50 dark:bg-zinc-950 mb-4 rounded-xl flex items-center justify-center overflow-hidden">
+            <div className="w-full h-48 bg-gray-50 dark:bg-zinc-950 mb-4 rounded-none flex items-center justify-center overflow-hidden">
               <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
             </div>
             <h3 className="font-semibold text-lg mb-1">{item.name}</h3>
@@ -44,14 +44,14 @@ export default function WishlistPage() {
             <div className="mt-auto flex gap-3">
               <button
                 onClick={() => addToCart(item._id)}
-                className="flex-1 flex items-center justify-center gap-2 bg-primary text-white dark:text-black py-2 rounded-lg font-medium hover:bg-primary/90 transition-colors text-sm"
+                className="flex-1 flex items-center justify-center gap-2 bg-primary text-white dark:text-black py-2 rounded-none font-medium hover:bg-primary/90 transition-colors text-sm"
               >
                 <ShoppingCart className="w-4 h-4" />
                 Add to Cart
               </button>
               <button
                 onClick={() => toggleWishlist(item._id)}
-                className="p-2 border border-gray-200 dark:border-zinc-800 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
+                className="p-2 border border-gray-200 dark:border-zinc-800 rounded-none text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
                 title="Remove from wishlist"
               >
                 <Trash2 className="w-4 h-4" />

@@ -12,7 +12,7 @@ export async function PUT(req: Request) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    const { name, currentPassword, newPassword } = await req.json();
+    const { name, currentPassword, newPassword, image } = await req.json();
     await connectToDatabase();
 
     const user = await User.findById(session.user.id);
@@ -20,6 +20,10 @@ export async function PUT(req: Request) {
 
     if (name) {
       user.name = name;
+    }
+    
+    if (image !== undefined) {
+      user.image = image;
     }
 
     if (currentPassword && newPassword) {

@@ -60,11 +60,11 @@ export default function DashboardOverview() {
 
   if (loading) {
     return <div className="animate-pulse space-y-8 mt-4">
-      <div className="h-10 bg-gray-200 dark:bg-zinc-800 rounded w-1/3"></div>
+      <div className="h-10 bg-gray-200 dark:bg-zinc-800 rounded-none w-1/3"></div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[1, 2, 3, 4].map((i) => <div key={i} className="h-32 bg-gray-200 dark:bg-zinc-800 rounded"></div>)}
+        {[1, 2, 3, 4].map((i) => <div key={i} className="h-32 bg-gray-200 dark:bg-zinc-800 rounded-none"></div>)}
       </div>
-      <div className="h-64 bg-gray-200 dark:bg-zinc-800 rounded w-full"></div>
+      <div className="h-64 bg-gray-200 dark:bg-zinc-800 rounded-none w-full"></div>
     </div>;
   }
 
@@ -163,14 +163,16 @@ export default function DashboardOverview() {
           </div>
         </div>
 
-        {/* Sales Overview Chart (Only for Admins) */}
-        {isAdmin && (
-          <div className="bg-transparent border border-gray-200 dark:border-zinc-800 p-8 lg:col-span-2">
-            <h2 className="text-xs uppercase tracking-widest font-bold text-foreground mb-2">Sales Overview</h2>
-            <p className="text-sm text-gray-500 mb-6">Your revenue stream over the last 6 months.</p>
-            <SalesChart data={data?.salesData || []} />
-          </div>
-        )}
+        {/* Overview Chart (Sales for Admin, Spending for User) */}
+        <div className="bg-transparent border border-gray-200 dark:border-zinc-800 p-8 lg:col-span-2">
+          <h2 className="text-xs uppercase tracking-widest font-bold text-foreground mb-2">
+            {isAdmin ? "Sales Overview" : "Spending Overview"}
+          </h2>
+          <p className="text-sm text-gray-500 mb-6">
+            {isAdmin ? "Your revenue stream over the last 6 months." : "Your spending over the last 6 months."}
+          </p>
+          <SalesChart data={isAdmin ? (data?.salesData || []) : (data?.spendingData || [])} />
+        </div>
 
       </div>
     </div>
