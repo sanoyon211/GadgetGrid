@@ -14,6 +14,7 @@ export default function DashboardSidebar() {
   const menuItems = isAdmin ? [
     { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
     { name: "Manage Products", icon: Package, href: "/dashboard/products" },
+    { name: "Manage Orders", icon: ShoppingBag, href: "/dashboard/admin/orders" },
     { name: "Settings", icon: Settings, href: "/dashboard/settings" },
   ] : [
     { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
