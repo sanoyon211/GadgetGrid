@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, ShoppingBag, Heart, Settings, LogOut, UserCircle, Home, Package, Users } from "lucide-react";
+import { LayoutDashboard, ShoppingBag, Heart, Settings, LogOut, UserCircle, Home, Package, Users, MessageSquare } from "lucide-react";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 
@@ -16,6 +16,7 @@ export default function DashboardSidebar() {
     { name: "Manage Products", icon: Package, href: "/dashboard/products" },
     { name: "Manage Orders", icon: ShoppingBag, href: "/dashboard/admin/orders" },
     { name: "Manage Users", icon: Users, href: "/dashboard/admin/users" },
+    { name: "Manage Reviews", icon: MessageSquare, href: "/dashboard/admin/reviews" },
     { name: "Settings", icon: Settings, href: "/dashboard/settings" },
   ] : [
     { name: "Overview", icon: LayoutDashboard, href: "/dashboard" },
