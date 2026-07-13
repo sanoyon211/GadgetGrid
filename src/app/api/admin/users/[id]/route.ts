@@ -4,15 +4,16 @@ import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongoose";
 import User from "@/models/User";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     // Prevent admin from downgrading themselves
-    if (session.user.id === params.id) {
+    if (session.user.id === id) {
         return NextResponse.json({ message: "Cannot change your own role" }, { status: 400 });
     }
 
@@ -21,7 +22,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     await connectToDatabase();
     
     const updatedUser = await User.findByIdAndUpdate(
-      params.id,
+      id,
       { role },
       { new: true }
     ).select("-password");
@@ -37,21 +38,22 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     // Prevent admin from deleting themselves
-    if (session.user.id === params.id) {
+    if (session.user.id === id) {
         return NextResponse.json({ message: "Cannot delete your own account" }, { status: 400 });
     }
 
     await connectToDatabase();
     
-    const deletedUser = await User.findByIdAndDelete(params.id);
+    const deletedUser = await User.findByIdAndDelete(id);
 
     if (!deletedUser) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });

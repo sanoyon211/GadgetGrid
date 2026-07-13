@@ -6,6 +6,7 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import FAQSection from "@/components/home/FAQSection";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import NewsletterSection from "@/components/home/NewsletterSection";
+import ImageSlider from "@/components/home/ImageSlider";
 
 import { Metadata } from "next";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <HeroSection />
       <FeaturedCategories />
       <TrendingGadgets />
+      <ImageSlider />
       <WhyChooseUs />
       <StatisticsSection />
       <TestimonialsSection />

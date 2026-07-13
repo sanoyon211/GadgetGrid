@@ -4,8 +4,9 @@ import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongoose";
 import Review from "@/models/Review";
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -13,7 +14,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
     await connectToDatabase();
     
-    const deletedReview = await Review.findByIdAndDelete(params.id);
+    const deletedReview = await Review.findByIdAndDelete(id);
 
     if (!deletedReview) {
       return NextResponse.json({ message: "Review not found" }, { status: 404 });

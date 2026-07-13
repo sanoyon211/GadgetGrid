@@ -5,11 +5,12 @@ import connectToDatabase from "@/lib/mongoose";
 import Review from "@/models/Review";
 import Gadget from "@/models/Gadget";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     await connectToDatabase();
     
-    const reviews = await Review.find({ gadget: params.id })
+    const reviews = await Review.find({ gadget: id })
       .populate('user', 'name image')
       .sort({ createdAt: -1 });
 
@@ -20,8 +21,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -38,17 +40,17 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     // Create review
     const newReview = await Review.create({
       user: session.user.id,
-      gadget: params.id,
+      gadget: id,
       rating,
       comment,
     });
 
     // Update Gadget rating and reviewsCount
-    const allReviews = await Review.find({ gadget: params.id });
+    const allReviews = await Review.find({ gadget: id });
     const totalRating = allReviews.reduce((sum, rev) => sum + rev.rating, 0);
     const avgRating = totalRating / allReviews.length;
 
-    await Gadget.findByIdAndUpdate(params.id, {
+    await Gadget.findByIdAndUpdate(id, {
       rating: Number(avgRating.toFixed(1)),
       reviewsCount: allReviews.length,
     });

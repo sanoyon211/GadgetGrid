@@ -4,8 +4,9 @@ import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongoose";
 import Message from "@/models/Message";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -13,7 +14,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
     await connectToDatabase();
     
-    const message = await Message.findById(params.id);
+    const message = await Message.findById(id);
     if (!message) {
       return NextResponse.json({ message: "Message not found" }, { status: 404 });
     }
@@ -28,8 +29,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -37,7 +39,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
     await connectToDatabase();
     
-    const deleted = await Message.findByIdAndDelete(params.id);
+    const deleted = await Message.findByIdAndDelete(id);
 
     if (!deleted) {
       return NextResponse.json({ message: "Message not found" }, { status: 404 });

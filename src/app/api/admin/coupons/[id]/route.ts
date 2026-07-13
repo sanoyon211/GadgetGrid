@@ -4,8 +4,9 @@ import { authOptions } from "@/lib/auth";
 import connectToDatabase from "@/lib/mongoose";
 import Coupon from "@/models/Coupon";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -15,7 +16,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
     await connectToDatabase();
     
-    const updatedCoupon = await Coupon.findByIdAndUpdate(params.id, { isActive }, { new: true });
+    const updatedCoupon = await Coupon.findByIdAndUpdate(id, { isActive }, { new: true });
 
     if (!updatedCoupon) {
       return NextResponse.json({ message: "Coupon not found" }, { status: 404 });
@@ -28,8 +29,9 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
     if (!session?.user || session.user.role !== "admin") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -37,7 +39,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
     await connectToDatabase();
     
-    const deletedCoupon = await Coupon.findByIdAndDelete(params.id);
+    const deletedCoupon = await Coupon.findByIdAndDelete(id);
 
     if (!deletedCoupon) {
       return NextResponse.json({ message: "Coupon not found" }, { status: 404 });
