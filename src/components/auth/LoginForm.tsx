@@ -6,7 +6,7 @@ import { Mail, Lock, LogIn, User, Eye, EyeOff } from "lucide-react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -14,6 +14,8 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ export default function LoginForm() {
         toast.error("Invalid email or password");
       } else {
         toast.success("Successfully logged in!");
-        router.push("/");
+        router.push(callbackUrl);
         router.refresh();
       }
     } catch (error) {
@@ -49,7 +51,7 @@ export default function LoginForm() {
       if (res?.error) toast.error("Invalid email or password");
       else {
         toast.success("Successfully logged in!");
-        router.push("/");
+        router.push(callbackUrl);
         router.refresh();
       }
     } catch (error) { toast.error("Something went wrong"); }
@@ -65,7 +67,7 @@ export default function LoginForm() {
       if (res?.error) toast.error("Invalid email or password");
       else {
         toast.success("Successfully logged in!");
-        router.push("/");
+        router.push(callbackUrl);
         router.refresh();
       }
     } catch (error) { toast.error("Something went wrong"); }
@@ -84,7 +86,7 @@ export default function LoginForm() {
       <div className="mb-6">
         <button 
           type="button"
-          onClick={() => signIn("google", { callbackUrl: "/" })}
+          onClick={() => signIn("google", { callbackUrl: callbackUrl })}
           className="w-full flex items-center justify-center gap-2 h-12 border border-gray-300 dark:border-zinc-700 rounded-none hover:bg-gray-50 dark:hover:bg-zinc-900 transition-colors"
         >
           <FaGoogle className="text-red-500" />

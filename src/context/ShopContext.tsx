@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { useRouter, usePathname } from "next/navigation";
+import Swal from "sweetalert2";
 
 export interface CartItem {
   product: {
@@ -29,7 +31,7 @@ interface ShopContextType {
   wishlist: WishlistItem[];
   isLoading: boolean;
   fetchCartAndWishlist: () => void;
-  addToCart: (productId: string, quantity?: number) => Promise<void>;
+  addToCart: (productId: string, quantity?: number) => Promise<boolean>;
   removeFromCart: (productId: string) => Promise<void>;
   updateCartQuantity: (productId: string, quantity: number) => Promise<void>;
   toggleWishlist: (productId: string) => Promise<void>;
@@ -40,6 +42,8 @@ const ShopContext = createContext<ShopContextType | undefined>(undefined);
 
 export const ShopProvider = ({ children }: { children: ReactNode }) => {
   const { data: session } = useSession();
+  const router = useRouter();
+  const pathname = usePathname();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,10 +82,21 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
     fetchCartAndWishlist();
   }, [session]);
 
-  const addToCart = async (productId: string, quantity = 1) => {
+  const addToCart = async (productId: string, quantity = 1): Promise<boolean> => {
     if (!session?.user) {
-      toast.error("Please sign in to add items to your cart.");
-      return;
+      const result = await Swal.fire({
+        title: "Login Required",
+        text: "Please sign in to add items to your cart.",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#000",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login Now"
+      });
+      if (result.isConfirmed) {
+        router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+      }
+      return false;
     }
 
     try {
@@ -96,8 +111,10 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
       const data = await res.json();
       setCart(data.cart);
       toast.success("Added to cart");
+      return true;
     } catch (error) {
       toast.error("Failed to add to cart");
+      return false;
     }
   };
 
@@ -135,7 +152,18 @@ export const ShopProvider = ({ children }: { children: ReactNode }) => {
 
   const toggleWishlist = async (productId: string) => {
     if (!session?.user) {
-      toast.error("Please sign in to manage your wishlist.");
+      const result = await Swal.fire({
+        title: "Login Required",
+        text: "Please sign in to manage your wishlist.",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#000",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login Now"
+      });
+      if (result.isConfirmed) {
+        router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
+      }
       return;
     }
 

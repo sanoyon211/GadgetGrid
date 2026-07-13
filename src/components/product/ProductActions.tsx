@@ -26,8 +26,10 @@ export default function ProductActions({ product }: { product: any }) {
   };
 
   const handleBuyNow = async () => {
-    await addToCart(product._id, quantity);
-    router.push('/checkout');
+    const success = await addToCart(product._id, quantity);
+    if (success) {
+      router.push('/checkout');
+    }
   };
 
   const handleToggleWishlist = async () => {

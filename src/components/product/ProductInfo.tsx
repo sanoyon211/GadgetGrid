@@ -36,14 +36,14 @@ export default function ProductInfo({ product }: { product: any }) {
       </div>
 
       {/* Price */}
-      <div className="flex items-end gap-3 mb-6">
+      <div className="flex flex-wrap items-end gap-x-3 gap-y-1 mb-6">
         <span className="text-4xl font-bold text-gray-900 dark:text-white">${product.price}</span>
         {product.originalPrice && (
           <span className="text-xl text-gray-400 line-through mb-1">${product.originalPrice}</span>
         )}
         {product.originalPrice && (
-          <span className="text-sm font-medium text-green-500 mb-2 ml-2">
-            Save ${product.originalPrice - product.price}
+          <span className="text-sm font-medium text-green-500 mb-1 sm:mb-2 ml-0 sm:ml-2">
+            Save ${(product.originalPrice - product.price).toFixed(2)}
           </span>
         )}
       </div>
