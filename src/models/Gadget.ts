@@ -14,12 +14,18 @@ export interface IGadget extends Document {
   isFeatured?: boolean;
   isTrending?: boolean;
   specifications: Record<string, string>;
+  userId?: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
 
 const GadgetSchema: Schema = new Schema(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      // Not required initially to avoid breaking existing data
+    },
     name: {
       type: String,
       required: [true, 'Please provide a product name'],

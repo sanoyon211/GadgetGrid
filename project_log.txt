@@ -200,3 +200,8 @@ Step 25: Remove Placeholder Content & Final Polish
 - How it was done:
   * সম্পূর্ণ প্রোজেক্ট কোডবেস (About Page, Contact, Product Tabs) চেক করা হয়েছে। কোথাও কোনো "Lorem Ipsum" বা ডামি টেক্সট নেই, সব জায়গায় অর্থপূর্ণ (Realistic) কন্টেন্ট ব্যবহার করা হয়েছে যা রিকোয়ারমেন্টের সাথে সামঞ্জস্যপূর্ণ।
   * পুরো প্রোজেক্টটিকে ১০০% রিকোয়ারমেন্ট অনুযায়ী রেডি করা হয়েছে।
+
+Step 26: Update Gadget Schema
+-----------------------------------------------------------------------------
+- How it was done:
+  * Added `userId` field to `src/models/Gadget.ts` to support ownership-based permissions for editing/deleting products.
