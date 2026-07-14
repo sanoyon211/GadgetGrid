@@ -45,10 +45,10 @@ export default async function ManageProductsPage() {
                 <td className="py-4 px-4">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gray-100 dark:bg-zinc-900 flex items-center justify-center text-xl overflow-hidden shrink-0">
-                      {gadget.images[0]?.startsWith('http') ? (
+                      {gadget.images[0] ? (
                         <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" />
                       ) : (
-                        gadget.images[0] ? <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" /> : <Package className="w-6 h-6 text-gray-400" />
+                        <Package className="w-6 h-6 text-gray-400" />
                       )}
                     </div>
                     <span className="font-heading text-lg text-foreground line-clamp-1">{gadget.name}</span>
@@ -79,10 +79,10 @@ export default async function ManageProductsPage() {
             <div key={`mobile-${gadget._id.toString()}`} className="bg-white dark:bg-zinc-950 p-4 border border-gray-200 dark:border-zinc-800 shadow-sm space-y-3">
               <div className="flex items-start gap-4">
                 <div className="w-16 h-16 bg-gray-100 dark:bg-zinc-900 flex items-center justify-center text-2xl overflow-hidden shrink-0">
-                  {gadget.images[0]?.startsWith('http') ? (
+                  {gadget.images[0] ? (
                     <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" />
                   ) : (
-                    gadget.images[0] ? <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" /> : <Package className="w-8 h-8 text-gray-400" />
+                    <Package className="w-8 h-8 text-gray-400" />
                   )}
                 </div>
                 <div>

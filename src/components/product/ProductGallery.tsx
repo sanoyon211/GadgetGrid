@@ -25,7 +25,7 @@ export default function ProductGallery({ images = [] }: { images?: string[] }) {
                 : "border-transparent hover:border-gray-300 dark:hover:border-gray-600"
             }`}
           >
-            {img.content.startsWith('http') ? (
+            {img.content ? (
               <img src={img.content} alt="Thumbnail" className="w-full h-full object-cover" />
             ) : (
               <div className="flex items-center justify-center w-full h-full text-gray-400"><Package className="w-8 h-8" /></div>
@@ -37,7 +37,7 @@ export default function ProductGallery({ images = [] }: { images?: string[] }) {
       {/* Main Image */}
       <div className="relative w-full aspect-square sm:aspect-[4/3] lg:aspect-square bg-gray-50 dark:bg-zinc-900 rounded-2xl overflow-hidden flex items-center justify-center group">
         <div className="w-full h-full transform group-hover:scale-105 transition-transform duration-500 ease-out">
-          {displayImages[activeImage].content.startsWith('http') ? (
+          {displayImages[activeImage].content ? (
             <div className="relative w-full h-full p-8">
               <Image 
                 src={displayImages[activeImage].content} 
