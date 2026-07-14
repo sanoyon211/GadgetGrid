@@ -59,7 +59,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     storage: ["1TB SSD", "2TB SSD", "4TB SSD"], // Defaulting
     description: productRaw.description,
     shortDescription: productRaw.shortDescription,
-    image: productRaw.images[0] || "📦",
+    image: productRaw.images[0] || "",
     images: productRaw.images || [],
     specifications: productRaw.specifications || {}
   };

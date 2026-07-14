@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Star, ShoppingCart, Heart } from "lucide-react";
+import { Star, ShoppingCart, Heart, Package } from "lucide-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export default function ProductGrid({ initialGadgets, totalPages, currentPage }: any) {
@@ -39,7 +39,7 @@ export default function ProductGrid({ initialGadgets, totalPages, currentPage }:
                 {product.image || product.images?.[0] ? (
                   <img src={product.image || product.images?.[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 ) : (
-                  <div className="text-6xl">📦</div>
+                  <div className="text-gray-400 dark:text-gray-600"><Package className="w-16 h-16" strokeWidth={1.5} /></div>
                 )}
               </div>
             </Link>

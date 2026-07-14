@@ -1,7 +1,7 @@
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { Plus, Package } from "lucide-react";
 import DeleteButton from "@/components/dashboard/DeleteButton";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -48,7 +48,7 @@ export default async function ManageProductsPage() {
                       {gadget.images[0]?.startsWith('http') ? (
                         <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" />
                       ) : (
-                        gadget.images[0] || "📦"
+                        gadget.images[0] ? <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" /> : <Package className="w-6 h-6 text-gray-400" />
                       )}
                     </div>
                     <span className="font-heading text-lg text-foreground line-clamp-1">{gadget.name}</span>
@@ -82,7 +82,7 @@ export default async function ManageProductsPage() {
                   {gadget.images[0]?.startsWith('http') ? (
                     <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" />
                   ) : (
-                    gadget.images[0] || "📦"
+                    gadget.images[0] ? <img src={gadget.images[0]} alt={gadget.name} className="w-full h-full object-cover" /> : <Package className="w-8 h-8 text-gray-400" />
                   )}
                 </div>
                 <div>

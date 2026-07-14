@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import BackButton from "@/components/globals/BackButton";
 import Image from "next/image";
 import Link from "next/link";
+import { Package } from "lucide-react";
 
 export default async function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
@@ -77,7 +78,7 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
                     {item.image?.startsWith('http') ? (
                       <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                     ) : (
-                      <span className="text-2xl">{item.image || "📦"}</span>
+                      <div className="flex items-center justify-center text-gray-400 w-full h-full">{item.image || <Package className="w-6 h-6" />}</div>
                     )}
                   </div>
                   <div className="flex-1">

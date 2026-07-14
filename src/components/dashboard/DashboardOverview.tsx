@@ -106,7 +106,7 @@ export default function DashboardOverview() {
                 {data.latestOrder.items?.[0]?.image ? (
                   <img src={data.latestOrder.items[0].image} alt="Product" className="w-full h-full object-cover" />
                 ) : (
-                  <span className="text-2xl opacity-50 text-foreground">📦</span>
+                  <span className="text-gray-400"><Package className="w-8 h-8" /></span>
                 )}
               </div>
               <div className="flex-1 w-full">

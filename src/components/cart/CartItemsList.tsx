@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2, ShoppingCart } from "lucide-react";
 
 import { useShop } from "@/context/ShopContext";
 
@@ -23,8 +23,8 @@ export default function CartItemsList() {
   if (items.length === 0) {
     return (
       <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 p-12 text-center">
-        <div className="w-24 h-24 bg-gray-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-6">
-          <span className="text-4xl">🛒</span>
+        <div className="w-24 h-24 bg-gray-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-400 dark:text-gray-500">
+          <ShoppingCart className="w-10 h-10" />
         </div>
         <h2 className="text-2xl font-heading font-bold text-gray-900 dark:text-white mb-2">Your cart is empty</h2>
         <p className="text-gray-500 mb-8">Looks like you haven't added any premium gadgets to your cart yet.</p>

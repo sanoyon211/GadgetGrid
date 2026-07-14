@@ -113,7 +113,7 @@ export default function EditProductPage() {
           originalPrice: formData.originalPrice ? Number(formData.originalPrice) : undefined,
           category: formData.category,
           stock: Number(formData.stock),
-          images: imagesArray.length > 0 ? imagesArray : ["📱"],
+          images: imagesArray.length > 0 ? imagesArray : [],
           specifications
         })
       });

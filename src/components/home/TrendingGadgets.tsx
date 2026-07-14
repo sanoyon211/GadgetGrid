@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Star, ShoppingCart, Heart } from "lucide-react";
+import { Star, ShoppingCart, Heart, Package } from "lucide-react";
 
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
@@ -27,7 +27,7 @@ export default async function TrendingGadgets() {
     originalPrice: p.originalPrice,
     rating: p.rating,
     reviews: p.reviewsCount,
-    image: p.images?.[0] || "📦",
+    image: p.images?.[0] || "",
     category: p.category,
     badge: p.isTrending ? "Trending" : p.isFeatured ? "Sale" : null
   }));
@@ -53,7 +53,7 @@ export default async function TrendingGadgets() {
                 {product.image ? (
                   <Image src={product.image} alt={product.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
                 ) : (
-                  <div className="text-6xl">📦</div>
+                  <div className="text-gray-400 dark:text-gray-600 flex items-center justify-center h-full"><Package className="w-16 h-16" strokeWidth={1.5} /></div>
                 )}
               </div>
             </Link>

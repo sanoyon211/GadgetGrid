@@ -80,7 +80,7 @@ export async function POST(req: Request) {
 
     // Step 10: Mock Email Notification
     console.log(`\n======================================================`);
-    console.log(`📧 MOCK EMAIL SENT`);
+    console.log(`[Email] MOCK EMAIL SENT`);
     console.log(`To: ${session.user.email || 'user@example.com'}`);
     console.log(`Subject: Order Confirmation - ${newOrder._id}`);
     console.log(`Body: Thank you for your order! Your total is $${totalAmount.toFixed(2)}.`);

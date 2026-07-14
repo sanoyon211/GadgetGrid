@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Maximize2 } from "lucide-react";
+import { Maximize2, Package } from "lucide-react";
 import Image from "next/image";
 
 export default function ProductGallery({ images = [] }: { images?: string[] }) {
@@ -9,7 +9,7 @@ export default function ProductGallery({ images = [] }: { images?: string[] }) {
 
   const displayImages = images.length > 0 
     ? images.map((img, id) => ({ id, content: img })) 
-    : [{ id: 0, content: "📦" }];
+    : [{ id: 0, content: "" }];
 
   return (
     <div className="flex flex-col-reverse lg:flex-row gap-4">
@@ -28,7 +28,7 @@ export default function ProductGallery({ images = [] }: { images?: string[] }) {
             {img.content.startsWith('http') ? (
               <img src={img.content} alt="Thumbnail" className="w-full h-full object-cover" />
             ) : (
-              <span className="text-4xl">{img.content}</span>
+              <div className="flex items-center justify-center w-full h-full text-gray-400"><Package className="w-8 h-8" /></div>
             )}
           </button>
         ))}
@@ -49,9 +49,9 @@ export default function ProductGallery({ images = [] }: { images?: string[] }) {
               />
             </div>
           ) : (
-            <span className="text-9xl sm:text-[12rem] flex items-center justify-center h-full">
-              {displayImages[activeImage].content}
-            </span>
+            <div className="flex items-center justify-center h-full text-gray-400">
+              <Package className="w-32 h-32 sm:w-48 sm:h-48" strokeWidth={1} />
+            </div>
           )}
         </div>
         

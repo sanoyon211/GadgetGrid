@@ -17,7 +17,7 @@ export default function AddProductPage() {
     price: "",
     originalPrice: "",
     category: "Smartphones",
-    image1: "📱",
+    image1: "",
     image2: "",
     image3: "",
     image4: "",
@@ -73,7 +73,7 @@ export default function AddProductPage() {
           originalPrice: formData.originalPrice ? Number(formData.originalPrice) : undefined,
           category: formData.category,
           stock: Number(formData.stock),
-          images: imagesArray.length > 0 ? imagesArray : ["📱"],
+          images: imagesArray.length > 0 ? imagesArray : [],
           specifications
         })
       });
