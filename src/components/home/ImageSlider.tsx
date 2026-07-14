@@ -5,10 +5,12 @@ import Image from "next/image";
 
 const sliderImages = [
   "https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1629429407756-4a7703614972?q=80&w=870&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=80&w=2070&auto=format&fit=crop",
   "https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=2070&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=2084&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=2084&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1738830251513-a7bfef4b53c6?q=80&w=2084&auto=format&fit=crop"
 ];
 
 export default function ImageSlider() {

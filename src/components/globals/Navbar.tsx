@@ -219,13 +219,13 @@ export default function Navbar() {
       <div 
         className={`fixed inset-y-0 left-0 w-[80%] max-w-sm bg-background shadow-2xl z-50 lg:hidden transform transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-zinc-800">
           <Link href="/" className="text-xl font-heading font-bold text-foreground">
             Gadget<span className="text-primary">Grid</span>
           </Link>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 rounded-md text-foreground hover:bg-gray-100/50 transition-colors"
+            className="p-2 rounded-md text-foreground hover:bg-gray-100/50 dark:hover:bg-zinc-800/50 transition-colors"
           >
             <X className="h-6 w-6" />
           </button>
@@ -239,21 +239,56 @@ export default function Navbar() {
               className={`block px-3 py-3 rounded-md text-base font-medium transition-colors ${
                 pathname === link.href 
                   ? "text-primary bg-primary/5" 
-                  : "text-foreground active:bg-gray-50"
+                  : "text-foreground active:bg-gray-50 dark:active:bg-zinc-800/50"
               }`}
               onClick={() => setIsOpen(false)}
             >
               {link.name}
             </Link>
           ))}
-          <div className="border-t border-gray-100 mt-4 pt-4 px-3 flex flex-col space-y-3">
+
+          {/* Cart Mobile Link */}
+          <Link
+            href="/cart"
+            onClick={() => setIsOpen(false)}
+            className={`flex items-center space-x-3 px-3 py-3 rounded-md text-base font-medium transition-colors ${
+              pathname === "/cart" 
+                ? "text-primary bg-primary/5" 
+                : "text-foreground active:bg-gray-50 dark:active:bg-zinc-800/50"
+            }`}
+          >
+            <div className="relative">
+              <ShoppingCart className="w-5 h-5" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-2 -right-2 inline-flex items-center justify-center w-4 h-4 text-[10px] font-bold text-background bg-foreground rounded-full">
+                  {cartItemCount}
+                </span>
+              )}
+            </div>
+            <span>Cart</span>
+          </Link>
+
+          {/* Theme Toggle Mobile */}
+          {mounted && (
+            <button
+              onClick={() => {
+                setTheme(theme === "dark" ? "light" : "dark");
+              }}
+              className="flex items-center space-x-3 w-full text-left px-3 py-3 rounded-md text-base font-medium transition-colors text-foreground active:bg-gray-50 dark:active:bg-zinc-800/50"
+            >
+              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+            </button>
+          )}
+
+          <div className="border-t border-gray-100 dark:border-zinc-800 mt-4 pt-4 px-3 flex flex-col space-y-3">
             {session ? (
               <button
                 onClick={() => {
                   setIsOpen(false);
                   signOut({ callbackUrl: "/" });
                 }}
-                className="flex items-center justify-center space-x-2 bg-red-50 text-red-500 px-4 py-3 rounded-lg font-medium active:bg-red-100 transition-all shadow-sm"
+                className="flex items-center justify-center space-x-2 bg-red-50 dark:bg-red-900/20 text-red-500 px-4 py-3 rounded-lg font-medium active:bg-red-100 dark:active:bg-red-900/40 transition-all shadow-sm"
               >
                 <LogOut className="w-5 h-5" />
                 <span>Logout</span>
