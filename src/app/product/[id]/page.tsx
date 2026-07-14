@@ -4,9 +4,10 @@ import ProductGallery from "@/components/product/ProductGallery";
 import ProductInfo from "@/components/product/ProductInfo";
 import ProductActions from "@/components/product/ProductActions";
 import ProductTabs from "@/components/product/ProductTabs";
-import TrendingGadgets from "@/components/home/TrendingGadgets"; // Using this as Related Products
+import TrendingGadgets from "@/components/home/TrendingGadgets";
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
+import Review from "@/models/Review";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
@@ -35,8 +36,18 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
   await connectToDatabase();
 
   let productRaw;
+  let actualReviewCount = 0;
+  let actualRating = 0;
   try {
     productRaw = await Gadget.findById(resolvedParams.id).lean();
+    if (productRaw) {
+      const allReviews = await Review.find({ gadget: productRaw._id });
+      actualReviewCount = allReviews.length;
+      if (actualReviewCount > 0) {
+        const totalRating = allReviews.reduce((sum, rev) => sum + rev.rating, 0);
+        actualRating = Number((totalRating / actualReviewCount).toFixed(1));
+      }
+    }
   } catch (error) {
     productRaw = null;
   }
@@ -51,8 +62,8 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     name: productRaw.name,
     price: productRaw.price,
     originalPrice: productRaw.originalPrice,
-    rating: productRaw.rating,
-    reviews: productRaw.reviewsCount,
+    rating: actualReviewCount > 0 ? actualRating : (productRaw.rating || 0),
+    reviews: actualReviewCount,
     category: productRaw.category,
     badge: productRaw.isTrending ? "Trending" : productRaw.isFeatured ? "Featured" : null,
     colors: ["silver", "space-gray"], // Defaulting since we don't have this in schema yet

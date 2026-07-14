@@ -32,7 +32,7 @@ export default function ProductInfo({ product }: { product: any }) {
           ))}
         </div>
         <span className="text-gray-900 dark:text-gray-100 font-medium">{product.rating || 0}</span>
-        <span className="text-gray-400 text-sm">({product.reviewsCount || 0} reviews)</span>
+        <span className="text-gray-400 text-sm">({product.reviews || 0} reviews)</span>
       </div>
 
       {/* Price */}

@@ -3,6 +3,7 @@ import SearchAndSort from "@/components/shop/SearchAndSort";
 import ProductGrid from "@/components/shop/ProductGrid";
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
+import Review from "@/models/Review";
 import { Suspense } from "react";
 
 import { Metadata } from "next";
@@ -50,13 +51,28 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const total = await Gadget.countDocuments(query);
   const totalPages = Math.ceil(total / limit) || 1;
 
+  const gadgetIds = rawGadgets.map((g: any) => g._id);
+  const reviewsCountMap = new Map();
+  const ratingsMap = new Map();
+
+  if (gadgetIds.length > 0) {
+    const allReviews = await Review.aggregate([
+      { $match: { gadget: { $in: gadgetIds } } },
+      { $group: { _id: "$gadget", count: { $sum: 1 }, avgRating: { $avg: "$rating" } } }
+    ]);
+    allReviews.forEach(r => {
+      reviewsCountMap.set(r._id.toString(), r.count);
+      ratingsMap.set(r._id.toString(), Number(r.avgRating.toFixed(1)));
+    });
+  }
+
   const gadgets = rawGadgets.map((g: any) => ({
     id: g._id.toString(),
     name: g.name,
     price: g.price,
     originalPrice: g.originalPrice,
-    rating: g.rating,
-    reviews: g.reviewsCount,
+    rating: reviewsCountMap.has(g._id.toString()) ? ratingsMap.get(g._id.toString()) : 0,
+    reviews: reviewsCountMap.has(g._id.toString()) ? reviewsCountMap.get(g._id.toString()) : 0,
     description: g.shortDescription || g.description,
     image: g.images[0],
     category: g.category,

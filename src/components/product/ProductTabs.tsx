@@ -55,7 +55,7 @@ export default function ProductTabs({ product }: { product: any }) {
   const tabs = [
     { id: "description", label: "Description" },
     { id: "specifications", label: "Specifications" },
-    { id: "reviews", label: `Reviews (${product.reviewsCount || 0})` }
+    { id: "reviews", label: `Reviews (${Math.max(product.reviews || 0, reviews.length)})` }
   ];
 
   return (

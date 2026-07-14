@@ -4,6 +4,7 @@ import { Star, ShoppingCart, Heart, Package } from "lucide-react";
 
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
+import Review from "@/models/Review";
 
 export default async function TrendingGadgets() {
   await connectToDatabase();
@@ -19,14 +20,30 @@ export default async function TrendingGadgets() {
   
   // Filter out any nulls
   const productsRaw = productsRawArray.filter(p => p !== null);
+  
+  const productIds = productsRaw.map(p => p._id);
+  const reviewsCountMap = new Map();
+  const ratingsMap = new Map();
+
+  if (productIds.length > 0) {
+    const allReviews = await Review.aggregate([
+      { $match: { gadget: { $in: productIds } } },
+      { $group: { _id: "$gadget", count: { $sum: 1 }, avgRating: { $avg: "$rating" } } }
+    ]);
+    allReviews.forEach(r => {
+      reviewsCountMap.set(r._id.toString(), r.count);
+      ratingsMap.set(r._id.toString(), Number(r.avgRating.toFixed(1)));
+    });
+  }
+
   const products = productsRaw.map((p: any) => ({
     id: p._id.toString(),
     name: p.name,
     description: p.description,
     price: p.price,
     originalPrice: p.originalPrice,
-    rating: p.rating,
-    reviews: p.reviewsCount,
+    rating: reviewsCountMap.has(p._id.toString()) ? ratingsMap.get(p._id.toString()) : 0,
+    reviews: reviewsCountMap.has(p._id.toString()) ? reviewsCountMap.get(p._id.toString()) : 0,
     image: p.images?.[0] || "",
     category: p.category,
     badge: p.isTrending ? "Trending" : p.isFeatured ? "Sale" : null
