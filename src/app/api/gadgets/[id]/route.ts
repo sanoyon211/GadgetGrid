@@ -15,9 +15,9 @@ export async function DELETE(req: Request, { params }: { params: Promise<{ id: s
     const gadget = await Gadget.findById(resolvedParams.id);
     if (!gadget) return NextResponse.json({ message: "Not found" }, { status: 404 });
 
-    // Check ownership-based permissions
-    if (gadget.userId?.toString() !== session.user.id && session.user.role !== 'admin') {
-      return NextResponse.json({ message: "Forbidden: You don't own this product" }, { status: 403 });
+    // Admin permissions required
+    if (session.user.role !== 'admin') {
+      return NextResponse.json({ message: "Forbidden: Admin access required" }, { status: 403 });
     }
 
     await Gadget.findByIdAndDelete(resolvedParams.id);
@@ -40,9 +40,9 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const gadget = await Gadget.findById(resolvedParams.id);
     if (!gadget) return NextResponse.json({ message: "Not found" }, { status: 404 });
 
-    // Check ownership-based permissions
-    if (gadget.userId?.toString() !== session.user.id && session.user.role !== 'admin') {
-      return NextResponse.json({ message: "Forbidden: You don't own this product" }, { status: 403 });
+    // Admin permissions required
+    if (session.user.role !== 'admin') {
+      return NextResponse.json({ message: "Forbidden: Admin access required" }, { status: 403 });
     }
 
     const updatedGadget = await Gadget.findByIdAndUpdate(resolvedParams.id, data, { new: true });

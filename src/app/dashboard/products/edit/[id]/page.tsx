@@ -3,14 +3,22 @@
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useRouter, useParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Save, Plus, Trash2 } from "lucide-react";
 import BackButton from "@/components/globals/BackButton";
 
 export default function EditProductPage() {
   const router = useRouter();
   const params = useParams();
+  const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
+
+  useEffect(() => {
+    if (status !== "loading" && session?.user?.role !== "admin") {
+      router.push("/dashboard");
+    }
+  }, [session, status, router]);
   
   const [formData, setFormData] = useState({
     name: "",

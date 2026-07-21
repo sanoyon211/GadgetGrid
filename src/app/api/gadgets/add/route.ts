@@ -10,6 +10,9 @@ export async function POST(req: Request) {
     if (!session?.user) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
+    if (session.user.role !== "admin") {
+      return NextResponse.json({ message: "Forbidden: Admin access required" }, { status: 403 });
+    }
 
     const data = await req.json();
     await connectToDatabase();

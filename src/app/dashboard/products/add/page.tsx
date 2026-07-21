@@ -1,15 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Save, Plus, Trash2 } from "lucide-react";
 
 import BackButton from "@/components/globals/BackButton";
 
 export default function AddProductPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (status !== "loading" && session?.user?.role !== "admin") {
+      router.push("/dashboard");
+    }
+  }, [session, status, router]);
+
+  if (status === "loading" || session?.user?.role !== "admin") {
+    return null;
+  }
   const [formData, setFormData] = useState({
     name: "",
     shortDescription: "",

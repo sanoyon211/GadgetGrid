@@ -1,6 +1,7 @@
 import connectToDatabase from "@/lib/mongoose";
 import Gadget from "@/models/Gadget";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Plus, Package } from "lucide-react";
 import DeleteButton from "@/components/dashboard/DeleteButton";
 import { getServerSession } from "next-auth";
@@ -10,12 +11,11 @@ export default async function ManageProductsPage() {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
   
-  if (!session?.user) {
-    return null; // Handled by middleware
+  if (!session?.user || session.user.role !== "admin") {
+    redirect("/dashboard");
   }
 
-  const query = session.user.role === "admin" ? {} : { userId: session.user.id };
-  const gadgets = await Gadget.find(query).sort({ createdAt: -1 }).lean();
+  const gadgets = await Gadget.find({}).sort({ createdAt: -1 }).lean();
 
   return (
     <div className="bg-transparent">
