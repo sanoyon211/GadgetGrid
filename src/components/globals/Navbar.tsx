@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Search, ShoppingCart, User, Sun, Moon, LogOut } from "lucide-react";
+import { Menu, X, Search, ShoppingCart, User, Sun, Moon, LogOut, ChevronDown } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSession, signOut } from "next-auth/react";
 import dynamic from "next/dynamic";
@@ -53,13 +53,6 @@ export default function Navbar() {
     { name: "Contact", href: "/contact" },
   ];
 
-  if (session) {
-    navLinks.push(
-      { name: "Add Item", href: "/dashboard/products/add" },
-      { name: "Manage Items", href: "/dashboard/products" }
-    );
-  }
-
   const mobileNavLinks = [
     { name: "Home", href: "/" },
     { name: "Shop", href: "/products" },
@@ -69,9 +62,7 @@ export default function Navbar() {
 
   if (session) {
     mobileNavLinks.push(
-      { name: "Dashboard", href: "/dashboard" },
-      { name: "Add Item", href: "/dashboard/products/add" },
-      { name: "Manage Items", href: "/dashboard/products" }
+      { name: "Dashboard", href: "/dashboard" }
     );
   }
 
@@ -149,13 +140,16 @@ export default function Navbar() {
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden shrink-0 hover:ring-2 hover:ring-primary/50 transition-all focus:outline-none"
+                  className="flex items-center gap-1.5 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-zinc-800/60 transition-all focus:outline-none"
                 >
-                  {session.user?.image ? (
-                    <img src={session.user.image} alt="Profile" className="w-full h-full object-cover" />
-                  ) : (
-                    session.user?.name?.charAt(0).toUpperCase() || "U"
-                  )}
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden shrink-0 hover:ring-2 hover:ring-primary/50 transition-all">
+                    {session.user?.image ? (
+                      <img src={session.user.image} alt="Profile" className="w-full h-full object-cover" />
+                    ) : (
+                      session.user?.name?.charAt(0).toUpperCase() || "U"
+                    )}
+                  </div>
+                  <ChevronDown className={`w-4 h-4 text-foreground/70 transition-transform duration-200 ${isProfileOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {isProfileOpen && (
